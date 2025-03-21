@@ -1,3 +1,16 @@
 {
-  "files": {}
+  "files": {
+    "opensafely-amoxicillin-oral.csv": {
+      "id": "opensafely/amoxicillin-oral/164af813",
+      "url": "https://www.opencodelists.org/codelist/opensafely/amoxicillin-oral/164af813/",
+      "downloaded_at": "2025-03-21 10:44:26.577629Z",
+      "sha": "fcbbd5872ac6aca039a3a8588cc5fc89c2fc3444"
+    },
+    "opensafely-cefalexin-oral.csv": {
+      "id": "opensafely/cefalexin-oral/4eeb4e44",
+      "url": "https://www.opencodelists.org/codelist/opensafely/cefalexin-oral/4eeb4e44/",
+      "downloaded_at": "2025-03-21 10:44:27.613218Z",
+      "sha": "3dace7067f97111241b2204be7a1b5dc872190d7"
+    }
+  }
 }
