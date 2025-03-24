@@ -1,2 +1,4 @@
 opensafely/amoxicillin-oral/164af813
 opensafely/cefalexin-oral/4eeb4e44
+opensafely/co-amoxiclav-oral/67fac179
+opensafely/trimethoprim/3f4880ba

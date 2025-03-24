@@ -11,6 +11,18 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/cefalexin-oral/4eeb4e44/",
       "downloaded_at": "2025-03-21 10:44:27.613218Z",
       "sha": "3dace7067f97111241b2204be7a1b5dc872190d7"
+    },
+    "opensafely-co-amoxiclav-oral.csv": {
+      "id": "opensafely/co-amoxiclav-oral/67fac179",
+      "url": "https://www.opencodelists.org/codelist/opensafely/co-amoxiclav-oral/67fac179/",
+      "downloaded_at": "2025-03-24 10:54:09.059447Z",
+      "sha": "a626a57aee8ce35cb7d1945e2949a6b7cebe3ce4"
+    },
+    "opensafely-trimethoprim.csv": {
+      "id": "opensafely/trimethoprim/3f4880ba",
+      "url": "https://www.opencodelists.org/codelist/opensafely/trimethoprim/3f4880ba/",
+      "downloaded_at": "2025-03-24 10:58:38.735134Z",
+      "sha": "1c5b65cfc6650ad9c5b9f40e193a0ee282848963"
     }
   }
 }
