@@ -1,4 +1,11 @@
+#Exposures
 opensafely/amoxicillin-oral/164af813
 opensafely/cefalexin-oral/4eeb4e44
 opensafely/co-amoxiclav-oral/67fac179
 opensafely/trimethoprim/3f4880ba
+user/jacklsbrist/trimethoprimsulfamethoxazole-dmd/48873042
+user/jacklsbrist/fluoroquinolones-dmd/166849d8
+
+
+#Outcomes
+user/jacklsbrist/tendinitis/23e609a6

@@ -1,0 +1,271 @@
+code,term
+1052298001,Rupture of flexor tendon of hand
+1052299009,Rupture of flexor tendon of wrist
+1071931000119104,Nontraumatic rupture of extensor tendon of thigh
+1072041000119101,Nontraumatic rupture of flexor tendon of thigh
+1072081000119106,Nontraumatic rupture of flexor tendon of wrist region
+1075991000119103,Nontraumatic rupture of extensor tendon of right foot
+1076001000119102,Nontraumatic rupture of extensor tendon of left foot
+1076011000119104,Nontraumatic rupture of flexor tendon of right foot
+1076021000119106,Nontraumatic rupture of flexor tendon of left foot
+1076581000119101,Tendinitis of right shoulder
+1076591000119103,Tendinitis of left shoulder
+1076621000119101,Tendinitis of right knee
+1076631000119103,Tendinitis of right hip adductor muscle
+1076641000119107,Tendinitis of left knee
+1076651000119109,Tendinitis of left hip adductor muscle
+1076671000119100,Tendinitis of right flexor hallucis longus
+1076691000119104,Tendinitis of left flexor hallucis longus
+11654001,Achilles tendinitis
+11767691000119107,Traumatic rupture of distal tendon of left biceps brachii
+11777961000119100,Traumatic rupture of distal tendon of right biceps brachii
+11828261000119106,Traumatic rupture of right quadriceps tendon
+11828341000119101,Traumatic rupture of left quadriceps tendon
+11857901000119102,Traumatic rupture of right patellar tendon
+11857941000119100,Traumatic rupture of left patellar tendon
+12241111000119104,Tendinitis of left elbow
+12241151000119103,Tendinitis of left forearm
+12241191000119108,Tendinitis of right elbow
+12241231000119104,Tendinitis of right forearm
+12241511000119106,Nontraumatic rupture of long head of biceps brachii tendon of left shoulder
+12241551000119107,Nontraumatic rupture of long head of biceps brachii tendon of right shoulder
+1293001008,Nontraumatic rupture of quadriceps tendon
+1293002001,Nontraumatic rupture of tendon of shoulder region
+1293227003,Nontraumatic rupture of extensor tendon of wrist region
+1296953008,Nontraumatic rupture of extensor tendon of left hand
+1296954002,Nontraumatic rupture of extensor tendon of right hand
+1332029001,Nontraumatic rupture of extensor tendon of foot
+1332030006,Nontraumatic rupture of flexor tendon of foot
+1343587000,Nontraumatic rupture of tendon of lower leg
+1343592003,Nontraumatic rupture of tendon of upper arm
+15630571000119109,Tendinitis of right wrist region
+15630611000119100,Tendinitis of left wrist region
+15630651000119104,Tendinitis of right hand
+15630691000119109,Tendinitis of left hand
+15630731000119102,Tendinitis of bilateral hands
+15637151000119108,Tendinitis of long head of biceps brachii of bilateral shoulders
+15638411000119100,Peroneal tendinitis of bilateral lower legs
+156663001,(Tendinitis: [ankle/tarsus] or [achilles] or [ankle]) or (calcaneal spur) or (metatarsalgia)
+156707005,Tendon rupture &/or non traumatic
+156708000,Tendon rupture - multiple
+156709008,Tendon rupture - shoulder
+156710003,Tendon rupture - elbow
+156711004,Tendon rupture - wrist
+156712006,Tendon rupture - hand
+156713001,Tendon rupture - hip
+156714007,Tendon rupture - knee
+156715008,Tendon rupture: [ankle &/or foot] or [achilles]
+156716009,Tendon rupture NOS
+15674641000119105,Tendinitis of bilateral psoas tendons
+15674881000119101,Tendinitis of adductor tendon of bilateral hips
+15674961000119103,Tendinitis of bilateral hips
+15675041000119102,Tendinitis of right supraspinatus tendon
+15675081000119107,Tendinitis of bilateral supraspinatus tendons
+15675121000119109,Tendinitis of left supraspinatus tendon
+15675201000119109,Tendinitis of metatarsophalangeal joint of second toe of left foot
+15675281000119101,Tendinitis of metatarsophalangeal joint of second toe of right foot
+15675321000119106,Tendinitis of bilateral flexor hallucis longus
+15675401000119105,Tendinitis of bilateral feet
+15675441000119107,Tendinitis of right foot
+15675481000119102,Tendinitis of left foot
+15676161000119105,Tendinitis of bilateral pes anserinus tendons
+15676241000119103,Tendinitis of bilateral knees
+15676401000119104,Tendinitis of flexor tendon of left hand
+15676441000119102,Tendinitis of flexor tendon of right hand
+15676481000119107,Tendinitis of flexor tendon of bilateral hands
+15676521000119107,Tendinitis of extensor tendon of right hand
+15676561000119102,Tendinitis of extensor tendon of bilateral hands
+15676601000119102,Tendinitis of extensor tendon of left hand
+15683361000119109,Bursitis of bilateral calcaneal tendon bursae
+15697681000119103,Tendinitis of bilateral ankles
+15701041000119100,Nontraumatic rupture of bilateral Achilles tendons
+15701321000119109,Nontraumatic rupture of tendon of bilateral shoulders
+15701481000119100,Nontraumatic rupture of tendon of bilateral upper arms
+15701521000119100,Nontraumatic rupture of extensor tendon of bilateral hands
+15701561000119105,Nontraumatic rupture of tendon of bilateral quadriceps muscles
+15701641000119107,Nontraumatic rupture of tendon of bilateral lower legs
+15701801000119106,Nontraumatic rupture of flexor tendon of right wrist
+15702041000119106,Nontraumatic rupture of tendon of right upper arm
+15702081000119101,Nontraumatic rupture of tendon of right shoulder
+15702121000119104,Nontraumatic rupture of right quadriceps tendon
+15702201000119104,Nontraumatic rupture of tendon of right lower leg
+15702321000119102,Nontraumatic rupture of tendon of left upper arm
+15702361000119107,Nontraumatic rupture of tendon of left shoulder
+15702401000119103,Nontraumatic rupture of left quadriceps tendon
+15702481000119106,Nontraumatic rupture of tendon of left lower leg
+15702561000119101,Nontraumatic rupture of flexor tendon of bilateral wrists
+15702641000119104,Nontraumatic rupture of extensor tendon of bilateral wrist regions
+15702681000119109,Nontraumatic rupture of extensor tendon of left wrist region
+15702721000119103,Nontraumatic rupture of extensor tendon of right wrist region
+15703081000119106,Nontraumatic rupture of flexor tendon of left wrist
+16003591000119104,Tendinitis of right rotator cuff
+16003631000119104,Tendinitis of bilateral rotator cuffs
+16003671000119101,Tendinitis of left rotator cuff
+16051871000119105,Nontraumatic rupture of tendon of bilateral triceps brachii
+16052031000119109,Nontraumatic rupture of tendon of right triceps brachii
+16052071000119107,Nontraumatic rupture of tendon of left triceps brachii
+16052151000119104,Tendinitis of bilateral quadriceps tendon
+16052191000119109,Tendinitis of right quadriceps tendon
+16052231000119100,Tendinitis of left quadriceps tendon
+16052271000119102,Tendinitis of bilateral elbows
+17654007,Tibialis anticus tendinitis
+202841003,Supraspinatus tendinitis
+202852009,Shoulder tendinitis
+202856007,Biceps tendinitis
+202857003,Triceps tendinitis
+202863007,Adductor tendinitis
+202868003,Pes anserinus tendinitis and bursitis
+202872004,Biceps femoris tendinitis
+202873009,Semimembranosus tendinitis
+202880006,Tibialis anterior tendinitis
+202881005,Tibialis posterior tendinitis
+202893001,Tendinitis: [NOS] or [bicepital] or [adductor] or [supraspinatus]
+202917000,Achilles tenosynovitis
+202957002,Nontraumatic tendon: [rupture] or [subluxation] or [dislocation]
+202958007,"Non-traumatic tendon rupture, unspecified"
+202961008,Hand and wrist extensor tendon rupture
+202962001,Hand and wrist flexor tendon rupture
+202963006,Non-traumatic rupture of patellar tendon
+202964000,Non-traumatic rupture of Achilles tendon
+202971005,Flexor pollicis longus tendon rupture
+202978004,Other foot and ankle tendon rupture
+202979007,Other non-traumatic tendon rupture
+208443000,"Closed fracture thumb distal phalanx, mallet"
+209754000,Rupture of infraspinatus tendon
+209755004,Rupture subscapularis tendon
+209762008,Rupture wrist extensors
+209765005,Rupture of tendon of thumb
+209770003,Rupture of tendon of finger
+209771004,Rupture flexor digitorum superficialis tendon
+209782007,Rupture of tendo achilles
+209787001,Other specified tendon rupture
+221695002,Bursitis of calcaneal tendon bursa
+239955008,Tendinitis AND/OR tenosynovitis of the shoulder region
+239956009,Infraspinatus tendinitis
+239965002,Tendinitis AND/OR tenosynovitis of the elbow region
+239973006,Tendinitis AND/OR tenosynovitis of wrist AND/OR hand
+239978002,Rupture of extensor tendon of finger
+239979005,Rupture of flexor tendon of finger
+239980008,Rupture of flexor tendon of thumb
+239981007,Rupture of extensor tendon of thumb
+239991001,Tendinitis AND/OR tenosynovitis of the pelvic region
+240000001,Tendinitis AND/OR tenosynovitis of the knee region
+249646051000119108,Nontraumatic rupture of right Achilles tendon
+262978006,Tendon rupture NOS
+267996008,Tendinitis NOS
+268002004,Non-traumatic tendon rupture
+268090002,(Tendinitis: [ankle/tarsus] or [achilles] or [ankle]) or (calcaneal spur) or (metatarsalgia)
+268099001,Tendon rupture &/or non traumatic
+268100009,Rupture of tendon of wrist
+268101008,Tendon rupture: [ankle &/or foot] or [achilles]
+274140005,Subscapularis tendinitis
+287980003,Rupture of tendon of elbow
+288215009,Tendon rupture - multiple
+288216005,Tendon rupture - shoulder
+288217001,Rupture of tendon of hand
+288218006,Tendon rupture - hip
+288219003,Tendon rupture - knee
+29210001,Trochanteric tendinitis
+299771000119102,Nontraumatic rupture of extensor tendon of forearm
+299781000119104,Nontraumatic rupture of extensor tendon of hand
+299791000119101,Nontraumatic rupture of extensor tendon of lower leg
+299821000119109,Nontraumatic rupture of extensor tendon of upper arm
+299851000119101,Nontraumatic rupture of flexor tendon of forearm
+299861000119104,Nontraumatic rupture of flexor tendon of lower leg
+301691000119102,Tendinitis of left Achilles tendon
+301701000119102,Tendinitis of right Achilles tendon
+302939002,Tendinitis AND/OR tenosynovitis of the foot region
+30832001,Rupture of patellar tendon
+317511000119102,Tendinitis of left patellar tendon
+317521000119109,Tendinitis of right patellar tendon
+317741000119107,Peroneal tendinitis of left lower limb
+317751000119109,Peroneal tendinitis of right lower limb
+318171000119100,Tendinitis of left posterior tibial tendon
+318181000119102,Tendinitis of right posterior tibial tendon
+318771000119104,Tendinitis of left psoas tendon
+318781000119101,Tendinitis of right psoas tendon
+321361000119106,Nontraumatic rupture of extensor tendon of left forearm
+321371000119100,Spontaneous rupture of extensor tendon of left hand
+321381000119102,Nontraumatic rupture of extensor tendon of left lower leg
+321401000119102,Nontraumatic rupture of extensor tendon of left thigh
+321411000119104,Nontraumatic rupture of extensor tendon of left upper arm
+321441000119100,Nontraumatic rupture of extensor tendon of right forearm
+321451000119103,Spontaneous rupture of extensor tendon of right hand
+321461000119101,Nontraumatic rupture of extensor tendon of right lower leg
+321481000119105,Nontraumatic rupture of extensor tendon of right thigh
+321491000119108,Nontraumatic rupture of extensor tendon of right upper arm
+321511000119103,Nontraumatic rupture of flexor tendon of left forearm
+321521000119105,Spontaneous rupture of flexor tendon of left hand
+321531000119108,Nontraumatic rupture of flexor tendon of left lower leg
+321551000119102,Nontraumatic rupture of flexor tendon of left thigh
+321591000119107,Nontraumatic rupture of flexor tendon of right forearm
+321601000119100,Spontaneous rupture of flexor tendon of right hand
+321611000119102,Nontraumatic rupture of flexor tendon of right lower leg
+321631000119107,Nontraumatic rupture of flexor tendon of right thigh
+328814631000119101,Nontraumatic rupture of left Achilles tendon
+331000119106,Tendinitis of elbow or forearm
+34840004,Tendinitis
+371921000000105,Tendinitis of rotator cuff
+37785001,Tendinitis of patellar tendon
+399346004,Supraspinatus tear
+40251000087101,Tendinitis of left biceps femoris
+40261000087103,Tendinitis of right biceps femoris
+414872006,Non-traumatic rupture of biceps brachii tendon
+415574006,Spontaneous rupture of extensor tendons
+415575007,Spontaneous rupture of flexor tendons
+415748002,Traumatic rupture of patellar tendon
+41921000087105,Tendinitis of left biceps brachii
+41931000087107,Tendinitis of right biceps brachii
+42221000087107,Rupture of tendon of left shoulder
+42231000087109,Rupture of tendon of right shoulder
+423093000,Tendinitis of flexor tendon of hand
+423226005,Tendinitis of finger
+423417009,Tendinitis of hand
+423810002,Tendinitis of wrist
+425772008,Tendinitis of foot
+426218005,Tendinitis of flexor hallucis longus
+428228008,Traumatic rupture of quadriceps tendon
+429360005,Tendinitis of knee
+429718008,Rupture of distal quadriceps tendon
+430377007,Nontraumatic rupture of tibialis posterior tendon
+431033003,Rupture of proximal quadriceps tendon
+444971006,Inflammation of extensor tendon of hand
+444972004,Inflammation of tendon of metatarsophalangeal joint of second toe
+444979008,Inflammation of flexor carpi ulnaris muscle tendon
+445117007,Inflammation of flexor carpi radialis muscle tendon
+445276002,Inflammation of extensor carpi ulnaris muscle tendon
+445290004,Inflammation of extensor pollicis longus muscle tendon
+445335008,Inflammation of extensor indicis muscle tendon
+45861001,Pes anserinus tendinitis
+50127006,Tibialis tendinitis
+53208009,Peroneal tendinitis
+544511000000109,Tendinitis NOS
+54617005,Tibialis posticus tendinitis
+548961000000106,Other specified tendon rupture
+630381000000106,"Non-traumatic tendon rupture, unspecified"
+6849006,Rupture of quadriceps tendon
+685241000000109,Other non-traumatic tendon rupture
+685251000000107,Other foot and ankle tendon rupture
+700041000000103,Tendon rupture NOS
+712819000,Nontraumatic rupture of extensor tendon of hand and wrist
+718342006,Tear of distal tendon of biceps brachii
+75680005,Psoas tendinitis
+76647009,Rupture of Achilles tendon
+781239004,Tendinitis of left pes anserinus tendon
+781240002,Tendinitis of right pes anserinus tendon
+781241003,Tendinitis of long head of biceps brachii of right shoulder
+781242005,Tendinitis of long head of biceps brachii of left shoulder
+782538005,Tendinitis of ankle
+789394007,Tendinitis of shoulder region
+789754007,Tendinitis of rotator cuff tendon
+836300009,Rupture of hip abductor tendon
+840338002,Rupture of extensor tendon of hand
+86128003,"Rupture of tendon of biceps, long head"
+879531000000103,Acute rupture of Achilles tendon
+879651000000109,Tendinopathy of tibialis posterior tendon
+879931000000105,Tendinopathy of peroneal tendon
+926335004,Rupture of rotator cuff of shoulder
+95410001,Retropharyngeal tendinitis
+95414005,Calcific tendinitis
+958021000000109,Enthesitis of Achilles tendon
+987161000000107,"Current View Education, Employment, Training - attendance difficulties"

@@ -23,6 +23,24 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/trimethoprim/3f4880ba/",
       "downloaded_at": "2025-03-24 10:58:38.735134Z",
       "sha": "1c5b65cfc6650ad9c5b9f40e193a0ee282848963"
+    },
+    "user-jacklsbrist-trimethoprimsulfamethoxazole-dmd.csv": {
+      "id": "user/jacklsbrist/trimethoprimsulfamethoxazole-dmd/48873042",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/trimethoprimsulfamethoxazole-dmd/48873042/",
+      "downloaded_at": "2025-03-25 10:08:50.005932Z",
+      "sha": "d03b7f93597eea0d61b0a7ad7afa1cb6e2d0f26b"
+    },
+    "user-jacklsbrist-fluoroquinolones-dmd.csv": {
+      "id": "user/jacklsbrist/fluoroquinolones-dmd/166849d8",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/fluoroquinolones-dmd/166849d8/",
+      "downloaded_at": "2025-03-25 10:31:01.762514Z",
+      "sha": "04386616c2733ba01dd2fd9a01779266a26e20d7"
+    },
+    "user-jacklsbrist-tendinitis.csv": {
+      "id": "user/jacklsbrist/tendinitis/23e609a6",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/tendinitis/23e609a6/",
+      "downloaded_at": "2025-03-25 11:27:23.343940Z",
+      "sha": "b279eda677b49512985635985ac64a9f3b8c0391"
     }
   }
 }
