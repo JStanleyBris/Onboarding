@@ -3,21 +3,21 @@
 # This script provides the formal specification of the study data that will be extracted from
 # the OpenSAFELY database.
 
+#Jack Stanley
+
+#opensafely exec ehrql:v1 generate-dataset analysis/dataset_definition.py
+
 ######################################
 
 from ehrql import (create_dataset, codelist_from_csv)
 from ehrql.tables.tpp import patients, medications, practice_registrations, addresses, clinical_events
 from codelists import *
 
-##Q for Will/Rose - ehrql.tables.tpp vs core(?)
-##Q for Will and Rose - studydefinition function - https://github.com/opensafely/Shared-Care-Monitoring/blob/main/analysis/study_definition.py
 
 dataset = create_dataset()
 
 start_date = "2010-12-01" ##TBC
 end_date = "2024-08-01"  ##TBC
-
-##Need to ensure dmd codes in codelists that I have made
 
 amoxicillin_codes = codelist_from_csv("codelists/opensafely-amoxicillin-oral.csv", column = "code")
 amox_clavulanicacid_codes = codelist_from_csv("codelists/opensafely-co-amoxiclav-oral.csv", column = "code")
@@ -27,32 +27,41 @@ trim_sulfa_codes = codelist_from_csv("codelists/user-jacklsbrist-trimethoprimsul
 
 fluoroquinolone_codes = codelist_from_csv("codelists/user-jacklsbrist-fluoroquinolones-dmd.csv", column = "code")
 
+all_abx_codes = amoxicillin_codes + amox_clavulanicacid_codes + cefalexin_codes + trimethoprim_codes + trim_sulfa_codes +fluoroquinolone_codes
+
 #Outcome codes
 
 tendinitis_codes = codelist_from_csv("codelists/user-jacklsbrist-tendinitis.csv", column = "code")
 
 has_any_studyabx_prescription = medications.where(
-        medications.dmd_code.is_in(amoxicillin_codes)|
-        medications.dmd_code.is_in(cefalexin_codes)|
-        medications.dmd_code.is_in(amox_clavulanicacid_codes)|
-        medications.dmd_code.is_in(trimethoprim_codes)|
-        medications.dmd_code.is_in(trim_sulfa_codes)|
-        medications.dmd_code.is_in(fluoroquinolone_codes)
+        medications.dmd_code.is_in(all_abx_codes)
 ).where(
         medications.date.is_on_or_between(start_date, end_date)
-).exists_for_patient()
+)
 
 
+index_date = has_any_studyabx_prescription.sort_by(medications.date).first_for_patient().date #First prescription date - will need to alter this depending 
+#upon analysis approach - need to ensure this is extracting patient specific
 
-index_date = "2024-03-31"
 
 has_registration = practice_registrations.for_patient_on(
     index_date
 ).exists_for_patient()
 
+#Exclusion criteria
+
+prior_tendinitis = clinical_events.where(
+        clinical_events.snomedct_code.is_in(tendinitis_codes) #Exclude those with pre-existing diagnosis of tendinitis
+).where(
+        clinical_events.date.is_on_or_before(start_date)
+).exists_for_patient()
+
 dataset.define_population(
      (patients.exists_for_patient()) &
-    (has_any_studyabx_prescription == True))
+    (has_any_studyabx_prescription.exists_for_patient()) & #Only patients with at least one study antibiotic prescription
+    ~(prior_tendinitis)
+    )
+
 
 dataset.configure_dummy_data(population_size=10)
 
