@@ -8,8 +8,8 @@ actions:
         dataset: output/dataset.csv.gz
 
 #measures - look at abx prescribing over time
-generate_measure:
-    run: ehrql:v1 generate-measures analysis/measure_definition.py --output measures.csv 
+  generate_measure:
+    run: ehrql:v1 generate-measures analysis/measure_definition.py --output output/measures.csv 
     needs: [generate_dataset]
     outputs:
       moderately_sensitive:
@@ -17,9 +17,9 @@ generate_measure:
 
 
 
-#generate_report:
- #   run: r:v1 analysis/abx_time_series.r
-  #  needs: [generate_measure]
-   # outputs:
-    #  moderately_sensitive:
-     #   chart: output/fq_time_plot.png
+  generate_report:
+     run: r:v1 analysis/abx_time_series.r
+     needs: [generate_measure]
+     outputs:
+      moderately_sensitive:
+        chart: output/fq_time_plot.png
