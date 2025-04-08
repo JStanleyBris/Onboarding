@@ -6,7 +6,7 @@ df_input <- read_csv(
     measure = col_character(), 
     interval_start = col_date(format = "%Y-%m-%d"), 
     interval_end = col_date(format = "%Y-%m-%d"),
-    ratio = col_integer(),
+    ratio = col_double(),
     numerator = col_integer(),
     denominator = col_integer()
     )

@@ -1,3 +1,5 @@
+#opensafely codelists update
+
 #Exposures
 opensafely/amoxicillin-oral/164af813
 opensafely/cefalexin-oral/4eeb4e44
@@ -9,3 +11,4 @@ user/jacklsbrist/fluoroquinolones-dmd/166849d8
 
 #Outcomes
 user/jacklsbrist/tendinitis/23e609a6
+user/jacklsbrist/peripheral-neuropathy/553e3c81

@@ -18,7 +18,15 @@ actions:
 
 
   generate_report:
-     run: r:v1 analysis/abx_time_series.r
+    run: r:v2 analysis/report.R
+    needs: [generate_dataset]
+    outputs:
+      moderately_sensitive:
+        chart: output/report.png 
+  
+  
+  generate_report2:
+     run: r:v2 analysis/abx_time_series.R
      needs: [generate_measure]
      outputs:
       moderately_sensitive:

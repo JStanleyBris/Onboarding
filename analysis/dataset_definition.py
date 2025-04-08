@@ -32,6 +32,7 @@ all_abx_codes = amoxicillin_codes + amox_clavulanicacid_codes + cefalexin_codes 
 #Outcome codes
 
 tendinitis_codes = codelist_from_csv("codelists/user-jacklsbrist-tendinitis.csv", column = "code")
+neuropathy_newdx_codes = codelist_from_csv("codelists/user-jacklsbrist-peripheral-neuropathy.csv", column = "code")
 
 has_any_studyabx_prescription = medications.where(
         medications.dmd_code.is_in(all_abx_codes)

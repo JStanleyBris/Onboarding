@@ -41,6 +41,12 @@
       "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/tendinitis/23e609a6/",
       "downloaded_at": "2025-03-25 11:27:23.343940Z",
       "sha": "b279eda677b49512985635985ac64a9f3b8c0391"
+    },
+    "user-jacklsbrist-peripheral-neuropathy.csv": {
+      "id": "user/jacklsbrist/peripheral-neuropathy/553e3c81",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/peripheral-neuropathy/553e3c81/",
+      "downloaded_at": "2025-04-08 15:31:35.331603Z",
+      "sha": "06e7f6d8d69a949726058df0f1815789a746e8de"
     }
   }
 }

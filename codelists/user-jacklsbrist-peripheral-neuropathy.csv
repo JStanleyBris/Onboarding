@@ -1,0 +1,643 @@
+code,term
+1004092000,Entrapment of right ulnar nerve at elbow
+101000119102,Numbness and tingling sensation of skin
+101461000119102,Musculocutaneous nerve palsy
+102601005,Perioral numbness
+102602003,Paresthesia of skin
+102603008,Numbness of skin
+103014001,Cervical nerve root pain
+103015000,Thoracic nerve root pain
+103016004,Lumbosacral nerve root pain
+10521000119108,Common peroneal neuropathy at the fibular head
+106154007,Fourth cranial nerve finding
+106155008,Fifth cranial nerve finding
+106157000,Seventh cranial nerve finding
+106158005,Eighth cranial nerve finding
+106161006,Eleventh cranial nerve finding
+11049006,Cervical radiculitis
+11060002,Disease related peripheral neuropathy
+1119281000,Diffuse unilateral subacute neuroretinitis
+112102006,Atypical neuralgia
+112821000000109,Neuropathic pain
+1149251000,Impaired peripheral neurovascular function
+11679003,Radicular pain
+1169360001,Chronic relapsing inflammatory optic neuropathy
+1172701002,Facial diplegia with paresthesia
+1208883006,Acquired weakness of third cranial nerve
+1217207008,Congenital oculomotor nerve palsy
+12236641000119103,Brachial neuritis of left upper limb
+12236681000119108,Brachial neuritis of right upper limb
+1231190008,Nuclear oculomotor nerve palsy
+1231227006,Neuroretinitis following infectious disease
+1231240001,Idiopathic optic neuritis
+1231624007,Third cranial nerve weakness sparing pupil
+1231627000,Third cranial nerve weakness involving pupil
+1231751000,Recurrent idiopathic neuroretinitis
+123253007,Neuralgia
+123254001,Neuritis
+1258954001,Lumbar radicular pain
+1259063005,Acute sensory polyneuropathy
+1260382003,Lesion of trigeminal ganglion
+1263551002,Inflammation of lumbosacral plexus
+1263579008,Idiopathic disorder of lumbosacral plexus
+128078004,Polyradiculoneuropathy
+128189008,Mononeuropathy
+128192007,Peripheral neuritis
+128194008,Superficial peroneal nerve disorder
+128195009,Deep peroneal neuropathy
+128196005,Lumbar radiculopathy
+128197001,Sacral radiculopathy
+128214000,Infectious disorder of the peripheral nervous system
+129131007,Acute infective polyneuritis
+129616004,Porphyric polyneuropathy
+1332371005,Inflammation of peripheral nerve of ankle
+1332372003,Inflammation of peripheral nerve of upper limb
+135873002,Transient paresthesia
+139519005,Pins and needles
+139520004,Pricking: [sensation] or [has sensation]
+139521000,Tingling: [sensation] or [has sensation]
+139522007,Numbness: [has] or [sensation]
+139524008,C/O paraesthesia
+139775008,Pricking pain
+140909003,O/E - paraesthesia present
+141305005,O/E -cranial nerve 7-palsy-LMN
+14786003,Saturday night paralysis
+155060008,Inflammatory &/or toxic neuropathy
+155070005,Bell's palsy &/or facial palsy
+155072002,Mononeuritis of upper limb and mononeuritis multiplex
+155074001,Other mononeuritis upper limb &/or causalgia
+155075000,Mononeuritis lower limb
+155078003,Interdigital neuralgia
+155079006,Other mononeuritis lower limb
+155080009,Neuropathy: [peripheral] or [polyneuropathy]
+155082001,Acute infective polyneuritis (& [Guillain-Barre syndrome])
+155085004,Compression neuropathy
+155086003,Other peripheral neuropathy
+155087007,Other peripheral nerve disease
+15633361000119103,Bilateral sciatica
+15634791000119106,Paresthesia of right lower limb
+15634841000119109,Paresthesia of left lower limb
+156642003,Neuritis: [brachial (cervical)] or [brachial] or [cervical] or [ulnar]
+156750000,"Neuralgia, neuritis or radiculitis NOS"
+156752008,Neuralgia/neuritis - multiple
+156753003,Neuralgia/neuritis - shoulder
+156754009,Neuralgia/neuritis - upper arm
+156755005,Neuralgia/neuritis - forearm
+156756006,Neuralgia/neuritis - hand
+156757002,Neuralgia/neuritis - pelvis/thigh
+156758007,Neuralgia/neuritis - lower leg
+156759004,(Neuralgia/neuritis - ankle/foot) or (policemans' disease)
+156760009,(Neuralgia/neuritis - NOS) or (nerve root pain NEC)
+15697241000119105,Inflammation of bilateral ulnar nerves
+15697281000119100,Neuritis of left ulnar nerve
+15697321000119105,Neuritis of right ulnar nerve
+15730881000119103,Partial palsy of bilateral oculomotor nerves
+15730921000119105,Partial palsy of right oculomotor nerve
+15730961000119100,Partial palsy of left oculomotor nerve
+15731001000119108,Total palsy of left oculomotor nerve
+15731041000119105,Total palsy of right oculomotor nerve
+15731081000119100,Total palsy of bilateral oculomotor nerves
+158223000,[D]Pricking of skin
+158224006,[D]Tingling of skin
+158227004,[D]Numbness
+158228009,[D]Paraesthesia
+15973661000119106,Paresthesia of left upper limb
+15973701000119104,Paresthesia of right upper limb
+15978711000119106,Disorder of left cervical nerve root
+15978831000119108,Disorder of right cervical nerve root
+15992631000119101,Neuroretinitis of right eye
+15992671000119103,Neuroretinitis of left eye
+15992711000119104,Neuroretinitis of bilateral eyes
+16005071000119109,Disorder of right axillary nerve
+16005111000119102,Disorder of left axillary nerve
+16026471000119103,Disorder of right suprascapular nerve
+16026511000119107,Disorder of peripheral nerve of bilateral upper limbs
+16026551000119108,Peripheral neuropathy of bilateral lower limbs
+16026871000119101,Disorder of left suprascapular nerve
+16057351000119103,Neuralgia of left glossopharyngeal nerve
+16057391000119108,Neuralgia of right glossopharyngeal nerve
+16057991000119109,Disorder of left trigeminal nerve
+16058031000119107,Disorder of right trigeminal nerve
+16058231000119103,Brachial plexopathy of right upper limb
+16058271000119100,Brachial plexopathy of left upper limb
+16058311000119100,Disorder of left lumbosacral plexus
+16058351000119104,Brachial plexopathy of bilateral upper limbs
+16058391000119109,Disorder of right lumbosacral plexus
+16064691000119103,Disorder due to and following toxic polyneuropathy
+16206301000119102,Disorder of bilateral ulnar nerves
+16206341000119100,Entrapment of bilateral ulnar nerves at elbow
+16206381000119105,Entrapment of bilateral ulnar nerves
+16206701000119101,Disorder of bilateral sciatic nerves
+16206781000119109,Meralgia paresthetica of bilateral lower limbs
+16206901000119103,Tarsal tunnel syndrome of bilateral posterior tibial nerves
+16206981000119106,Entrapment of bilateral ilioinguinal nerves
+162247000,Pins and needles
+162248005,Prickling sensation of skin
+162249002,Has tingling sensation
+162250002,Has numbness
+162253000,Numbness of limbs
+162255007,C/O paraesthesia
+162506004,Pricking pain
+16269008,Neuralgia
+163707002,On examination - paresthesia present
+163708007,On examination - paresthesia in hands
+164106005,On examination - cranial nerve 7-palsy-lower motor neuron
+16636671000119108,Lesion of bilateral median nerves
+16636821000119106,Disorder of bilateral median nerves
+16637761000119107,Disorder of bilateral common peroneal nerves
+16638241000119100,Neuralgia of bilateral iliohypogastric nerves
+16638321000119100,Neuralgia of bilateral pudendal nerves
+16638401000119101,Neuralgia of nerve of bilateral lower limbs
+16641061000119103,Inflammation of peripheral nerve of bilateral upper limbs
+16641241000119106,Inflammation of bilateral ilioinguinal nerves
+16641311000119104,Inflammation of bilateral saphenous nerves
+16641401000119105,Inflammation of bilateral iliohypogastric nerves
+16641521000119102,Inflammation of peripheral nerve of bilateral ankles
+16644004,Radial neuropathy
+16650161000119108,Lesion of right cervical spinal nerve root
+16650301000119105,Lesion of left cervical spinal nerve root
+16864831000119104,Lumbar radiculitis
+17111003,Postinfectious neuralgia
+175004,Supraorbital neuralgia
+17689009,Median nerve neuritis
+18156008,Abdominal hyperesthesia
+193093009,Bell's palsy
+193095002,Other facial nerve disorders
+193096001,Other facial nerve disorder NOS
+193125009,Mononeuritis of upper limb and mononeuritis multiplex
+193128006,Median nerve neuritis
+193129003,Median nerve compression in forearm
+193132000,Ulnar nerve lesions &/or neuritis ulnar nerve
+193142003,Other upper limb mononeuritis
+193143008,Mononeuritis upper limb NOS
+193149007,Interdigital neuralgia
+193150007,Interdigital neuralgia
+193152004,Deep peroneal nerve lesion
+193153009,Other mononeuritis lower limb
+193154003,Unspecified mononeuritis lower limb
+193155002,(Mononeuritis of unspecified site NOS) or (hereditary or idiopathic peripheral neuropathy)
+193164007,Idiopathic progressive polyneuropathy
+193166009,Polyneuropathy
+193168005,Other idiopathic peripheral neuropathy
+193170001,Other idiopathic peripheral neuropathy NOS
+193172009,Inflammatory &/or toxic neuropathy
+193173004,Acute infective polyneuritis
+193174005,Post-infectious polyneuritis
+193176007,Acute infective polyneuritis NOS
+193186008,Polyneuropathy associated with another disorder
+193197008,Polyneuropathy in disease NOS
+193200009,Intercostal neuropathy
+193201008,"[X]Inflammatory polyneuropathy, unspecified"
+193202001,Other toxic or inflammatory neuropathy
+193204000,(Toxic or inflammatory neuropathy NOS) or (polyneuropathy unspecified)
+193947008,Ciliary neuralgia
+194118007,Partial oculomotor nerve palsy
+194119004,Total oculomotor nerve palsy
+194513005,[X]Other mononeuropathies of upper limb
+194514004,[X]Other mononeuropathies of lower limb
+194515003,[X]Other specified mononeuropathies
+194516002,[X]Other mononeuropathies in diseases classified elsewhere
+194517006,[X]Polyneuropathies and other disorders of the peripheral nervous system
+194519009,[X]Other inflammatory polyneuropathies
+194520003,[X]Other specified polyneuropathies
+194526009,[X]Polyneuropathy in other musculoskeletal disorders classified elsewhere
+194529002,"[X]Inflammatory polyneuropathy, unspecified"
+194530007,"[X]Polyneuropathy, unspecified"
+195309009,Acroparesthesia - unspecified
+202683005,Cervical spondylosis with radiculopathy
+202684004,Single-level cervical spondylosis with radiculopathy
+202685003,Two-level cervical spondylosis with radiculopathy
+202686002,Multiple-level cervical spondylosis with radiculopathy
+202765006,(Neuritis: [brachial - cervical] or [ulnar]) or (radiculitis: [brachial] or [cervical]) or (cervical root pain)
+202796002,Thoracic and lumbosacral neuritis
+202797006,"Thoracic: [neuritis, unspecified] or [nerve root pain]"
+202798001,"Lumbosacral neuritis, unspecified"
+202799009,Thoracic and lumbosacral neuritis NOS
+203114003,"Neuralgia, neuritis and radiculitis unspecified"
+203115002,Neuralgia unspecified
+203116001,Neuritis unspecified
+203118000,"(Neuralgia, neuritis or radiculitis NOS) or (policeman's disease)"
+203814001,[X]Other spondylosis with radiculopathy
+203825005,[X]Lumbar and other intervertebral disc disorders with radiculopathy
+206852007,[D]Pricking of skin
+206853002,[D]Tingling of skin
+206856005,[D]Numbness
+206857001,[D]Paresthesia
+21018002,Inflammatory neuropathy
+212239002,Cervical sympathetic nerve injury
+2169001,Thoracic radiculitis
+21860004,Acoustic neuritis
+2231001,Nerve plexus disorder
+22722001,Idiopathic peripheral neuropathy
+230507009,Retrobulbar neuritis
+230535008,Trigeminal nerve inflammation
+230537000,Idiopathic trigeminal neuralgia
+230538005,Secondary trigeminal neuralgia
+230540000,Idiopathic trigeminal neuropathy
+230543003,Facial neuropathy
+230549004,Multiple cranial nerve palsies of ocular motor nerves
+230550004,Neuritis ulnar nerve
+23056005,Sciatica
+230565003,Inflammatory lumbosacral plexus neuropathy
+230566002,Neuropathies and neuromyelopathies associated with systemic disorder
+230570005,Burning feet syndrome
+230607004,Neuropathy caused by chemical substance
+230608009,Neuropathy caused by organic substance
+230611005,Neuropathy caused by bacterial toxin
+230612003,Local toxic nerve damage
+230617009,Lumbosacral plexus neuropathy
+230627003,Compression neuropathy of upper limb
+230628008,Pronator syndrome
+230629000,Supracondylar process entrapment
+230630005,Struther ligament entrapment
+230631009,Ulnar nerve entrapment at elbow
+230633007,Entrapment of deep palmar branch of ulnar nerve
+230634001,Radial nerve compression
+230635000,Suprascapular nerve compression
+230636004,Axillary nerve compression
+230637008,Compression neuropathy of lower limb
+230638003,Sciatic nerve compression
+230639006,Obturator nerve compression
+230640008,Femoral nerve compression
+230641007,Common peroneal nerve compression
+230643005,Tibial nerve compression
+230644004,Medial plantar nerve compression
+230646002,Intercostal neuropathy
+230647006,Abdominal neuropathy
+230655004,Idiopathic chronic neuropathy
+230656003,Demyelinating sensorimotor neuropathy
+230657007,Axonal sensorimotor neuropathy
+230658002,Chronic idiopathic ataxic neuropathy
+23096007,Cranial neuralgia
+232267001,Inflammatory facial neuropathy
+23414001,Peripheral demyelinating neuropathy
+23882000,Neuritis AND/OR radiculitis due to rupture of lumbar intervertebral disc
+2415007,Lumbosacral radiculopathy
+246602002,Root irritation of non-organic origin
+246605000,Peripheral nerve finding
+246610001,Median nerve finding
+246611002,Median nerve entrapment
+247378004,Neuritis
+247385000,Lateral femoral cutaneous neuralgia
+247386004,Obturator neuralgia
+247387008,Cruralgia
+247388003,Segmental peripheral neuralgia
+247389006,Intercostal neuralgia
+247390002,Sciatic nerve palsy
+247391003,Perineal neuralgia
+247392005,Iliohypogastric nerve neuralgia
+247393000,Ilioinguinal nerve neuralgia
+247395007,Genitofemoral nerve neuralgia
+247396008,Testicular neuralgia
+247398009,Neuropathic pain
+250024000,Peripheral neuropathic gait
+25416002,Peripheral neuralgia
+25690000,Femoral neuropathy
+26261000119109,Acute inflammatory demyelinating polyneuropathy
+264554005,Neuropathy
+267173007,Pricking: [sensation] or [has sensation]
+267174001,Tingling: [sensation] or [has sensation]
+267175000,Numbness: [has] or [sensation]
+267600005,Mononeuritis of unspecified site NOS
+267601009,Inflammatory and toxic neuropathy
+267603007,Toxic or inflammatory neuropathy NOS
+267703001,Bell's palsy &/or facial palsy
+267705008,Other mononeuritis upper limb &/or causalgia
+267706009,Neuropathy: [peripheral] or [polyneuropathy]
+267707000,Acute infective polyneuritis (& [Guillain-Barre syndrome])
+267977009,Brachial (cervical) neuritis
+267983007,"Thoracic neuritis, unspecified"
+268011004,"Neuralgia, neuritis or radiculitis NOS"
+268079007,Neuritis: [brachial (cervical)] or [brachial] or [cervical] or [ulnar]
+268110000,(Neuralgia/neuritis - ankle/foot) or (policemans' disease)
+268111001,(Neuralgia/neuritis - NOS) or (nerve root pain NEC)
+274676007,Tingling of skin
+277187008,Proximal median neuropathy
+277188003,Ulnar nerve entrapment
+277189006,Subacute inflammatory demyelinating polyradiculoneuropathy
+27830001,Brachial radiculitis
+279059006,Hypoglossal neuralgia
+279980002,Peripheral neurogenic pain
+279981003,Peripheral neuropathic pain
+28007006,Trigeminal nerve sensory disorder
+280816001,Facial palsy
+286938007,Other peripheral neuropathy
+286939004,Other peripheral nerve disease
+288233003,Neuralgia/neuritis - multiple
+288234009,Neuralgia/neuritis - shoulder
+288235005,Neuralgia/neuritis - upper arm
+288236006,Neuralgia/neuritis - forearm
+288237002,Neuralgia/neuritis - hand
+288238007,Neuralgia/neuritis - pelvis/thigh
+288239004,Neuralgia/neuritis - lower leg
+288240002,Neuralgia/neuritis - ankle/foot
+289495001,Numbness of vulva
+290511000119107,Tarsal tunnel syndrome of left posterior tibial nerve
+290521000119100,Tarsal tunnel syndrome of right posterior tibial nerve
+291821000119108,Inflammation of peripheral nerve of left upper limb
+291831000119106,Inflammation of peripheral nerve of right upper limb
+291861000119103,Disorder of peripheral nerve of left upper limb
+291871000119109,Disorder of peripheral nerve of right upper limb
+291921000119100,Disorder of left sciatic nerve
+291931000119102,Disorder of right sciatic nerve
+291961000119105,Disorder of left femoral nerve
+291971000119104,Disorder of right femoral nerve
+292061000119100,Disorder of right common peroneal nerve
+292071000119106,Disorder of left common peroneal nerve
+292121000119106,Disorder of right superficial peroneal nerve
+292131000119109,Disorder of left superficial peroneal nerve
+292261000119107,Inflammation of right iliohypogastric nerve
+292271000119101,Inflammation of left iliohypogastric nerve
+292301000119104,Neuralgia of right iliohypogastric nerve
+292311000119101,Neuralgia of left iliohypogastric nerve
+292321000119108,Inflammation of right saphenous nerve
+292331000119106,Inflammation of left saphenous nerve
+292361000119103,Inflammation of right ilioinguinal nerve
+292371000119109,Inflammation of left ilioinguinal nerve
+292421000119103,Inflammation of peripheral nerve of right ankle
+292431000119100,Inflammation of peripheral nerve of left ankle
+292441000119109,Inflammation of peripheral nerve of right foot
+292451000119106,Inflammation of peripheral nerve of left foot
+292481000119104,Neuralgia of right pudendal nerve
+292491000119101,Neuralgia of left pudendal nerve
+292501000119108,Disorder of peripheral nerve of right lower limb
+292511000119106,Disorder of peripheral nerve of left lower limb
+292521000119104,Neuralgia of nerve of right lower limb
+292531000119101,Neuralgia of nerve of left lower limb
+292561000119109,Disorder of right sural nerve
+292571000119103,Disorder of left sural nerve
+292731000119105,Entrapment of right ulnar nerve
+292741000119101,Entrapment of left ulnar nerve
+292751000119104,Tardy right ulnar nerve palsy
+292761000119102,Tardy left ulnar nerve palsy
+292791000119109,Disorder of right median nerve
+292801000119105,Disorder of left median nerve
+292811000119108,Compression of right median nerve at elbow
+292821000119101,Compression of left median nerve at elbow
+298137008,Thoracoabdominal neuropathy
+29833009,Median neuropathy
+298753001,Numbness of upper limb
+300108008,Numbness of pinna
+300951006,Polyneuritis
+30211000119106,Sensation of burning or prickling of skin
+302225005,Polyneuropathy and mononeuropathy
+302226006,Peripheral nerve disease
+302885000,Anterior interosseous nerve entrapment
+302886004,Posterior interosseous nerve compression
+30292005,Mononeuritis multiplex
+304595001,Mononeuropathy
+307176005,Acute sciatica
+307177001,Chronic sciatica
+307326004,Polyneuropathy unspecified
+309086004,Paresthesia of hand
+309087008,Paresthesia of foot
+309520003,Symmetrical sensory neuropathy
+309521004,Numbness of hand
+309536001,Numbness of finger
+309537005,Numbness of lower limb
+309538000,Numbness of foot
+309539008,Numbness of toe
+309557009,Numbness of face
+30961001,Prickling sensation
+310481001,Complaining of paresthesia
+310501001,Numbness of limbs
+311221000119103,Radiculopathy co-occurrent and due to lumbosacral intervertebral disc disorder
+31490007,Nasociliary neuralgia
+315056009,Pudendal nerve neuropathy
+31681005,Trigeminal neuralgia
+32595002,Mononeuritis
+329681000119109,Entrapment of peripheral nerve of right upper limb
+329691000119107,Entrapment of peripheral nerve of left upper limb
+329721000119103,Entrapment of right median nerve
+329731000119100,Entrapment of left median nerve
+330291000119104,Entrapment of right radial nerve
+330301000119103,Entrapment of left radial nerve
+330331000119105,Disorder of right radial nerve
+330751000119103,Posterior interosseous nerve syndrome of right posterior interosseous nerve
+330781000119105,Disorder of left radial nerve
+331861000119101,Palsy of right oculomotor nerve
+33209009,Idiopathic progressive polyneuropathy
+333531000119105,Optic papillitis of right eye
+334721000119102,Total internal ophthalmoplegia of right eye
+337481000119104,Palsy of left oculomotor nerve
+33832002,Third division of fifth cranial nerve disorder
+339141000119108,Optic papillitis of left eye
+340321000119106,Total internal ophthalmoplegia of left eye
+343271000119109,Palsy of bilateral oculomotor nerves
+344891000119109,Optic papillitis of bilateral eyes
+345681000119108,Total internal ophthalmoplegia of bilateral eyes
+350471000119102,Idiopathic small fiber peripheral neuropathy
+35062009,Tibial neuropathy
+3548001,Brachial plexus disorder
+35496009,Femoral neuralgia
+35635000,Cervicobrachial neuralgia
+359837005,Ulnar neuropathy
+359842002,Tibial neuropathy
+365258000,Tibial nerve palsy
+366964006,Transient paraesthesia
+367188001,Transient paraesthesia
+367399005,Ulnar nerve palsy
+368841000000108,Axonal sensorimotor neuropathy 
+38073003,Neuritis AND/OR radiculitis due to displacement of intervertebral disc
+38428003,Upper brachial plexus neuropathy
+388980004,Third cranial nerve weakness
+3900008,Mixed sensory-motor polyneuropathy
+394515001,Ulnar neuropathy
+394640000,Radiculopathy
+395205004,Ulnar neuropathy
+396521000000104,[X]Other specified polyneuropathies
+397828008,Median neuropathy
+399076001,Tibial neuropathy
+399081005,Common peroneal neuropathy
+399107008,Common peroneal nerve lesion
+399364006,Posterior tibial neuropathy
+400983004,Ilio-inguinal nerve entrapment
+402971000000103,[X]Polyneuropathy in other musculoskeletal disorders classified elsewhere
+404690004,Superior division third nerve palsy
+410471004,Neuroretinitis
+410472006,Bartonella henselae neuroretinitis
+412301000000108,[X]Other specified mononeuropathies
+414031000000107,[X]Other mononeuropathies of lower limb
+4151000119102,Facial neuralgia
+416061000000108,[X]Other inflammatory polyneuropathies
+416913007,Toxoplasma neuroretinitis
+41733009,Neuritis AND/OR radiculitis due to rupture of intervertebral disc
+417621000000106,"[X]Inflammatory polyneuropathy, unspecified"
+423023005,Entrapment neuropathy of upper limb
+42345000,Polyneuropathy
+42452002,Thoracic radiculopathy
+42561004,Reminiscent neuralgia
+426293000,Sural neuropathy
+427972000,Pudendal neuralgia
+428141001,Iliohypogastric nerve neuritis
+428359008,Ilioinguinal nerve neuritis
+428461003,Superficial peroneal nerve neuropathy
+429081000000100,[X]Polyneuropathies and other disorders of the peripheral nervous system
+429501000000104,[X]Other spondylosis with radiculopathy
+429668008,Neuritis of saphenous nerve
+429783005,Paresthesia of lower extremity
+43763009,Glossopharyngeal neuralgia
+43898003,Brachial neuritis AND/OR radiculitis due to rupture of cervical intervertebral disc
+44077006,Numbness
+442031000000109,[X]Other mononeuropathies of upper limb
+443353000,Entrapment of genitofemoral nerve
+443490000,Entrapment of plantar nerve
+443876008,Radial tunnel syndrome
+4439001,Cyclic oculomotor paralysis
+444728005,Chronic inflammatory demyelinating polyneuropathy
+449813001,Numbness of saddle area
+449916008,Peripheral facial palsy
+450101000000104,[X]Lumbar and other intervertebral disc disorders with radiculopathy
+450371000000105,"[X]Inflammatory polyneuropathy, unspecified"
+450381000000107,"[X]Polyneuropathy, unspecified"
+45600000,Toxic polyneuropathy
+45781009,Peripheral nerve entrapment syndrome
+46138007,Tropical ataxic neuropathy
+46382007,Peripheral nerve facial nerve paralysis
+46578006,Lumbosacral radiculitis
+4724003,Acute radial nerve palsy
+47374004,Tarsal tunnel syndrome
+480601000000104,[X]Other mononeuropathies in diseases classified elsewhere
+48780006,Cranial neuritis
+49605003,Recurrent painful ophthalmoplegic neuropathy
+496371000000103,[D]Pricking of skin
+496381000000101,[D]Tingling of skin
+496411000000104,[D]Numbness
+496421000000105,[D]Paraesthesia
+50366005,Mandibular neuropraxia
+51604006,Acute retrobulbar neuritis
+5181000119108,Cervical plexopathy
+52585001,Sciatic neuropathy
+52996001,Neuropathic atrophy
+54404000,Cervical radiculopathy
+55740007,Common peroneal neuropathy
+55802003,Ulnar neuropathy
+56795008,Polyneuritis cranialis
+57105000,Simple acroparesthesia
+57406009,Carpal tunnel syndrome
+5747006,Lower brachial plexus neuropathy
+58497009,Tardy ulnar nerve palsy
+5855005,Trigeminal nerve motor disorder
+58850003,Mononeuritis of upper limb
+58856009,Thoracic neuritis
+594791000000103,Thoracic and lumbosacral neuritis NOS
+59979003,Second division of fifth cranial nerve disorder
+600691000000108,Acroparesthesia - unspecified
+60490008,Brachial neuritis AND/OR radiculitis due to displacement of cervical intervertebral disc
+60525009,Lateral plantar neuropathy
+609383005,Anterior interosseous neuritis
+609530001,Common peroneal neuropathy at lateral popliteal branch
+609531002,Femoral nerve paralysis
+609590004,Radial nerve entrapment
+609591000,Mononeuropathy of upper limb
+609592007,Mononeuropathy of lower limb
+609599003,Neuropathy of upper limb
+609600000,Neuropathy of lower limb
+609601001,Suprascapular neuropathy
+609605005,Sural neuropathy in calf
+609613006,Entrapment of common peroneal nerve
+609614000,Entrapment neuropathy of lower limb
+609640006,Compression neuropathy of genitofemoral nerve
+609641005,Compression neuropathy of ilioinguinal nerve
+61830005,Sphenopalatine neuralgia
+620651000000108,Other mononeuritis lower limb
+62195001,Lumbosacral neuritis
+62235007,Mononeuritis of lower limb
+624151000000109,Unspecified mononeuritis lower limb
+62507009,Pins and needles
+636091000000108,Other idiopathic peripheral neuropathy
+636111000000103,Other idiopathic peripheral neuropathy NOS
+636131000000106,Acute infective polyneuritis NOS
+63755003,Glove anesthesia
+639681000000105,Polyneuropathy in disease NOS
+639701000000107,Other toxic or inflammatory neuropathy
+64309007,Trigeminal nerve disorder
+654321000000102,Other upper limb mononeuritis
+654331000000100,Mononeuritis upper limb NOS
+657001000000102,"Neuralgia, neuritis or radiculitis NOS"
+66085007,Stocking anesthesia
+665411000000105,Other facial nerve disorders
+665421000000104,Other facial nerve disorder NOS
+666651000000102,"Thoracic neuritis, unspecified"
+66760008,Optic neuritis
+667651000000100,"Neuralgia, neuritis and radiculitis unspecified"
+667681000000106,Neuralgia unspecified
+669041000000101,Neuritis unspecified
+669101000000103,"Lumbosacral neuritis, unspecified"
+67157003,Middle brachial plexus neuropathy
+675641000000102,Other peripheral neuropathy
+679691000119100,Retrobulbar optic neuritis of bilateral eyes
+679701000119100,Retrobulbar optic neuritis of left eye
+679711000119102,Retrobulbar optic neuritis of right eye
+68121000119103,Facial palsy House-Brackmann grade II
+68131000119100,Facial palsy House-Brackmann grade III
+68141000119109,Facial palsy House-Brackmann grade IV
+68151000119106,Facial palsy House-Brackmann grade V
+68711000119109,Genitofemoral neuropathy
+68721000119102,Ilioinguinal neuropathy
+68861000119103,Ulnar neuropathy at wrist
+689171000000108,Other peripheral nerve disease
+698081000000100,Polyneuropathy unspecified
+69942004,Obturator neuropathy
+703981000000103,Mononeuritis of unspecified site NOS
+703991000000101,Toxic or inflammatory neuropathy NOS
+709143008,Peripheral neuropathy caused by toxin
+709489006,Small fiber neuropathy
+710359002,Peripheral neuropathy of upper limb due to infection
+712644005,Inflammation of obturator nerve
+712645006,Inflammation of femoral nerve
+713829001,Postinfective intercostal neuralgia
+713831005,Postinfective peripheral neuralgia
+713837009,Postinfective segmental peripheral neuralgia
+714027006,Trigeminal nerve palsy
+715770009,Acute motor axonal neuropathy
+71760005,Cervico-occipital neuralgia
+721261004,Infection causing inflammation of optic nerve
+72274001,Nerve root disorder
+72893007,Brachial neuritis
+73221001,Optic papillitis
+7339009,Polyneuropathy caused by drug
+73431005,Meningococcal optic neuritis
+735936005,Chronic neuropathic pain
+75572007,Polyradiculopathy
+75962003,First division of fifth cranial nerve disorder
+762374005,Paresthesia of finger
+762607008,Orofacial neuropathic pain
+76691009,Brachial plexus neuralgia
+76886005,Polyneuritis
+781221000000108,Numbness of saddle area
+783090002,"Idiopathic retinal vasculitis, aneurysms, neuroretinitis syndrome"
+783244002,Acute pure sensory neuropathy
+786837007,Tingling pain
+789588003,Peripheral sensory neuropathy
+79256006,Acroparesthesia
+82331007,Neuritis AND/OR radiculitis due to displacement of lumbar intervertebral disc
+823985006,Intact spinal accessory nerve
+823986007,Intact trigeminal nerve
+823991008,Intact trochlear nerve
+82473003,Radiculitis
+831851000000109,Numbness of hand
+838321000,Autonomic ganglionopathy
+840319006,Paresthesia of bilateral hands
+84299009,Neuritis
+85007004,Meralgia paresthetica
+85423005,Motor polyneuropathy
+86266009,Total internal ophthalmoplegia
+866043000,Neuralgia of twelfth thoracic nerve
+866099002,Leber idiopathic stellate neuroretinitis
+866133000,Infectious neuroretinitis
+870321008,Ocular nerve palsy caused by Herpes zoster
+870707008,Anesthesia in bilateral lower limbs
+87651000119100,Facial palsy House-Brackmann grade VI
+88219000,Celiac plexus syndrome
+91019004,Paresthesia
+95358009,Paresthesia of mucous membrane
+95359001,Mucosal numbness
+95528002,Numbness of tongue
+95662005,Sensory neuropathy
+95665007,Facial paresthesia
+95669001,Superior laryngeal neuralgia
+95670000,Nervus intermedius neuralgia
+95673003,Paresthesia of upper limb
+95675005,Ulnar neuritis
+95676006,Berger's paresthesia
