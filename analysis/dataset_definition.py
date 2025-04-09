@@ -93,4 +93,3 @@ dataset.first_tendinitis_diagnosis_date = clinical_events.where(
 ).sort_by(
         clinical_events.date
 ).first_for_patient().date
-
