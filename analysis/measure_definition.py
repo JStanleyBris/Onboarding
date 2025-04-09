@@ -47,19 +47,34 @@ tendinitis_dx = dx_in_interval.where(
     clinical_events.snomedct_code.is_in(tendinitis_codes)
 )
 
-#Define numerators - outcomes with antibiotic prescription in previous 30d
-#amoxrx = medications.where(medications.dmd_code.is_in(amoxicillin_codes))
+#Define numerators - outcomes with antibiotic prescription in previous 30d - ?dummy data - suggested by Rose
 
 #tendinitis_prev_amox_dx = tendinitis_dx.where(
  #   amoxrx.date.is_on_or_between(
   #      tendinitis_dx.date - days(30), tendinitis_dx.date - days(1)).exists_for_patient()
 #)
 
-tendinitis_post_amox = dx_in_interval.where(
-    clinical_events.snomedct_code.is_in(tendinitis_codes)
-    .where(medications.dmd_code.is_in(amoxicillin_codes))
-           .where(medications.date.is_on_or_between(clinical_events.date - days(30), clinical_events.date - days(1)))
-)
+first_tendinitis = clinical_events.where(
+    clinical_events.snomedct_code.is_in(tendinitis_codes)).where(
+        clinical_events.date.is_during(INTERVAL)).sort_by(clinical_events.date).first_for_patient()
+    
+.date
+amoxrx = medications.where(medications.dmd_code.is_in(amoxicillin_codes)).where(
+        medications.date.is_on_or_between(first_tendinitis - days(30), first_tendinitis - days(1))
+                                          )
+
+#first_tendinitis= clinical_events.where(
+ #   clinical_events.snomedct_code.is_in(tendinitis_codes)).where(
+  #      clinical_events.date.is_on_or_between(amoxrx + days(1), amoxrx + days(30))
+#)
+
+#D/w Rose 9/4 - show option helpful for understanding 'hidden' data processing etc
+
+#tendinitis_post_amox = clinical_events.where(
+ #   clinical_events.snomedct_code.is_in(tendinitis_codes)
+  #  .where(medications.dmd_code.is_in(amoxicillin_codes))
+   #        .where(medications.date.is_on_or_between(clinical_events.date - days(30), clinical_events.date - days(1)))
+#)
 
 #tendinitis_post_amox = rx_in_interval.where(
  #   medications.dmd_code.is_in(amoxicillin_codes)
@@ -97,11 +112,11 @@ measures.define_measure( #Is this the best way to work with measures here - to m
 measures.define_measure(
     name="tendinitis_trends",
     numerator= tendinitis_dx.exists_for_patient(), #exists better than count here - any rpt coding would be same dx
-    denominator = denominator_abxcount
+    denominator = denominator_abxcount,
 )
 
 measures.define_measure(
     name="tendinitis_prevamox_trends",
-    numerator= tendinitis_post_amox.exists_for_patient(), #this runs and works - and only counts by patient within interval I think because of rx_in_interval
-    denominator=denominator_all_amox, 
+    numerator= amoxrx.exists_for_patient(), #this runs and works - and only counts by patient within interval I think because of rx_in_interval
+    denominator=denominator_abxcount, 
 )
