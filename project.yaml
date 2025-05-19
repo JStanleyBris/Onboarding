@@ -21,4 +21,4 @@ actions:
      needs: [generate_measure]
      outputs:
       moderately_sensitive:
-        chart: output/fq_time_plot.png
+        chart: output/abx_quarter_time_plot.png
