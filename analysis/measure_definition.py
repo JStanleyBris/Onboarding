@@ -102,12 +102,12 @@ denominator_abxcount = (
 
 denominator_all_comparator = ( #For use with post abx outcomes - this is count of all prescriptions within the timeframe - look back 30 days
  medications.where(medications.dmd_code.is_in(all_comparator_abx))
- .where(medications.date.is_on_or_between(INTERVAL.start_date - days(30), INTERVAL.end_date - days(30)))
+ .where(medications.date.is_on_or_between(INTERVAL.start_date - days(30), INTERVAL.start_date - days(1)))
 )
 
 denominator_fq_specific = ( #For use with post abx outcomes - this is count of all prescriptions within the timeframe - look back 30 days
  medications.where(medications.dmd_code.is_in(fluoroquinolone_codes))
- .where(medications.date.is_on_or_between(INTERVAL.start_date - days(30), INTERVAL.end_date - days(30)))
+ .where(medications.date.is_on_or_between(INTERVAL.start_date - days(30), INTERVAL.start_date - days(1)))
 )
 
 #Start with measures
@@ -128,6 +128,12 @@ measures.define_measure(
 measures.define_measure(
     name="cefalexin_trends",
     numerator= cefalexin_rx.count_for_patient(),
+    denominator=denominator_abxcount.exists_for_patient(),
+)
+
+measures.define_measure(
+    name="coamox_trends",
+    numerator= co_amox_rx.count_for_patient(),
     denominator=denominator_abxcount.exists_for_patient(),
 )
 

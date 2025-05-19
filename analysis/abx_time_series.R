@@ -1,8 +1,10 @@
 library('tidyverse')
 library(lubridate)
 
-abx_list<-c("fluoroquinolone_trends","amoxicillin_trends")
-outcome_list <- c("tendinitis_trends")
+abx_list<-c( "Fluoroquinolones", "Amoxicillin","Amoxicillin + clavulanic acid",  "Cefalexin","Trimethoprim", "Trimethoprim + sulfamethoxazole")
+outcome_list <- c("Tendinitis", "Neuropathy")
+outcome_post_abx_list <- c("Tendinitis after Fluoroquinolone Prescription", "Tendinitis after Comparator Prescription", "Neuropathy after Fluoroquinolone Prescription", 
+"Neuropathy after Comparator Prescription")
 
 df_input <- read_csv(
     here::here("output", "measures.csv"),
@@ -24,29 +26,61 @@ df_quarter <- df_input %>% #Generate quarter for easier plotting
         numerator_mean = mean(numerator, na.rm = TRUE),
         denominator_mean = mean(denominator, na.rm = TRUE)
 ) %>%
-ungroup()
+ungroup() %>% 
+mutate(measure = recode(measure,
+"fluoroquinolone_trends" = "Fluoroquinolones",
+"amoxicillin_trends" = "Amoxicillin",
+"coamox_trends" = "Amoxicillin + clavulanic acid", 
+"cefalexin_trends" = "Cefalexin", 
+"trim_trends" = "Trimethoprim", 
+"co_trim_trends" = "Trimethoprim + sulfamethoxazole",
+"tendinitis_trends" = "Tendinitis", 
+"neuropathy_trends" = "Neuropathy",
+"tendinitis_prev_fluoroquinolone_trends" = "Tendinitis after Fluoroquinolone Prescription", 
+"tendinitis_prev_comparator_trends" = "Tendinitis after Comparator Prescription", 
+"neuropathy_prev_fluoroquinolone_trends" = "Neuropathy after Fluoroquinolone Prescription", 
+"neuropathy_prev_comparator_trends"  = "Neuropathy after Comparator Prescription"
+)) %>%
+mutate(ratio_mean_1000 = ratio_mean*1000) #for use with prescribing/1000 patients
 
-#Plot of abx over time
+#Plot of abx over time - want this /1000 patients(?)
 
 plot_abx_quarter <- ggplot(data = (df_quarter %>% 
 filter(measure %in% abx_list) #restrict to abx only
-), aes(x = quarter_start, y = ratio_mean)) +
+), aes(x = quarter_start, y = ratio_mean_1000)) +
 geom_point() +
 geom_line() + 
 facet_wrap(~ measure, scales = "free_y") + 
 theme_minimal() +
-labs(x = "Quarter")
+labs(x = "Quarter", 
+y = "Prescriptions per quarter per 1000 registered patients",
+title = "Quarterly Prescribing Trends Over Time")
 
 #Plot of outcomes over time
 
 plot_outcome_quarter <- ggplot(data = (df_quarter %>% 
-filter(measure %in% outcome_list) #restrict to abx only
-), aes(x = quarter_start, y = ratio_mean)) +
+filter(measure %in% outcome_list)  #restrict to outcomes only
+), aes(x = quarter_start, y = ratio_mean_1000)) +
 geom_point() +
 geom_line() + 
 facet_wrap(~ measure, scales = "free_y") + 
 theme_minimal() +
-labs(x = "Quarter")
+labs(x = "Quarter",
+y = "New diagnoses per 1000 registered patients",
+title = "Quarterly Tendinitis and Neuropathy Trends Over Time")
+
+#Plot of outcomes post abx rx
+
+plot_outcome_postabx_quarter <- ggplot(data = (df_quarter %>% 
+filter(measure %in% outcome_post_abx_list)  #restrict to outcomes post abx only
+), aes(x = quarter_start, y = ratio_mean_1000)) +
+geom_point() +
+geom_line() + 
+facet_wrap(~ measure, scales = "free_y") + 
+theme_minimal() +
+labs(x = "Quarter",
+y = "New diagnoses per 1000 prescriptions",
+title = "Quarterly Tendinitis and Neuropathy in the 30 days after Antibiotic Prescription")
 
 ggsave(
     plot = plot_abx_quarter,
@@ -57,5 +91,11 @@ path = here::here("output")
 ggsave(
     plot = plot_outcome_quarter,
 filename = "outcome_quarter_time_plot.png",
+path = here::here("output")
+)
+
+ggsave(
+    plot = plot_outcome_postabx_quarter,
+filename = "outcome_postabx_quarter.png",
 path = here::here("output")
 )
