@@ -113,6 +113,84 @@
       "url": "https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake-old/ckd15_cod/4490aee1/",
       "downloaded_at": "2025-05-21 11:26:10.854423Z",
       "sha": "88cc1ab0e8fc6e4be88929369a5b492cc402884a"
+    },
+    "qcovid-has_peripheral_vascular_disease.csv": {
+      "id": "qcovid/has_peripheral_vascular_disease/1951dd87",
+      "url": "https://www.opencodelists.org/codelist/qcovid/has_peripheral_vascular_disease/1951dd87/",
+      "downloaded_at": "2025-05-21 11:56:03.051059Z",
+      "sha": "1869a9b217acd6f4dd5530b9606705800ff58bbe"
+    },
+    "nhsd-primary-care-domain-refsets-aaa_cod.csv": {
+      "id": "nhsd-primary-care-domain-refsets/aaa_cod/40231d11",
+      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/aaa_cod/40231d11/",
+      "downloaded_at": "2025-05-21 11:56:04.100190Z",
+      "sha": "88b131a9e5af269547653ce3055d6c15bba23306"
+    },
+    "opensafely-multiple-sclerosis.csv": {
+      "id": "opensafely/multiple-sclerosis/4fcd25fc",
+      "url": "https://www.opencodelists.org/codelist/opensafely/multiple-sclerosis/4fcd25fc/",
+      "downloaded_at": "2025-05-21 11:56:04.894931Z",
+      "sha": "68e04d3d387dc90a0ee05592e6fd4b7fa474b194"
+    },
+    "opensafely-rheumatoid-arthritis.csv": {
+      "id": "opensafely/rheumatoid-arthritis/68dc9931",
+      "url": "https://www.opencodelists.org/codelist/opensafely/rheumatoid-arthritis/68dc9931/",
+      "downloaded_at": "2025-05-21 11:56:05.720226Z",
+      "sha": "4042d1daebf9ab893093d0eeff6b62ad5927c86e"
+    },
+    "opensafely-solid-organ-transplantation.csv": {
+      "id": "opensafely/solid-organ-transplantation/3a37264c",
+      "url": "https://www.opencodelists.org/codelist/opensafely/solid-organ-transplantation/3a37264c/",
+      "downloaded_at": "2025-05-21 11:56:06.728017Z",
+      "sha": "94178a9e19770b9c43c08fe42df6ab5ed0d9ec49"
+    },
+    "opensafely-cancer-excluding-lung-and-haematological.csv": {
+      "id": "opensafely/cancer-excluding-lung-and-haematological/2127b317",
+      "url": "https://www.opencodelists.org/codelist/opensafely/cancer-excluding-lung-and-haematological/2127b317/",
+      "downloaded_at": "2025-05-21 11:56:08.187057Z",
+      "sha": "8fa1164b587028c4bd5903289e0948642d399e56"
+    },
+    "opensafely-haematological-cancer.csv": {
+      "id": "opensafely/haematological-cancer/1e74f321",
+      "url": "https://www.opencodelists.org/codelist/opensafely/haematological-cancer/1e74f321/",
+      "downloaded_at": "2025-05-21 11:56:09.446545Z",
+      "sha": "59d65c613a7b984ba46eca8a74eedcc6320609fe"
+    },
+    "opensafely-lung-cancer.csv": {
+      "id": "opensafely/lung-cancer/53469981",
+      "url": "https://www.opencodelists.org/codelist/opensafely/lung-cancer/53469981/",
+      "downloaded_at": "2025-05-21 11:56:10.228893Z",
+      "sha": "645584a20f81c4d76187a2c305c904e8b8c63dbb"
+    },
+    "nhsd-primary-care-domain-refsets-peptic-ulceration-codes.csv": {
+      "id": "nhsd-primary-care-domain-refsets/peptic-ulceration-codes/712613a0",
+      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/peptic-ulceration-codes/712613a0/",
+      "downloaded_at": "2025-05-21 11:56:11.250692Z",
+      "sha": "2638c76fe57d1f11c4bfe563be2da4658cfa75d6"
+    },
+    "nhsd-primary-care-domain-refsets-cndatrisk1_cod.csv": {
+      "id": "nhsd-primary-care-domain-refsets/cndatrisk1_cod/5dd15ca3",
+      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/cndatrisk1_cod/5dd15ca3/",
+      "downloaded_at": "2025-05-21 11:56:12.318527Z",
+      "sha": "55057f99eddd164538980cf7173957ecda7fba19"
+    },
+    "nhsd-primary-care-domain-refsets-c19copd_cod.csv": {
+      "id": "nhsd-primary-care-domain-refsets/c19copd_cod/29c669d2",
+      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/c19copd_cod/29c669d2/",
+      "downloaded_at": "2025-05-21 11:56:13.124226Z",
+      "sha": "77ae6e3de6d5a5d5e0bbcb6a2acd8251cc46d60b"
+    },
+    "opensafely-other-respiratory-conditions.csv": {
+      "id": "opensafely/other-respiratory-conditions/42ae0b77",
+      "url": "https://www.opencodelists.org/codelist/opensafely/other-respiratory-conditions/42ae0b77/",
+      "downloaded_at": "2025-05-21 11:56:14.139432Z",
+      "sha": "91b052f35ae6d6f750430f5cbda5175c97babe2d"
+    },
+    "nhsd-primary-care-domain-refsets-c19ast_cod.csv": {
+      "id": "nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e",
+      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e/",
+      "downloaded_at": "2025-05-21 11:56:14.934527Z",
+      "sha": "70493dd5facfa385a0759ee7861fe10616f0efd6"
     }
   }
 }
