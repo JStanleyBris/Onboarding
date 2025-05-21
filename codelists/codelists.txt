@@ -12,3 +12,8 @@ user/jacklsbrist/fluoroquinolones-dmd/166849d8
 #Outcomes
 user/jacklsbrist/tendinitis/23e609a6
 user/jacklsbrist/peripheral-neuropathy/553e3c81
+
+#Demographics
+opensafely/ethnicity-snomed-0removed/2e641f61
+opensafely/smoking-clear/10307fc4
+opensafely/smoking-unclear/77210c8e
