@@ -65,6 +65,54 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/smoking-unclear/77210c8e/",
       "downloaded_at": "2025-05-21 09:58:21.665123Z",
       "sha": "d9dad3e9d9491f765863b2617114c521957b6db1"
+    },
+    "nhsd-primary-care-domain-refsets-chd_cod.csv": {
+      "id": "nhsd-primary-care-domain-refsets/chd_cod/0f32f87c",
+      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/chd_cod/0f32f87c/",
+      "downloaded_at": "2025-05-21 11:17:28.270502Z",
+      "sha": "7b47b2cb6c00a2fc71ad9dfb1030bd6b08418535"
+    },
+    "nhsd-primary-care-domain-refsets-hyp_cod.csv": {
+      "id": "nhsd-primary-care-domain-refsets/hyp_cod/47dcb7aa",
+      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/hyp_cod/47dcb7aa/",
+      "downloaded_at": "2025-05-21 11:17:29.052121Z",
+      "sha": "f94870510a3550ff79710b2d88b551812bb2fb3b"
+    },
+    "opensafely-diabetes.csv": {
+      "id": "opensafely/diabetes/47ac0884",
+      "url": "https://www.opencodelists.org/codelist/opensafely/diabetes/47ac0884/",
+      "downloaded_at": "2025-05-21 11:23:55.335244Z",
+      "sha": "6bf3a45d96f7619c96714fa9c4f3ee42e0e2ad2e"
+    },
+    "opensafely-incident-non-traumatic-stroke.csv": {
+      "id": "opensafely/incident-non-traumatic-stroke/0be6efb3",
+      "url": "https://www.opencodelists.org/codelist/opensafely/incident-non-traumatic-stroke/0be6efb3/",
+      "downloaded_at": "2025-05-21 11:23:56.145621Z",
+      "sha": "0ab55320f1c9251bda2712164927dd40debfea9f"
+    },
+    "opensafely-dementia.csv": {
+      "id": "opensafely/dementia/0acaffd8",
+      "url": "https://www.opencodelists.org/codelist/opensafely/dementia/0acaffd8/",
+      "downloaded_at": "2025-05-21 11:23:56.973537Z",
+      "sha": "9d40ff3a5c2428af4651c765f2c418de3a3ad4b4"
+    },
+    "opensafely-hiv.csv": {
+      "id": "opensafely/hiv/0d7dbfce",
+      "url": "https://www.opencodelists.org/codelist/opensafely/hiv/0d7dbfce/",
+      "downloaded_at": "2025-05-21 11:23:57.782712Z",
+      "sha": "c36a629c306e57081f702c3f30671364e452a3ee"
+    },
+    "opensafely-chronic-liver-disease.csv": {
+      "id": "opensafely/chronic-liver-disease/02b2bff6",
+      "url": "https://www.opencodelists.org/codelist/opensafely/chronic-liver-disease/02b2bff6/",
+      "downloaded_at": "2025-05-21 11:26:10.063594Z",
+      "sha": "d31d212d23c5f0e15f63236d2106282fb070bd7c"
+    },
+    "primis-covid19-vacc-uptake-old-ckd15_cod.csv": {
+      "id": "primis-covid19-vacc-uptake-old/ckd15_cod/4490aee1",
+      "url": "https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake-old/ckd15_cod/4490aee1/",
+      "downloaded_at": "2025-05-21 11:26:10.854423Z",
+      "sha": "88cc1ab0e8fc6e4be88929369a5b492cc402884a"
     }
   }
 }

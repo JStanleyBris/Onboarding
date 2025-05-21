@@ -140,7 +140,7 @@ dataset.n_hosp_appt_6m = apcs.where(apcs.admission_date.is_on_or_between(
         #Nb to d/w Will/Rose as per here - https://docs.opensafely.org/ehrql/reference/schemas/tpp/#appointments
 
         #Comorbidities
-#?need codelists
+#?need codelists - ctv3. Or snomed. Or both?
 
         #Indication for antibiotic treatment
 
