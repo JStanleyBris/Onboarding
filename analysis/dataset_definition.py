@@ -9,6 +9,8 @@
 
 ######################################
 
+#COuld this be one dataset and then another one for CTC?
+
 from ehrql import create_dataset, codelist_from_csv, months, weeks, days, show
 from ehrql.tables.tpp import patients, medications, practice_registrations, addresses, clinical_events, apcs
 from codelists import *
@@ -47,7 +49,15 @@ smoking_unclear_codelist = codelist_from_csv("codelists/opensafely-smoking-uncle
 
 #both_smoking_codes = smoking_clear_codelist + smoking_unclear_codelist - why does this not work? Combining elsewhere works
 
+#COmorbidity codes
 
+diabetes_codelist = codelist_from_csv("codelists/opensafely-diabetes.csv", column = "CTV3ID")
+dementia_codelist = codelist_from_csv("codelists/opensafely-dementia.csv", column = "CTV3ID")
+
+comorbidity_codelists_ctv3 = {
+    "diabetes":diabetes_codelist,
+    "dementia":dementia_codelist
+}
 
 has_any_studyabx_prescription = medications.where(
         medications.dmd_code.is_in(all_abx_codes)
@@ -141,6 +151,21 @@ dataset.n_hosp_appt_6m = apcs.where(apcs.admission_date.is_on_or_between(
 
         #Comorbidities
 #?need codelists - ctv3. Or snomed. Or both?
+#TO put start date as date of rx for cohort (and event for CTC). Loop over these - need to do separately depending on whether using ctv3 or other
+
+for condition, codelist in comorbidity_codelists_ctv3.items():
+    setattr(
+        dataset,
+        f"has_{condition}",
+        clinical_events.where(
+            clinical_events.ctv3_code.is_in(codelist)
+        ).where(
+            clinical_events.date.is_before(first_cohort_abx_rx)
+        ).exists_for_patient()
+    )
+
+
+
 
         #Indication for antibiotic treatment
 
@@ -165,6 +190,15 @@ dataset.first_fluoroquinolone_date = medications.where(
         medications.date
 ).first_for_patient().date
 
+dataset.first_co_amox_date = medications.where(
+        medications.dmd_code.is_in(amox_clavulanicacid_codes)
+).where(
+        medications.date.is_on_or_after(start_date)
+).sort_by(
+        medications.date
+).first_for_patient().date
+
+
 #Outcome options - ICD-10 or SNOMED - any benefit to either cf the other?
 
 dataset.first_tendinitis_diagnosis_date = clinical_events.where(
@@ -175,3 +209,10 @@ dataset.first_tendinitis_diagnosis_date = clinical_events.where(
         clinical_events.date
 ).first_for_patient().date
 
+dataset.first_neuropathy_diagnosis_date = clinical_events.where(
+        clinical_events.snomedct_code.is_in(neuropathy_newdx_codes)
+).where(
+        clinical_events.date.is_on_or_after(start_date)
+).sort_by(
+        clinical_events.date
+).first_for_patient().date
