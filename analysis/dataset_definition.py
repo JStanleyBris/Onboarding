@@ -50,19 +50,31 @@ harmful_alcohol_codelist = codelist_from_csv("codelists/opensafely-hazardous-alc
 
 #Comorbidity codes
 
+        #ctv3
 diabetes_codelist = codelist_from_csv("codelists/opensafely-diabetes.csv", column = "CTV3ID")
 dementia_codelist = codelist_from_csv("codelists/opensafely-dementia.csv", column = "CTV3ID")
 
+        #ctv3 dictionary
 comorbidity_codelists_ctv3 = {
     "diabetes":diabetes_codelist,
     "dementia":dementia_codelist
+}
+
+        #snomed
+coronary_hd_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-chd_cod.csv", column = "code")
+hypertension_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-hyp_cod.csv", column = "code")
+
+        #snomed dictionary
+comorbidity_codelists_snomedct = {
+    "coronary_hd":coronary_hd_codelist,
+    "hypertension":hypertension_codelist
 }
 
 #Non-abx prescription codes
 
 corticosteroid_codes = codelist_from_csv("codelists/qcovid-is_prescribed_oral_steroids.csv", column = "code")
 
-phenytoin_codes = codelist_from_csv("codelists/user-jacklsbrist-phenytoin.csv", column = "code")
+phenytoin_codes = codelist_from_csv("codelists/user-jacklsbrist-phenytoin-dmd.csv", column = "code")
 amiodarone_codes = codelist_from_csv("codelists/pincer-amio.csv", column = "code")
 
 drug_causes_of_neuropathy_codes = phenytoin_codes  + amiodarone_codes
@@ -201,8 +213,16 @@ for condition, codelist in comorbidity_codelists_ctv3.items():
         ).exists_for_patient()
     )
 
-
-
+for condition, codelist in comorbidity_codelists_snomedct.items():
+    setattr(
+        dataset,
+        f"has_{condition}",
+        clinical_events.where(
+            clinical_events.snomedct_code.is_in(codelist)
+        ).where(
+            clinical_events.date.is_before(first_cohort_abx_rx)
+        ).exists_for_patient()
+    )
 
         #Indication for antibiotic treatment
 
@@ -218,6 +238,15 @@ dataset.year_cohort_prescrption = first_cohort_abx_rx.year
 
 dataset.corticosteroid_60d_before_abx = medications.where(
     medications.dmd_code.is_in(corticosteroid_codes)
+).where(
+    medications.date.is_on_or_between(
+        (first_cohort_abx_rx - days(60)), 
+        (first_cohort_abx_rx - days(1))
+)
+).exists_for_patient()
+
+dataset.drug_linked_to_neuropathy_60d_before_abx = medications.where(
+    medications.dmd_code.is_in(drug_causes_of_neuropathy_codes)
 ).where(
     medications.date.is_on_or_between(
         (first_cohort_abx_rx - days(60)), 

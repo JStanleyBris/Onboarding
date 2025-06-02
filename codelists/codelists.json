@@ -216,11 +216,11 @@
       "downloaded_at": "2025-06-02 07:55:28.575453Z",
       "sha": "5cd120a51c6d561c7f70c123e2c5ace38bb49692"
     },
-    "user-jacklsbrist-phenytoin.csv": {
-      "id": "user/jacklsbrist/phenytoin/1c230610",
-      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/phenytoin/1c230610/",
-      "downloaded_at": "2025-06-02 07:55:29.483388Z",
-      "sha": "7350fcae59336b9f0221e62b4d3abba22dea47f2"
+    "user-jacklsbrist-phenytoin-dmd.csv": {
+      "id": "user/jacklsbrist/phenytoin-dmd/565a2c5c",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/phenytoin-dmd/565a2c5c/",
+      "downloaded_at": "2025-06-02 13:06:36.202360Z",
+      "sha": "43a56e4b905d0917f5b32db2f01f25806f852d66"
     }
   }
 }

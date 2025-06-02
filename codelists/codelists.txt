@@ -52,6 +52,6 @@ nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e
 qcovid/is_prescribed_oral_steroids/05a7ea3e
 #Check this with Brian - some extended steroid codes
 pincer/amio/560cb6d8
-user/jacklsbrist/phenytoin/1c230610
+user/jacklsbrist/phenytoin-dmd/565a2c5c
 
 #Still need nitrofurantoin and metronidazole - need to edit existing. A/w input from Brian.
