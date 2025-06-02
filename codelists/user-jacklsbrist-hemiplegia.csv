@@ -1,0 +1,32 @@
+code,term
+1B3..,Motor symptoms (& [paralysis] or [weakness])
+2833.,O/E - hemiplegia
+F22..,(Hemiplegia) or (hemiparesis)
+F220.,Flaccid hemiplegia
+F221.,(Spastic hemiplegia) or (spastic foot)
+F222.,Left: [hemiplegia] or [sided weakness]
+F223.,Right: [hemiplegia] or [sided weakness]
+F22z.,Hemiplegia NOS
+F231.,Infantile hemiplegia
+F234.,Infantile hemiplegia NOS
+X006E,Hemiplegia-hemiconvulsion-epilepsy syndrome
+X00DE,Lacunar ataxic hemiparesis
+X76n9,Hemiparesis
+XE15T,Hemiplegia
+XE15U,Spastic hemiplegia
+XE181,Cerebral palsy (&/or infantile) &/or infantile hemiplegia
+Xa0fr,Right hemiplegia
+Xa0fs,Left hemiplegia
+Xa0ft,Right hemiparesis
+Xa0fu,Left hemiparesis
+XaELO,Residual hemiplegia
+XaL3N,Hemiparesis NOS
+Y1744,Evidence of one sided weakness
+Y1dc4,Limb movement evaluation: severe weakness in right arm
+Y1dc5,Limb movement evaluation: severe weakness in left arm
+Y1dd0,Limb movement evaluation: severe weakness in right leg
+Y1dd1,Limb movement evaluation: severe weakness in left leg
+Y3466,Hemiplegic
+Y4048,Weakness on right
+Y4049,Weakness on left
+Y6151,Congenital hemiplegia

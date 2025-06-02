@@ -53,17 +53,39 @@ harmful_alcohol_codelist = codelist_from_csv("codelists/opensafely-hazardous-alc
         #ctv3
 diabetes_codelist = codelist_from_csv("codelists/opensafely-diabetes.csv", column = "CTV3ID")
 dementia_codelist = codelist_from_csv("codelists/opensafely-dementia-complete.csv", column = "code")
-hiv_codelist = codelist_from_csv("codelists/opensafely-hiv.csv", column = "CTV3ID")
+hiv_codelist = codelist_from_csv("codelists/opensafely-heart-failure.csv", column = "CTV3ID")
+heart_failure_codelist = codelist_from_csv("codelists/opensafely-hiv.csv", column = "CTV3ID")
 chronic_liver_disease_codelist = codelist_from_csv("codelists/opensafely-chronic-liver-disease.csv", column = "CTV3ID")
 multiple_sclerosis_codelist = codelist_from_csv("codelists/opensafely-multiple-sclerosis.csv", column = "CTV3ID")
+rheumatoid_arthritis_codelist = codelist_from_csv("codelists/opensafely-rheumatoid-arthritis.csv", column = "CTV3ID")
+solid_organ_transplant_codelist = codelist_from_csv("codelists/opensafely-solid-organ-transplantation.csv", column = "CTV3ID")
+lung_cancer_codelist = codelist_from_csv("codelists/opensafely-lung-cancer.csv", column = "CTV3ID")
+notlung_nothaem_cancer_codelist = codelist_from_csv("codelists/opensafely-cancer-excluding-lung-and-haematological.csv", column = "CTV3ID")
+haem_cancer_codelist = codelist_from_csv("codelists/opensafely-haematological-cancer.csv", column = "CTV3ID")
+stroke_codelist = codelist_from_csv("codelists/opensafely-incident-non-traumatic-stroke.csv", column = "CTV3ID")
+tia_codelist = codelist_from_csv("codelists/opensafely-transient-ischaemic-attack.csv", column = "code")
+chronic_resp_exc_asthma_codelist = codelist_from_csv("codelists/opensafely-chronic-respiratory-disease.csv", column = "CTV3ID")
+asthma_codelist = codelist_from_csv("codelists/opensafely-asthma-diagnosis.csv", column = "CTV3ID")
+hemiplegia_codelist = codelist_from_csv("codelists/user-jacklsbrist-hemiplegia.csv", column = "code")
+
+all_cancer_codelist = lung_cancer_codelist + notlung_nothaem_cancer_codelist + haem_cancer_codelist
+stroke_tia_codelist = stroke_codelist + tia_codelist
+chronic_resp_codelist = chronic_resp_exc_asthma_codelist + asthma_codelist
 
         #ctv3 dictionary
 comorbidity_codelists_ctv3 = {
+    "had_cancer":all_cancer_codelist,
     "chronic_liver_disease":chronic_liver_disease_codelist,
+    "chronic_resp_disease":chronic_resp_codelist,
     "diabetes":diabetes_codelist,
     "dementia":dementia_codelist,
     "hiv":hiv_codelist,
-    "multiple_sclerosis":multiple_sclerosis_codelist
+    "heart_failure":heart_failure_codelist,
+    "hemiplegia":hemiplegia_codelist,
+    "multiple_sclerosis":multiple_sclerosis_codelist,
+    "rheumatoid_arthritis":rheumatoid_arthritis_codelist,
+    "solid_organ_transplant":solid_organ_transplant_codelist,
+    "stroke_tia":stroke_tia_codelist
 }
 
         #snomed
@@ -72,6 +94,7 @@ hypertension_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-re
 ckd_codelist =codelist_from_csv("codelists/primis-covid19-vacc-uptake-old-ckd15_cod.csv", column = "code")
 pvd_codelist = codelist_from_csv("codelists/qcovid-has_peripheral_vascular_disease.csv", column = "code")
 aaa_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-aaa_cod.csv", column = "code")
+peptic_ulcer_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-peptic-ulceration-codes.csv", column = "code")
 
         #snomed dictionary
 comorbidity_codelists_snomedct = {
@@ -79,6 +102,7 @@ comorbidity_codelists_snomedct = {
     "ckd":ckd_codelist,
     "coronary_hd":coronary_hd_codelist,
     "hypertension":hypertension_codelist,
+    "peptic_ulcer":peptic_ulcer_codelist,
     "pvd":pvd_codelist
 }
 

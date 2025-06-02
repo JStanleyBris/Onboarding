@@ -22,10 +22,11 @@ opensafely/hazardous-alcohol-drinking/6364474b
 
 #Comorbidities
 nhsd-primary-care-domain-refsets/chd_cod/0f32f87c 
-#THis covers MI and CVD - to check
+opensafely/heart-failure/79d3cc84
 nhsd-primary-care-domain-refsets/hyp_cod/47dcb7aa
 opensafely/diabetes/47ac0884
 opensafely/incident-non-traumatic-stroke/0be6efb3
+opensafely/transient-ischaemic-attack/3526e2ac
 opensafely/dementia-complete/48c76cf8
 opensafely/hiv/0d7dbfce
 opensafely/chronic-liver-disease/02b2bff6
@@ -36,17 +37,12 @@ opensafely/multiple-sclerosis/4fcd25fc
 opensafely/rheumatoid-arthritis/68dc9931
 opensafely/solid-organ-transplantation/3a37264c
 opensafely/cancer-excluding-lung-and-haematological/2127b317 
-#nb ca exc lung/haem - included both below
 opensafely/haematological-cancer/1e74f321
 opensafely/lung-cancer/53469981
 nhsd-primary-care-domain-refsets/peptic-ulceration-codes/712613a0
-nhsd-primary-care-domain-refsets/cndatrisk1_cod/5dd15ca3 
-#Could use this although then risk double counting strokes and MS - could correct in analysis stage
-nhsd-primary-care-domain-refsets/c19copd_cod/29c669d2 
-#combo with below
-opensafely/other-respiratory-conditions/42ae0b77 
-#combo with below
-nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e
+opensafely/chronic-respiratory-disease/69a34cc0
+opensafely/asthma-diagnosis/66f08cca
+user/jacklsbrist/hemiplegia/721c5f87
 
 #Past medication
 qcovid/is_prescribed_oral_steroids/05a7ea3e

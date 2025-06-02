@@ -84,6 +84,12 @@
       "downloaded_at": "2025-05-21 11:17:28.270502Z",
       "sha": "7b47b2cb6c00a2fc71ad9dfb1030bd6b08418535"
     },
+    "opensafely-heart-failure.csv": {
+      "id": "opensafely/heart-failure/79d3cc84",
+      "url": "https://www.opencodelists.org/codelist/opensafely/heart-failure/79d3cc84/",
+      "downloaded_at": "2025-06-02 14:52:23.108384Z",
+      "sha": "6139df4911534868bc5ade1ada53395606651064"
+    },
     "nhsd-primary-care-domain-refsets-hyp_cod.csv": {
       "id": "nhsd-primary-care-domain-refsets/hyp_cod/47dcb7aa",
       "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/hyp_cod/47dcb7aa/",
@@ -101,6 +107,12 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/incident-non-traumatic-stroke/0be6efb3/",
       "downloaded_at": "2025-05-21 11:23:56.145621Z",
       "sha": "0ab55320f1c9251bda2712164927dd40debfea9f"
+    },
+    "opensafely-transient-ischaemic-attack.csv": {
+      "id": "opensafely/transient-ischaemic-attack/3526e2ac",
+      "url": "https://www.opencodelists.org/codelist/opensafely/transient-ischaemic-attack/3526e2ac/",
+      "downloaded_at": "2025-06-02 14:42:42.404997Z",
+      "sha": "f2c674bcb3dc20b7f32c3265d67ee5e53e3f871b"
     },
     "opensafely-dementia-complete.csv": {
       "id": "opensafely/dementia-complete/48c76cf8",
@@ -180,29 +192,23 @@
       "downloaded_at": "2025-05-21 11:56:11.250692Z",
       "sha": "2638c76fe57d1f11c4bfe563be2da4658cfa75d6"
     },
-    "nhsd-primary-care-domain-refsets-cndatrisk1_cod.csv": {
-      "id": "nhsd-primary-care-domain-refsets/cndatrisk1_cod/5dd15ca3",
-      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/cndatrisk1_cod/5dd15ca3/",
-      "downloaded_at": "2025-05-21 11:56:12.318527Z",
-      "sha": "55057f99eddd164538980cf7173957ecda7fba19"
+    "opensafely-chronic-respiratory-disease.csv": {
+      "id": "opensafely/chronic-respiratory-disease/69a34cc0",
+      "url": "https://www.opencodelists.org/codelist/opensafely/chronic-respiratory-disease/69a34cc0/",
+      "downloaded_at": "2025-06-02 14:48:53.424423Z",
+      "sha": "77946d9b844f348daf5c8c9e81346b9776d13998"
     },
-    "nhsd-primary-care-domain-refsets-c19copd_cod.csv": {
-      "id": "nhsd-primary-care-domain-refsets/c19copd_cod/29c669d2",
-      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/c19copd_cod/29c669d2/",
-      "downloaded_at": "2025-05-21 11:56:13.124226Z",
-      "sha": "77ae6e3de6d5a5d5e0bbcb6a2acd8251cc46d60b"
+    "opensafely-asthma-diagnosis.csv": {
+      "id": "opensafely/asthma-diagnosis/66f08cca",
+      "url": "https://www.opencodelists.org/codelist/opensafely/asthma-diagnosis/66f08cca/",
+      "downloaded_at": "2025-06-02 14:48:54.506204Z",
+      "sha": "722a6ba77a1289a0941cfaa7ce0b9fa32c836f3c"
     },
-    "opensafely-other-respiratory-conditions.csv": {
-      "id": "opensafely/other-respiratory-conditions/42ae0b77",
-      "url": "https://www.opencodelists.org/codelist/opensafely/other-respiratory-conditions/42ae0b77/",
-      "downloaded_at": "2025-05-21 11:56:14.139432Z",
-      "sha": "91b052f35ae6d6f750430f5cbda5175c97babe2d"
-    },
-    "nhsd-primary-care-domain-refsets-c19ast_cod.csv": {
-      "id": "nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e",
-      "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e/",
-      "downloaded_at": "2025-05-21 11:56:14.934527Z",
-      "sha": "70493dd5facfa385a0759ee7861fe10616f0efd6"
+    "user-jacklsbrist-hemiplegia.csv": {
+      "id": "user/jacklsbrist/hemiplegia/721c5f87",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/hemiplegia/721c5f87/",
+      "downloaded_at": "2025-06-02 15:00:28.406135Z",
+      "sha": "fea4e8f675d5bf7fc830a3f8706365f5e2a5c714"
     },
     "qcovid-is_prescribed_oral_steroids.csv": {
       "id": "qcovid/is_prescribed_oral_steroids/05a7ea3e",
