@@ -45,10 +45,8 @@ neuropathy_newdx_codes = codelist_from_csv("codelists/user-jacklsbrist-periphera
 
 ethnicity_codelist = codelist_from_csv("codelists/opensafely-ethnicity-snomed-0removed.csv", column="snomedcode", category_column = "Grouping_16")
 smoking_clear_codelist = codelist_from_csv("codelists/opensafely-smoking-clear.csv", column = "CTV3Code", category_column = "Category")
-smoking_unclear_codelist = codelist_from_csv("codelists/opensafely-smoking-unclear.csv", column = "CTV3Code", category_column = "Category")
 bmi_codelist = codelist_from_csv("codelists/primis-covid19-vacc-uptake-bmi.csv", column = "code")
-
-#both_smoking_codes = smoking_clear_codelist + smoking_unclear_codelist - why does this not work? Combining elsewhere works
+harmful_alcohol_codelist = codelist_from_csv("codelists/opensafely-hazardous-alcohol-drinking.csv", column = "code")
 
 #Comorbidity codes
 
@@ -118,41 +116,67 @@ dataset.imd = addresses.for_patient_on(index_date).imd_rounded
 patient_address = addresses.for_patient_on(index_date)
 dataset.imd_decile = patient_address.imd_decile
 #BMI - is it possible to get the numeric value for bmi? https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake/bmi/v2.5/#full-list
+datasetlast_bmi = (
+    clinical_events.where(
+        clinical_events.snomedct_code.is_in(bmi_codelist))
+        .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx)) #filter to be before date of prescribing
+        .sort_by(clinical_events.date)
+        .last_for_patient()
+        .numeric_value
+)
 
-#Smoking - ctv3 or snomedct? Do I need to use both? Or just one? - https://www.opencodelists.org/codelist/opensafely/smoking-clear/2020-04-29/#full-list
-#Alcohol - possible to just get number of units or categorise into none, within normal limits, heavy, v heavy or similar - https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/alc_cod/20241205/#full-list
-dataset.latest_ethnicity_code =(
-    clinical_events.where(clinical_events.snomedct_code.is_in(ethnicity_codelist))
-    .where(clinical_events.date.is_on_or_before(end_date))
+#Smoking - ctv3 or snomedct? Do I need to use both? Or just one?
+#This works but could be improved with a boolean string for never smokers. Q for Will/Rose. Is it possible here to dynamically assign smoking status to N/E/S based on boolean logic and dates?
+# Or do I need to set three columns for never, ex, smoker all T/f
+dataset.latest_smoking_code =(
+    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
     .sort_by(clinical_events.date)
     .last_for_patient()
-    .snomedct_code
+    .ctv3_code
 )
-dataset.latest_ethnicity_group = dataset.latest_ethnicity_code.to_category(
-    ethnicity_codelist
+dataset.latest_smoking_group = dataset.latest_smoking_code.to_category(
+    smoking_clear_codelist #Here i would like to say - if this code = N then look at all patient events in smoking clear and check if there is an E or S
 )
 
-smoking_events = (
-    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist)) #Need to update when I can combine with smoking_unclear
-.where(clinical_events.date.is_on_or_before(first_cohort_abx_rx)
-           ).sort_by(clinical_events.date)
+dataset.never_smoker = ( 
+    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+    .where(
+        (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "N") & 
+        (~clinical_events.ctv3_code.to_category(smoking_clear_codelist).is_in(["E","S"]))
 )
-dataset.latest_smoking_code = smoking_events.last_for_patient().ctv3_code
-dataset.latest_smoking_status = dataset.latest_smoking_code.to_category(smoking_clear_codelist)
-dataset.ever_smoker_or_ex = smoking_events.where(
-    clinical_events.ctv3_code.to_category(smoking_clear_codelist).is_in(["S", "E"])
-).exists_for_patient()
+.exists_for_patient() #So here we want 'N' only if they have never had a smoking status entered in error
+)
+
+last_ex_smoke_date =(
+    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+    .where(
+        (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "E")
+    )
+    .date
+)
+
+last_smoke_date =(
+    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+    .where(
+        (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "S")
+    )
+    .date
+)
+
+dataset.harmful_alcohol =(
+    clinical_events.where(clinical_events.ctv3_code.is_in(harmful_alcohol_codelist))
+    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+    .exists_for_patient()
+) #Think this is best option - just find those with ever harmful alcohol use
 
 
-#dataset.derived_smoking_status = (dataset.__dict__latest_smoking_status.where("S", then="S")
- #       .where("E", then="E")
-  #      .where("N", then=dataset.ever_smoker_or_ex.where(True, then="E").otherwise("N"))
-   #     .otherwise("UNKNOWN")
-    #)
 
 
         #Frailty indicators
-
 
 #n hosp appt last 6 months - these will need to be dynamically set based on when the individual is entered into the study.
 #Cohort this = date of first prescription of either FQ or comparator. SCCS this is date of first tendinitis/peripheral neuropathy

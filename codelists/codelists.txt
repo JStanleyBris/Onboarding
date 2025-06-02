@@ -18,6 +18,7 @@ opensafely/ethnicity-snomed-0removed/2e641f61
 opensafely/smoking-clear/10307fc4
 opensafely/smoking-unclear/77210c8e
 primis-covid19-vacc-uptake/bmi/47614c03
+opensafely/hazardous-alcohol-drinking/6364474b
 
 #Comorbidities
 nhsd-primary-care-domain-refsets/chd_cod/0f32f87c 

@@ -72,6 +72,12 @@
       "downloaded_at": "2025-06-02 08:39:59.687536Z",
       "sha": "6e96c04ee1a647905be2b410fa2c33d770576bf0"
     },
+    "opensafely-hazardous-alcohol-drinking.csv": {
+      "id": "opensafely/hazardous-alcohol-drinking/6364474b",
+      "url": "https://www.opencodelists.org/codelist/opensafely/hazardous-alcohol-drinking/6364474b/",
+      "downloaded_at": "2025-06-02 12:34:23.789491Z",
+      "sha": "db9ef41fd8bbd00b01c2669a69812dbb884adea6"
+    },
     "nhsd-primary-care-domain-refsets-chd_cod.csv": {
       "id": "nhsd-primary-care-domain-refsets/chd_cod/0f32f87c",
       "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/chd_cod/0f32f87c/",
