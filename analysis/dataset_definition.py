@@ -55,25 +55,31 @@ diabetes_codelist = codelist_from_csv("codelists/opensafely-diabetes.csv", colum
 dementia_codelist = codelist_from_csv("codelists/opensafely-dementia-complete.csv", column = "code")
 hiv_codelist = codelist_from_csv("codelists/opensafely-hiv.csv", column = "CTV3ID")
 chronic_liver_disease_codelist = codelist_from_csv("codelists/opensafely-chronic-liver-disease.csv", column = "CTV3ID")
+multiple_sclerosis_codelist = codelist_from_csv("codelists/opensafely-multiple-sclerosis.csv", column = "CTV3ID")
 
         #ctv3 dictionary
 comorbidity_codelists_ctv3 = {
     "chronic_liver_disease":chronic_liver_disease_codelist,
     "diabetes":diabetes_codelist,
     "dementia":dementia_codelist,
-    "hiv":hiv_codelist
+    "hiv":hiv_codelist,
+    "multiple_sclerosis":multiple_sclerosis_codelist
 }
 
         #snomed
 coronary_hd_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-chd_cod.csv", column = "code")
 hypertension_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-hyp_cod.csv", column = "code")
 ckd_codelist =codelist_from_csv("codelists/primis-covid19-vacc-uptake-old-ckd15_cod.csv", column = "code")
+pvd_codelist = codelist_from_csv("codelists/qcovid-has_peripheral_vascular_disease.csv", column = "code")
+aaa_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-aaa_cod.csv", column = "code")
 
         #snomed dictionary
 comorbidity_codelists_snomedct = {
+    "aaa":aaa_codelist,
     "ckd":ckd_codelist,
     "coronary_hd":coronary_hd_codelist,
-    "hypertension":hypertension_codelist
+    "hypertension":hypertension_codelist,
+    "pvd":pvd_codelist
 }
 
 #Non-abx prescription codes
