@@ -17,6 +17,7 @@ user/jacklsbrist/peripheral-neuropathy/553e3c81
 opensafely/ethnicity-snomed-0removed/2e641f61
 opensafely/smoking-clear/10307fc4
 opensafely/smoking-unclear/77210c8e
+primis-covid19-vacc-uptake/bmi/47614c03
 
 #Comorbidities
 nhsd-primary-care-domain-refsets/chd_cod/0f32f87c 
@@ -45,3 +46,11 @@ nhsd-primary-care-domain-refsets/c19copd_cod/29c669d2
 opensafely/other-respiratory-conditions/42ae0b77 
 #combo with below
 nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e
+
+#Past medication
+qcovid/is_prescribed_oral_steroids/05a7ea3e
+#Check this with Brian - some extended steroid codes
+pincer/amio/560cb6d8
+user/jacklsbrist/phenytoin/1c230610
+
+#Still need nitrofurantoin and metronidazole - need to edit existing. A/w input from Brian.

@@ -66,6 +66,12 @@
       "downloaded_at": "2025-05-21 09:58:21.665123Z",
       "sha": "d9dad3e9d9491f765863b2617114c521957b6db1"
     },
+    "primis-covid19-vacc-uptake-bmi.csv": {
+      "id": "primis-covid19-vacc-uptake/bmi/47614c03",
+      "url": "https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake/bmi/47614c03/",
+      "downloaded_at": "2025-06-02 08:39:59.687536Z",
+      "sha": "6e96c04ee1a647905be2b410fa2c33d770576bf0"
+    },
     "nhsd-primary-care-domain-refsets-chd_cod.csv": {
       "id": "nhsd-primary-care-domain-refsets/chd_cod/0f32f87c",
       "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/chd_cod/0f32f87c/",
@@ -191,6 +197,24 @@
       "url": "https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/c19ast_cod/20f0df5e/",
       "downloaded_at": "2025-05-21 11:56:14.934527Z",
       "sha": "70493dd5facfa385a0759ee7861fe10616f0efd6"
+    },
+    "qcovid-is_prescribed_oral_steroids.csv": {
+      "id": "qcovid/is_prescribed_oral_steroids/05a7ea3e",
+      "url": "https://www.opencodelists.org/codelist/qcovid/is_prescribed_oral_steroids/05a7ea3e/",
+      "downloaded_at": "2025-06-02 07:06:01.100058Z",
+      "sha": "6ddf57a905369fab31d3c0b88c1efc75e616eb95"
+    },
+    "pincer-amio.csv": {
+      "id": "pincer/amio/560cb6d8",
+      "url": "https://www.opencodelists.org/codelist/pincer/amio/560cb6d8/",
+      "downloaded_at": "2025-06-02 07:55:28.575453Z",
+      "sha": "5cd120a51c6d561c7f70c123e2c5ace38bb49692"
+    },
+    "user-jacklsbrist-phenytoin.csv": {
+      "id": "user/jacklsbrist/phenytoin/1c230610",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/phenytoin/1c230610/",
+      "downloaded_at": "2025-06-02 07:55:29.483388Z",
+      "sha": "7350fcae59336b9f0221e62b4d3abba22dea47f2"
     }
   }
 }

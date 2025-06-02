@@ -11,7 +11,7 @@
 
 #COuld this be one dataset and then another one for CTC?
 
-from ehrql import create_dataset, codelist_from_csv, months, weeks, days, show
+from ehrql import create_dataset, codelist_from_csv, years, months, weeks, days, show
 from ehrql.tables.tpp import patients, medications, practice_registrations, addresses, clinical_events, apcs
 from codelists import *
 
@@ -46,10 +46,11 @@ neuropathy_newdx_codes = codelist_from_csv("codelists/user-jacklsbrist-periphera
 ethnicity_codelist = codelist_from_csv("codelists/opensafely-ethnicity-snomed-0removed.csv", column="snomedcode", category_column = "Grouping_16")
 smoking_clear_codelist = codelist_from_csv("codelists/opensafely-smoking-clear.csv", column = "CTV3Code", category_column = "Category")
 smoking_unclear_codelist = codelist_from_csv("codelists/opensafely-smoking-unclear.csv", column = "CTV3Code", category_column = "Category")
+bmi_codelist = codelist_from_csv("codelists/primis-covid19-vacc-uptake-bmi.csv", column = "code")
 
 #both_smoking_codes = smoking_clear_codelist + smoking_unclear_codelist - why does this not work? Combining elsewhere works
 
-#COmorbidity codes
+#Comorbidity codes
 
 diabetes_codelist = codelist_from_csv("codelists/opensafely-diabetes.csv", column = "CTV3ID")
 dementia_codelist = codelist_from_csv("codelists/opensafely-dementia.csv", column = "CTV3ID")
@@ -58,6 +59,17 @@ comorbidity_codelists_ctv3 = {
     "diabetes":diabetes_codelist,
     "dementia":dementia_codelist
 }
+
+#Non-abx prescription codes
+
+corticosteroid_codes = codelist_from_csv("codelists/qcovid-is_prescribed_oral_steroids.csv", column = "code")
+
+phenytoin_codes = codelist_from_csv("codelists/user-jacklsbrist-phenytoin.csv", column = "code")
+amiodarone_codes = codelist_from_csv("codelists/pincer-amio.csv", column = "code")
+
+drug_causes_of_neuropathy_codes = phenytoin_codes  + amiodarone_codes
+
+
 
 has_any_studyabx_prescription = medications.where(
         medications.dmd_code.is_in(all_abx_codes)
@@ -106,6 +118,7 @@ dataset.imd = addresses.for_patient_on(index_date).imd_rounded
 patient_address = addresses.for_patient_on(index_date)
 dataset.imd_decile = patient_address.imd_decile
 #BMI - is it possible to get the numeric value for bmi? https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake/bmi/v2.5/#full-list
+
 #Smoking - ctv3 or snomedct? Do I need to use both? Or just one? - https://www.opencodelists.org/codelist/opensafely/smoking-clear/2020-04-29/#full-list
 #Alcohol - possible to just get number of units or categorise into none, within normal limits, heavy, v heavy or similar - https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/alc_cod/20241205/#full-list
 dataset.latest_ethnicity_code =(
@@ -170,13 +183,23 @@ for condition, codelist in comorbidity_codelists_ctv3.items():
         #Indication for antibiotic treatment
 
         #Time
-##Year exposure (cohort) or event (SCCS) - should be able to extract in R
+##Year exposure (cohort) or event (SCCS)
+dataset.year_cohort_prescrption = first_cohort_abx_rx.year
 
 
         #Specific covariates -
 
 #Corticosteroid last 60d
-#Nitrofurantoin, phenytoin, metronidazole, amiodarone last 90d
+#Nitrofurantoin, phenytoin, metronidazole, amiodarone last 60d
+
+dataset.corticosteroid_60d_before_abx = medications.where(
+    medications.dmd_code.is_in(corticosteroid_codes)
+).where(
+    medications.date.is_on_or_between(
+        (first_cohort_abx_rx - days(60)), 
+        (first_cohort_abx_rx - days(1))
+)
+).exists_for_patient()
 
 
 #Medication options
@@ -216,3 +239,4 @@ dataset.first_neuropathy_diagnosis_date = clinical_events.where(
 ).sort_by(
         clinical_events.date
 ).first_for_patient().date
+
