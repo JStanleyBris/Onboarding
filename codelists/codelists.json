@@ -102,11 +102,11 @@
       "downloaded_at": "2025-05-21 11:23:56.145621Z",
       "sha": "0ab55320f1c9251bda2712164927dd40debfea9f"
     },
-    "opensafely-dementia.csv": {
-      "id": "opensafely/dementia/0acaffd8",
-      "url": "https://www.opencodelists.org/codelist/opensafely/dementia/0acaffd8/",
-      "downloaded_at": "2025-05-21 11:23:56.973537Z",
-      "sha": "9d40ff3a5c2428af4651c765f2c418de3a3ad4b4"
+    "opensafely-dementia-complete.csv": {
+      "id": "opensafely/dementia-complete/48c76cf8",
+      "url": "https://www.opencodelists.org/codelist/opensafely/dementia-complete/48c76cf8/",
+      "downloaded_at": "2025-06-02 13:17:48.326986Z",
+      "sha": "b73c9363f19a9ee9f4407e34e95e11d3eeb615f4"
     },
     "opensafely-hiv.csv": {
       "id": "opensafely/hiv/0d7dbfce",

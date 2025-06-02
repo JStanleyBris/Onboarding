@@ -52,20 +52,26 @@ harmful_alcohol_codelist = codelist_from_csv("codelists/opensafely-hazardous-alc
 
         #ctv3
 diabetes_codelist = codelist_from_csv("codelists/opensafely-diabetes.csv", column = "CTV3ID")
-dementia_codelist = codelist_from_csv("codelists/opensafely-dementia.csv", column = "CTV3ID")
+dementia_codelist = codelist_from_csv("codelists/opensafely-dementia-complete.csv", column = "code")
+hiv_codelist = codelist_from_csv("codelists/opensafely-hiv.csv", column = "CTV3ID")
+chronic_liver_disease_codelist = codelist_from_csv("codelists/opensafely-chronic-liver-disease.csv", column = "CTV3ID")
 
         #ctv3 dictionary
 comorbidity_codelists_ctv3 = {
+    "chronic_liver_disease":chronic_liver_disease_codelist,
     "diabetes":diabetes_codelist,
-    "dementia":dementia_codelist
+    "dementia":dementia_codelist,
+    "hiv":hiv_codelist
 }
 
         #snomed
 coronary_hd_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-chd_cod.csv", column = "code")
 hypertension_codelist = codelist_from_csv("codelists/nhsd-primary-care-domain-refsets-hyp_cod.csv", column = "code")
+ckd_codelist =codelist_from_csv("codelists/primis-covid19-vacc-uptake-old-ckd15_cod.csv", column = "code")
 
         #snomed dictionary
 comorbidity_codelists_snomedct = {
+    "ckd":ckd_codelist,
     "coronary_hd":coronary_hd_codelist,
     "hypertension":hypertension_codelist
 }

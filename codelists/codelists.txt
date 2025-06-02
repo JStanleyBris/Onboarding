@@ -26,7 +26,7 @@ nhsd-primary-care-domain-refsets/chd_cod/0f32f87c
 nhsd-primary-care-domain-refsets/hyp_cod/47dcb7aa
 opensafely/diabetes/47ac0884
 opensafely/incident-non-traumatic-stroke/0be6efb3
-opensafely/dementia/0acaffd8
+opensafely/dementia-complete/48c76cf8
 opensafely/hiv/0d7dbfce
 opensafely/chronic-liver-disease/02b2bff6
 primis-covid19-vacc-uptake-old/ckd15_cod/4490aee1
