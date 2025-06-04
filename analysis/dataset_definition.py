@@ -41,6 +41,8 @@ cohort_abx_codes = amox_clavulanicacid_codes + fluoroquinolone_codes
 tendinitis_codes = codelist_from_csv("codelists/user-jacklsbrist-tendinitis.csv", column = "code")
 neuropathy_newdx_codes = codelist_from_csv("codelists/user-jacklsbrist-peripheral-neuropathy.csv", column = "code")
 
+combo_outcome_codes = tendinitis_codes + neuropathy_newdx_codes
+
 #Covariate/demographic codes
 
 ethnicity_codelist = codelist_from_csv("codelists/opensafely-ethnicity-snomed-0removed.csv", column="snomedcode", category_column = "Grouping_16")
@@ -107,6 +109,7 @@ comorbidity_codelists_snomedct = {
 }
 
 #Non-abx prescription codes
+        #Need more when available
 
 corticosteroid_codes = codelist_from_csv("codelists/qcovid-is_prescribed_oral_steroids.csv", column = "code")
 
@@ -116,52 +119,102 @@ amiodarone_codes = codelist_from_csv("codelists/pincer-amio.csv", column = "code
 drug_causes_of_neuropathy_codes = phenytoin_codes  + amiodarone_codes
 
 
-
-has_any_studyabx_prescription = medications.where(
-        medications.dmd_code.is_in(all_abx_codes)
-).where(
-        medications.date.is_on_or_between(start_date, end_date)
-)
-
-
-index_date = has_any_studyabx_prescription.sort_by(medications.date).first_for_patient().date #First prescription date - will need to alter this depending 
-#upon analysis approach - need to ensure this is extracting patient specific
+#This is date of first prescription of study abx for cohort
 
 first_cohort_abx_rx = medications.where(
     medications.dmd_code.is_in(cohort_abx_codes)).where( #Set this to be the first date of receipt of any study antibiotic
-        medications.date.is_on_or_after(start_date)
+        medications.date.is_on_or_between(start_date, end_date)
 ).sort_by(
         medications.date
 ).first_for_patient().date
 
 
-has_registration = practice_registrations.for_patient_on(
-    index_date
-).exists_for_patient()
+has_registration_1y_before_cohort_abx =  (
+    practice_registrations.where(practice_registrations.start_date <= (first_cohort_abx_rx + years(1)))
+    .except_where(practice_registrations.end_date < end_date)
+    .exists_for_patient()
+
+)
 
 #Exclusion criteria
 
-prior_tendinitis = clinical_events.where(
-        clinical_events.snomedct_code.is_in(tendinitis_codes) #Exclude those with pre-existing diagnosis of tendinitis
+prior_tendinitis_or_neuropathy = clinical_events.where(
+        clinical_events.snomedct_code.is_in(combo_outcome_codes) #Exclude those with pre-existing diagnosis of tendinitis
 ).where(
-        clinical_events.date.is_on_or_before(start_date)
+        clinical_events.date.is_on_or_before(first_cohort_abx_rx)
 ).exists_for_patient()
+
+#Cohort definition
 
 dataset.define_population(
      (patients.exists_for_patient()) &
-    (has_any_studyabx_prescription.exists_for_patient()) & #Only patients with at least one study antibiotic prescription
-    ~(prior_tendinitis)
+     (has_registration_1y_before_cohort_abx) &
+    ~(prior_tendinitis_or_neuropathy) 
     )
 
 
 dataset.configure_dummy_data(population_size=10)
 
+        #Exposed or not - all 0s therefore should be coamox. But for sanity to check by coding coamox and comparing once generated
+
+dataset.fluoroquinolone_exp = (medications.where(
+    medications.dmd_code.is_in(fluoroquinolone_codes))
+    .where(medications.date.is_on_or_between(first_cohort_abx_rx, first_cohort_abx_rx))
+        .exists_for_patient()
+    )
+
+dataset.coamox_exp = (medications.where(
+    medications.dmd_code.is_in(amox_clavulanicacid_codes))
+    .where(medications.date.is_on_or_between(first_cohort_abx_rx, first_cohort_abx_rx))
+        .exists_for_patient()
+    )
+
+        #Medication options
+
+#This extracts first date of FQ prescription
+dataset.fluoroquinolone_date = medications.where(
+        medications.dmd_code.is_in(fluoroquinolone_codes)
+).where(
+        medications.date.is_on_or_after(first_cohort_abx_rx)
+).sort_by(
+        medications.date
+).first_for_patient().date
+
+dataset.first_co_amox_date = medications.where(
+        medications.dmd_code.is_in(amox_clavulanicacid_codes)
+).where(
+        medications.date.is_on_or_after(first_cohort_abx_rx)
+).sort_by(
+        medications.date
+).first_for_patient().date
+
+
+#Outcome options - ICD-10 or SNOMED - any benefit to either cf the other? - Leave coded as start_date for now to check for santiy. 
+# We should not be getting any coming up before the date of prescription of either
+
+dataset.first_tendinitis_diagnosis_date = clinical_events.where(
+        clinical_events.snomedct_code.is_in(tendinitis_codes)
+).where(
+        clinical_events.date.is_on_or_after(start_date)
+).sort_by(
+        clinical_events.date
+).first_for_patient().date
+
+dataset.first_neuropathy_diagnosis_date = clinical_events.where(
+        clinical_events.snomedct_code.is_in(neuropathy_newdx_codes)
+).where(
+        clinical_events.date.is_on_or_after(start_date)
+).sort_by(
+        clinical_events.date
+).first_for_patient().date
+
+
         #Demographics
 dataset.sex = patients.sex
-dataset.age = patients.age_on(index_date)
+dataset.age = patients.age_on(first_cohort_abx_rx)
 dataset.date_of_birth = patients.date_of_birth #Likely to need to calculate age at time of prescription later on
-dataset.imd = addresses.for_patient_on(index_date).imd_rounded
-patient_address = addresses.for_patient_on(index_date)
+dataset.imd = addresses.for_patient_on(first_cohort_abx_rx).imd_rounded
+patient_address = addresses.for_patient_on(first_cohort_abx_rx)
 dataset.imd_decile = patient_address.imd_decile
 #BMI - is it possible to get the numeric value for bmi? https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake/bmi/v2.5/#full-list
 datasetlast_bmi = (
@@ -222,8 +275,6 @@ dataset.harmful_alcohol =(
 ) #Think this is best option - just find those with ever harmful alcohol use
 
 
-
-
         #Frailty indicators
 
 #n hosp appt last 6 months - these will need to be dynamically set based on when the individual is entered into the study.
@@ -264,6 +315,7 @@ for condition, codelist in comorbidity_codelists_snomedct.items():
 
         #Time
 ##Year exposure (cohort) or event (SCCS)
+dataset.daterx = first_cohort_abx_rx
 dataset.year_cohort_prescrption = first_cohort_abx_rx.year
 
 
@@ -290,42 +342,4 @@ dataset.drug_linked_to_neuropathy_60d_before_abx = medications.where(
 )
 ).exists_for_patient()
 
-
-#Medication options
-
-#This extracts first date of FQ prescription
-dataset.first_fluoroquinolone_date = medications.where(
-        medications.dmd_code.is_in(fluoroquinolone_codes)
-).where(
-        medications.date.is_on_or_after(start_date)
-).sort_by(
-        medications.date
-).first_for_patient().date
-
-dataset.first_co_amox_date = medications.where(
-        medications.dmd_code.is_in(amox_clavulanicacid_codes)
-).where(
-        medications.date.is_on_or_after(start_date)
-).sort_by(
-        medications.date
-).first_for_patient().date
-
-
-#Outcome options - ICD-10 or SNOMED - any benefit to either cf the other?
-
-dataset.first_tendinitis_diagnosis_date = clinical_events.where(
-        clinical_events.snomedct_code.is_in(tendinitis_codes)
-).where(
-        clinical_events.date.is_on_or_after(start_date)
-).sort_by(
-        clinical_events.date
-).first_for_patient().date
-
-dataset.first_neuropathy_diagnosis_date = clinical_events.where(
-        clinical_events.snomedct_code.is_in(neuropathy_newdx_codes)
-).where(
-        clinical_events.date.is_on_or_after(start_date)
-).sort_by(
-        clinical_events.date
-).first_for_patient().date
 
