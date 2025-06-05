@@ -12,7 +12,7 @@
 #COuld this be one dataset and then another one for CTC?
 
 from ehrql import create_dataset, codelist_from_csv, years, months, weeks, days, show
-from ehrql.tables.tpp import patients, medications, practice_registrations, addresses, clinical_events, apcs
+from ehrql.tables.tpp import patients, medications, practice_registrations, addresses, clinical_events, apcs, ons_deaths
 from codelists import *
 
 #show(dataset) - how do I get show to work?
@@ -133,7 +133,6 @@ has_registration_1y_before_cohort_abx =  (
     practice_registrations.where(practice_registrations.start_date <= (first_cohort_abx_rx + years(1)))
     .except_where(practice_registrations.end_date < end_date)
     .exists_for_patient()
-
 )
 
 #Exclusion criteria
@@ -153,7 +152,7 @@ dataset.define_population(
     )
 
 
-dataset.configure_dummy_data(population_size=10)
+dataset.configure_dummy_data(population_size=1000)
 
         #Exposed or not - all 0s therefore should be coamox. But for sanity to check by coding coamox and comparing once generated
 
@@ -172,7 +171,7 @@ dataset.coamox_exp = (medications.where(
         #Medication options
 
 #This extracts first date of FQ prescription
-dataset.fluoroquinolone_date = medications.where(
+dataset.first_fluoroquinolone_date = medications.where(
         medications.dmd_code.is_in(fluoroquinolone_codes)
 ).where(
         medications.date.is_on_or_after(first_cohort_abx_rx)
@@ -216,6 +215,7 @@ dataset.date_of_birth = patients.date_of_birth #Likely to need to calculate age 
 dataset.imd = addresses.for_patient_on(first_cohort_abx_rx).imd_rounded
 patient_address = addresses.for_patient_on(first_cohort_abx_rx)
 dataset.imd_decile = patient_address.imd_decile
+dataset.date_of_death = ons_deaths.date
 #BMI - is it possible to get the numeric value for bmi? https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake/bmi/v2.5/#full-list
 datasetlast_bmi = (
     clinical_events.where(
@@ -315,7 +315,7 @@ for condition, codelist in comorbidity_codelists_snomedct.items():
 
         #Time
 ##Year exposure (cohort) or event (SCCS)
-dataset.daterx = first_cohort_abx_rx
+dataset.date_cohort_prescription = first_cohort_abx_rx
 dataset.year_cohort_prescrption = first_cohort_abx_rx.year
 
 
