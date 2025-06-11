@@ -115,8 +115,10 @@ corticosteroid_codes = codelist_from_csv("codelists/qcovid-is_prescribed_oral_st
 
 phenytoin_codes = codelist_from_csv("codelists/user-jacklsbrist-phenytoin-dmd.csv", column = "code")
 amiodarone_codes = codelist_from_csv("codelists/pincer-amio.csv", column = "code")
+metronidazole_codes = codelist_from_csv("codelists/ukhsa-metronidazole-tinidazole-and-ornidazole-antibacterials.csv", column = "code")
+nitrofurantoin_codes = codelist_from_csv("codelists/user-jacklsbrist-nitrofurantoin-dmd.csv", column = "code")
 
-drug_causes_of_neuropathy_codes = phenytoin_codes  + amiodarone_codes
+drug_causes_of_neuropathy_codes = phenytoin_codes  + amiodarone_codes + metronidazole_codes + nitrofurantoin_codes
 
 
 #This is date of first prescription of study abx for cohort
@@ -216,7 +218,7 @@ dataset.imd = addresses.for_patient_on(first_cohort_abx_rx).imd_rounded
 patient_address = addresses.for_patient_on(first_cohort_abx_rx)
 dataset.imd_decile = patient_address.imd_decile
 dataset.date_of_death = ons_deaths.date
-#BMI - is it possible to get the numeric value for bmi? https://www.opencodelists.org/codelist/primis-covid19-vacc-uptake/bmi/v2.5/#full-list
+#BMI - is this best way to get bmi
 datasetlast_bmi = (
     clinical_events.where(
         clinical_events.snomedct_code.is_in(bmi_codelist))
@@ -316,7 +318,7 @@ for condition, codelist in comorbidity_codelists_snomedct.items():
         #Time
 ##Year exposure (cohort) or event (SCCS)
 dataset.date_cohort_prescription = first_cohort_abx_rx
-dataset.year_cohort_prescrption = first_cohort_abx_rx.year
+dataset.year_cohort_prescription = first_cohort_abx_rx.year
 
 
         #Specific covariates -

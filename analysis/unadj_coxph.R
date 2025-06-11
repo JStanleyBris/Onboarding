@@ -16,6 +16,13 @@ df <- readr::read_csv("output/dataset.csv.gz", col_types = readr::cols(
     )
     )
 
+#Need to separately make imd_decile an ordered factor
+df$imd_decile <- factor(df$imd_decile,
+                        levels = as.character(1:10),
+                        ordered = TRUE)
+
+
+
 df <- df %>%
 mutate(
 # Calculate 30-day censoring date
@@ -30,6 +37,8 @@ mutate(
     # Time from entry to censoring (in days)
     time = as.numeric(difftime(censor_date, date_cohort_prescription, units = "days"))
 )
+
+
 
 summary(df$time)
 table(df$event, useNA = "ifany")

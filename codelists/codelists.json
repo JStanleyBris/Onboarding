@@ -227,6 +227,18 @@
       "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/phenytoin-dmd/565a2c5c/",
       "downloaded_at": "2025-06-02 13:06:36.202360Z",
       "sha": "43a56e4b905d0917f5b32db2f01f25806f852d66"
+    },
+    "ukhsa-metronidazole-tinidazole-and-ornidazole-antibacterials.csv": {
+      "id": "ukhsa/metronidazole-tinidazole-and-ornidazole-antibacterials/193f96f4",
+      "url": "https://www.opencodelists.org/codelist/ukhsa/metronidazole-tinidazole-and-ornidazole-antibacterials/193f96f4/",
+      "downloaded_at": "2025-06-11 06:42:07.230325Z",
+      "sha": "4c3f0e405b100376edac10b469aa0a0ee328960c"
+    },
+    "user-jacklsbrist-nitrofurantoin-dmd.csv": {
+      "id": "user/jacklsbrist/nitrofurantoin-dmd/4a01c566",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/nitrofurantoin-dmd/4a01c566/",
+      "downloaded_at": "2025-06-11 06:48:26.292574Z",
+      "sha": "054594114170e81b7c30d05d4ac107f0bd001e7c"
     }
   }
 }

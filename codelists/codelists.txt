@@ -49,5 +49,7 @@ qcovid/is_prescribed_oral_steroids/05a7ea3e
 #Check this with Brian - some extended steroid codes
 pincer/amio/560cb6d8
 user/jacklsbrist/phenytoin-dmd/565a2c5c
+ukhsa/metronidazole-tinidazole-and-ornidazole-antibacterials/193f96f4
+user/jacklsbrist/nitrofurantoin-dmd/4a01c566
 
 #Still need nitrofurantoin and metronidazole - need to edit existing. A/w input from Brian.
