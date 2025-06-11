@@ -2,25 +2,12 @@ library(tidyverse)
 library(survey)      # for weighted analyses
 library(tableone)    # for checking balance
 library(cobalt)      # for Love plots and diagnostics
+library(lubridate)
 
 ##https://ehsanx.github.io/TMLEworkshop/iptw.html#step-3-balance-checking
 
-df <- readr::read_csv("output/dataset.csv.gz", col_types = readr::cols(
-    first_co_amox_date = col_date(format = "%Y-%m-%d"),
-    first_fluoroquinolone_date = col_date(format = "%Y-%m-%d"),
-    first_tendinitis_diagnosis_date = col_date(format = "%Y-%m-%d"),
-    first_neuropathy_diagnosis_date = col_date(format = "%Y-%m-%d"),
-    date_cohort_prescription = col_date(format = "%Y-%m-%d"),
-    date_of_death = col_date(format = "%Y-%m-%d"),
-    coamox_exp = col_logical(),
-    fluoroquinolone_exp = col_logical()
-    )
-    )
-
-#Need to separately make imd_decile an ordered factor
-df$imd_decile <- factor(df$imd_decile,
-                        levels = as.character(1:10),
-                        ordered = TRUE)
+#Read formatted data
+df <- readr::read_csv("output/dataset_formatted_cohort.csv")
 
 #Start with iptw for sex and present of hypertension only then expand
 
@@ -91,3 +78,12 @@ love.plot(W.out, binary = "std",
           line = TRUE)
 
 dev.off()
+
+#Then once balanced run coxph
+
+iptw_cox_model <- coxph(Surv(time_tendinitis, event_tendinitis) ~ fluoroquinolone_exp,
+                   data = df,
+                   weights = weight,
+                   robust = TRUE)
+
+summary(iptw_cox_model)

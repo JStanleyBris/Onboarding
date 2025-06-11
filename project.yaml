@@ -24,4 +24,9 @@ actions:
         chart1: output/abx_quarter_time_plot.png
         chart2: output/outcome_quarter_time_plot.png
 
-  
+  generate_cohort:
+      run: r:v2 analysis/dataset_manipulate_cohort.R
+      needs: [generate_dataset]
+      outputs:
+        highly_sensitive:
+          chart: output/dataset_formatted_cohort.csv
