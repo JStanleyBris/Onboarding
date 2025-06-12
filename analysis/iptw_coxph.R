@@ -12,7 +12,13 @@ df <- readr::read_csv("output/dataset_formatted_cohort.csv")
 #Start with iptw for sex and present of hypertension only then expand
 
 #Set variables
-baseline_vars <- c("sex", "has_diabetes")
+baseline_vars <- c("sex", "has_diabetes", "harmful_alcohol", "has_had_cancer", "has_chronic_liver_disease", "has_chronic_resp_disease",
+"has_dementia", "has_hiv", "has_heart_failure", "has_hemiplegia", "has_multiple_sclerosis", "has_rheumatoid_arthritis", "has_solid_organ_transplant",              
+"has_stroke_tia", "has_aaa", "has_ckd", "has_coronary_hd", "has_hypertension", "has_peptic_ulcer", "has_pvd",  "corticosteroid_60d_before_abx",
+"drug_linked_to_neuropathy_60d_before_abx")  
+                                    
+# To think about - "age", "imd_decile", "last_bmi", "latest_ethnicity_group", "never_smoker" -eg work out what to do with smoking, "n_hosp_appt_6m",
+#  "year_cohort_prescription"                           
 
 ps.formula <- as.formula(paste("fluoroquinolone_exp ~",
                                paste(baseline_vars,
@@ -44,7 +50,7 @@ dev.off()
 p_treat <- mean(df$fluoroquinolone_exp)
 
 #Calculate the stabilized treatment weight - less variance
-df$weight <- with(df, ifelse(fluoroquinolone_exp == 1,
+df$weight <- with(df, ifelse(fluoroquinolone_exp == TRUE,
                              p_treat / ps, #IPTW for treated individuals
                              (1 - p_treat) / (1 - ps))) #IPTW for untreated individuals
 

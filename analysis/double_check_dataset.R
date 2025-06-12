@@ -114,25 +114,11 @@ summarise_multilevel_categorical <- function(var) {
 }
 
 combined_summary_multilevelcat <- (map_dfr(multi_categorical_vars, summarise_multilevel_categorical)) %>%
-mutate(variable = paste0(variable, level)) %>%
-select(-c(level))
+mutate(variable = level) %>%
+select(-c(level)) %>%
+filter(!(variable %in% c("unknown", "NA")))
 
-#Save output - separately for now then remove once happy
-summary_table %>%
-  knitr::kable(format = "markdown") %>%
-  writeLines("output/summary_table_categoricals.md")
-
-continuous_summary_wide %>%
-  knitr::kable(format = "markdown") %>%
-  writeLines("output/summary_table_continuous.md")
-
-overall_summary %>%
-  knitr::kable(format = "markdown") %>%
-  writeLines("output/total_table.md")
-
-combined_summary_multilevelcat %>%
-  knitr::kable(format = "markdown") %>%
-  writeLines("output/multilevelcat_table.md")
+#Save output 
 
 rbind(overall_summary, continuous_summary_wide, combined_summary_multilevelcat, summary_table) %>%
   knitr::kable(format = "markdown") %>%

@@ -16,14 +16,29 @@ df <- readr::read_csv("output/dataset.csv.gz", col_types = readr::cols(
     coamox_exp = col_logical(),
     fluoroquinolone_exp = col_logical()
     )
-    )
-
-#Need to separately make imd_decile an ordered factor
-df$imd_decile <- factor(df$imd_decile,
+    ) %>%
+    mutate(imd_decile = factor(imd_decile,
                         levels = as.character(1:10),
-                        ordered = TRUE)
-
-
+                        ordered = TRUE),
+            latest_ethnicity_group = recode(latest_ethnicity_group,
+            `1` = "White British",
+    `2` = "White Irish",
+    `3` = "Other White",
+    `4` = "White and Caribbean",
+    `5` = "White and African",
+    `6` = "White and Asian",
+    `7` = "Other mixed",
+    `8` = "Indian",
+    `9` = "Pakistani",
+    `10` = "Bangladeshi",
+    `11` = "Other South Asian",
+    `12` = "Caribbean",
+    `13` = "African",
+    `14` = "Other Black",
+    `15` = "Chinese",
+    `16` = "All other ethnic groups",
+    `17` = "Not stated")
+    )
 
 df <- df %>%
 mutate(
