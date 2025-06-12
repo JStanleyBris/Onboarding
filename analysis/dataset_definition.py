@@ -219,7 +219,7 @@ patient_address = addresses.for_patient_on(first_cohort_abx_rx)
 dataset.imd_decile = patient_address.imd_decile
 dataset.date_of_death = ons_deaths.date
 #BMI - is this best way to get bmi
-datasetlast_bmi = (
+dataset.last_bmi = (
     clinical_events.where(
         clinical_events.snomedct_code.is_in(bmi_codelist))
         .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx)) #filter to be before date of prescribing
