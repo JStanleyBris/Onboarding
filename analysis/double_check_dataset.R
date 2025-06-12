@@ -87,9 +87,35 @@ continuous_summary_wide <- continuous_summary_long %>%
 ) %>%
   select(c(variable, `Fluoroquinolone exposed`, `Amoxicillin-clavulanic acid exposed`))
 
-multi_categorical_vars <- c("sex", "ethnicity")  # add more if needed
 
+#Now look at multilevel categorical vars 
+df$latest_ethnicity_group <- as.character(df$latest_ethnicity_group)
 
+multi_categorical_vars <- c("sex", "latest_ethnicity_group")  # add more if needed
+
+summarise_multilevel_categorical <- function(var) {
+  df %>%
+    group_by(fluoroquinolone_exp, level = .data[[var]]) %>%
+    summarise(count = n(), .groups = "drop") %>%
+    group_by(fluoroquinolone_exp) %>%
+    mutate(percent = round(100 * count / sum(count), 1)) %>%
+    ungroup() %>%
+    pivot_wider(
+      names_from = fluoroquinolone_exp,
+      values_from = c(count, percent),
+      names_glue = "{.value}_FQ_{fluoroquinolone_exp}"
+    ) %>%
+    mutate(
+      variable = var,
+      `Fluoroquinolone exposed` = paste0(count_FQ_TRUE, " (", percent_FQ_TRUE, "%)"),
+      `Amoxicillin-clavulanic acid exposed` = paste0(count_FQ_FALSE, " (", percent_FQ_FALSE, "%)")
+    ) %>%
+    select(variable, level, `Fluoroquinolone exposed`, `Amoxicillin-clavulanic acid exposed`)
+}
+
+combined_summary_multilevelcat <- (map_dfr(multi_categorical_vars, summarise_multilevel_categorical)) %>%
+mutate(variable = paste0(variable, level)) %>%
+select(-c(level))
 
 #Save output - separately for now then remove once happy
 summary_table %>%
@@ -104,6 +130,10 @@ overall_summary %>%
   knitr::kable(format = "markdown") %>%
   writeLines("output/total_table.md")
 
-rbind(overall_summary, continuous_summary_wide, summary_table) %>%
+combined_summary_multilevelcat %>%
+  knitr::kable(format = "markdown") %>%
+  writeLines("output/multilevelcat_table.md")
+
+rbind(overall_summary, continuous_summary_wide, combined_summary_multilevelcat, summary_table) %>%
   knitr::kable(format = "markdown") %>%
   writeLines("output/overall_table1.md")

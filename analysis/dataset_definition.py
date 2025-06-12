@@ -228,6 +228,17 @@ dataset.last_bmi = (
         .numeric_value
 )
 
+dataset.latest_ethnicity_code =(
+    clinical_events.where(clinical_events.snomedct_code.is_in(ethnicity_codelist))
+    .where(clinical_events.date.is_on_or_before(end_date))
+    .sort_by(clinical_events.date)
+    .last_for_patient()
+    .snomedct_code
+)
+dataset.latest_ethnicity_group = dataset.latest_ethnicity_code.to_category(
+    ethnicity_codelist
+)
+
 #Smoking - ctv3 or snomedct? Do I need to use both? Or just one?
 #This works but could be improved with a boolean string for never smokers. Q for Will/Rose. Is it possible here to dynamically assign smoking status to N/E/S based on boolean logic and dates?
 # Or do I need to set three columns for never, ex, smoker all T/f
