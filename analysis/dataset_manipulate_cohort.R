@@ -14,13 +14,13 @@ df <- readr::read_csv("output/dataset.csv.gz", col_types = readr::cols(
     date_cohort_prescription = col_date(format = "%Y-%m-%d"),
     date_of_death = col_date(format = "%Y-%m-%d"),
     coamox_exp = col_logical(),
-    fluoroquinolone_exp = col_logical()
-    )
-    ) %>%
-    mutate(imd_decile = factor(imd_decile,
-                        levels = as.character(1:10),
-                        ordered = TRUE),
-            latest_ethnicity_group = recode(latest_ethnicity_group,
+    fluoroquinolone_exp = col_logical(),
+    imd_decile = col_character(),
+    last_bmi = col_double()
+    ),
+  na = c("", "NA", "na")
+ ) %>%
+    mutate(latest_ethnicity_group = recode(latest_ethnicity_group,
             `1` = "White British",
     `2` = "White Irish",
     `3` = "Other White",
@@ -37,8 +37,19 @@ df <- readr::read_csv("output/dataset.csv.gz", col_types = readr::cols(
     `14` = "Other Black",
     `15` = "Chinese",
     `16` = "All other ethnic groups",
-    `17` = "Not stated")
-    )
+    `17` = "Not stated"), 
+    imd_decile = if_else(imd_decile %in% as.character(1:10), imd_decile, NA_character_),
+    imd_decile = factor(imd_decile, levels = as.character(1:10)), #Clean imd_decile: set invalid values to NA, then convert to factor
+  latest_ethnicity_group = factor(latest_ethnicity_group),
+  bmi_cat = cut(last_bmi,
+                       breaks = c(-Inf, 18.5, 25, 30, Inf),
+                       labels = c("Underweight", "Normal", "Overweight", "Obese"),
+                       right = FALSE),
+  bmi_cat = factor(bmi_cat)
+  )
+
+
+
 
 df <- df %>%
 mutate(

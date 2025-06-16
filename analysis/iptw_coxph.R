@@ -5,6 +5,8 @@ library(cobalt)      # for Love plots and diagnostics
 library(lubridate)
 library(splines)
 
+#Positivity - need a non-zero probability of receiving each treatment - IPTW points here - https://bpb-us-w2.wpmucdn.com/u.osu.edu/dist/e/58955/files/2023/11/Best-practices-IPTW.pdf
+
 ##https://ehsanx.github.io/TMLEworkshop/iptw.html#step-3-balance-checking
 
 #Read formatted data
@@ -16,10 +18,14 @@ df <- readr::read_csv("output/dataset_formatted_cohort.csv")
 baseline_vars <- c("sex", "has_diabetes", "harmful_alcohol", "has_had_cancer", "has_chronic_liver_disease", "has_chronic_resp_disease",
 "has_dementia", "has_hiv", "has_heart_failure", "has_hemiplegia", "has_multiple_sclerosis", "has_rheumatoid_arthritis", "has_solid_organ_transplant",              
 "has_stroke_tia", "has_aaa", "has_ckd", "has_coronary_hd", "has_hypertension", "has_peptic_ulcer", "has_pvd",  "corticosteroid_60d_before_abx",
-"drug_linked_to_neuropathy_60d_before_abx")  
+"drug_linked_to_neuropathy_60d_before_abx", "latest_ethnicity_group", "imd_decile")  
                                     
-# To think about - "age", "imd_decile", "last_bmi", "latest_ethnicity_group", "never_smoker" -eg work out what to do with smoking, "n_hosp_appt_6m",
-#  "year_cohort_prescription"             
+# To think about - "age" - splines. Code below
+#"imd_decile" - consider to be a factor but look for evidence that it is linear. Might need to impute as some missing data
+#"last_bmi" - group it(?) - this isn't working as currrently don't have bmi sorted
+#"never_smoker" -eg work out what to do with smoking - again to do with Rose/Will
+#"n_hosp_appt_6m",
+#  "year_cohort_prescription" - look at how prescribing changes over time to decide            
 
 #Look at whether age can be used alone or should be modelled with a spline
 
@@ -35,31 +41,44 @@ model_spline <- glm(fluoroquinolone_exp ~ ns(age, df = 4), data = df, family = b
 # Build data frame for predictions
 df_preds <- df %>%
   select(age) %>%
-  arrange(age) %>% 
-  distinct() %>%  # Just one row per age (for smooth plot)
+  arrange(age) %>%
+  distinct() %>%
   mutate(
-    pred_linear = predict(model_linear, newdata = ., type = "response"),
-    pred_poly   = predict(model_poly, newdata = ., type = "response"),
-    pred_spline = predict(model_spline, newdata = ., type = "response")
+    # Response scale (predicted probabilities)
+    linear_response   = predict(model_linear, newdata = ., type = "response"),
+    poly_response     = predict(model_poly, newdata = ., type = "response"),
+    spline_response   = predict(model_spline, newdata = ., type = "response"),
+    
+    # Link scale (log-odds)
+    linear_link       = predict(model_linear, newdata = ., type = "link"),
+    poly_link         = predict(model_poly, newdata = ., type = "link"),
+    spline_link       = predict(model_spline, newdata = ., type = "link")
   )
 
-# Convert to long format for ggplot
+# Convert to long format for ggplot (includes scale and model)
 df_long <- df_preds %>%
   pivot_longer(
-    cols = starts_with("pred_"),
-    names_to = "model",
-    values_to = "predicted_prob"
+    cols = -age,
+    names_to = c("model", "scale"),
+    names_sep = "_",
+    values_to = "predicted_value"
   ) %>%
-  mutate(model = recode(model,
-                        pred_linear = "Linear",
-                        pred_poly = "Quadratic",
-                        pred_spline = "Spline"))
+  mutate(
+    model = recode(model,
+                   linear = "Linear",
+                   poly = "Quadratic",
+                   spline = "Spline"),
+    scale = recode(scale,
+                   response = "Predicted Probability",
+                   link = "Logit (Linear Predictor)")
+  )
 
-# Plot predicted probabilities by age
-age_spline_check <- ggplot(df_long, aes(x = age, y = predicted_prob, color = model)) +
+# Plot: compare response vs link scale using facets
+age_spline_check <- ggplot(df_long, aes(x = age, y = predicted_value, color = model)) +
   geom_line(size = 1.2) +
-  labs(title = "Predicted Probability of Fluoroquinolone Exposure by Age",
-       x = "Age", y = "Predicted Probability",
+  facet_wrap(~ scale, scales = "free_y") +
+  labs(title = "Fluoroquinolone Exposure by Age",
+       x = "Age", y = "Value",
        color = "Model") +
   theme_minimal()
 
@@ -81,26 +100,117 @@ AIC_table %>%
   knitr::kable(format = "markdown") %>%
   writeLines("output/aictable_agespline.md")
 
+#imd_decile check
+
+imd_decile_roughcheck <- df %>%
+group_by(imd_decile) %>%
+summarise(p_fq = mean(fluoroquinolone_exp, na.rm = TRUE)) %>%
+ggplot(aes (x = imd_decile, y = p_fq)) +
+geom_point(size = 3, color = "steelblue") +
+scale_x_discrete(drop = FALSE) +
+labs(title= "IMD Decile vs Probability of fq exp")
+
+ggsave(plot = imd_decile_roughcheck,
+filename = "imd_decile_rough_check.png",
+path = here::here("output")
+)
+
+#bmi check
+# # Fit logistic regression model
+# #bmi_model <- glm(fluoroquinolone_exp ~ last_bmi, data = df, family = binomial())
+
+# # Create a prediction dataframe over the range of observed BMI
+# #bmi_range <- data.frame(last_bmi = seq(min(df$last_bmi, na.rm = TRUE),
+#                                        max(df$last_bmi, na.rm = TRUE),
+#                                        length.out = 100))
+
+# # Get predicted log-odds (type = "link")
+# #bmi_range$log_odds <- predict(bmi_model, newdata = bmi_range, type = "link")
+
+# # Plot
+# bmi_cont_plot<- ggplot(bmi_range, aes(x = last_bmi, y = log_odds)) +
+#   geom_line(color = "darkblue", size = 1) +
+#   labs(title = "Log-odds of fluoroquinolone exposure vs BMI",
+#        x = "Last BMI",
+#        y = "Log-odds (logit)") +
+#   theme_minimal()
+
+
+# # BMI cat now
+# bmi_cat_model <- glm(fluoroquinolone_exp ~ bmi_cat, data = df, family = binomial())
+
+# # Create dataframe for prediction
+# bmi_cat_levels <- data.frame(bmi_cat = levels(df$bmi_cat))
+
+# # Predict log-odds for each BMI category
+# bmi_cat_levels$log_odds <- predict(bmi_cat_model, newdata = bmi_cat_levels, type = "link")
+
+# # Plot
+# bmi_cat_plot<- ggplot(bmi_cat_levels, aes(x = bmi_cat, y = log_odds)) +
+#   geom_col(fill = "steelblue") +
+#   labs(title = "Log-odds of fluoroquinolone exposure by BMI category",
+#        x = "BMI Category",
+#        y = "Log-odds (logit)") +
+#   theme_minimal()
+
+# ggsave(plot = bmi_cont_plot,
+# filename = "age_spline_check.png",
+# path = here::here("output")
+# )
+
+# ggsave(plot = bmi_cat_plot,
+# filename = "age_spline_check.png",
+# path = here::here("output")
+# )
+
+# Fit a basic logistic regression - for n hosp appt in 6m
+model_simple <- glm(fluoroquinolone_exp ~ n_hosp_appt_6m,
+                    family = binomial(), data = df)
+
+# Predict log-odds (type = "link" gives the linear predictor, i.e. log-odds)
+df$log_odds <- predict(model_simple, type = "link")
+
+# Plot
+n_hosp_logoddsplot<- ggplot(df, aes(x = n_hosp_appt_6m, y = log_odds)) +
+  geom_point(alpha = 0.3, size = 1) +
+  geom_smooth(method = "loess", se = FALSE, color = "blue") +
+  labs(title = "Log-odds of Fluoroquinolone Treatment vs Hospital Appointments",
+       x = "Number of hospital appointments (6 months)",
+       y = "Predicted log-odds of treatment")
+
+
+ggsave(plot = n_hosp_logoddsplot,
+filename = "n_hosp_logoddsplot.png",
+path = here::here("output")
+)
+
 ps.formula <- as.formula(paste("fluoroquinolone_exp ~",
                                paste(baseline_vars,
                                      collapse = "+")))
 
+# This is a workaround until decided re: imputation(?)
+
+# Subset complete cases
+df_complete <- df %>% drop_na(all_of(c("fluoroquinolone_exp", baseline_vars)))
+
 #Estimate propensity score
 ps_model <- glm(ps.formula,
                 family = binomial(),
-                data = df)
+                data = df_complete)
 
-df$ps <- predict(ps_model, type = "response")
+# Predict
+df_complete$ps <- predict(ps_model, type = "response")
+
 
 #Look at responses
-summary(df$ps)
+summary(df_complete$ps)
 
 #Look at overlap
 png(filename = here::here("output", "ps_density_plot.png"), width = 800, height = 600)
 
-plot(density(df$ps[df$fluoroquinolone_exp==TRUE]), 
+plot(density(df_complete$ps[df_complete$fluoroquinolone_exp==TRUE]), 
      col = "red", main = "")
-lines(density(df$ps[df$fluoroquinolone_exp==FALSE]), 
+lines(density(df_complete$ps[df_complete$fluoroquinolone_exp==FALSE]), 
       col = "blue", lty = 2)
 legend("topright", c("FQ","No FQ"), 
        col = c("red", "blue"), lty=1:2)
@@ -108,10 +218,10 @@ legend("topright", c("FQ","No FQ"),
 dev.off()
 
 # Marginal probability of treatment
-p_treat <- mean(df$fluoroquinolone_exp)
+p_treat <- mean(df_complete$fluoroquinolone_exp)
 
 #Calculate the stabilized treatment weight - less variance
-df$weight <- with(df, ifelse(fluoroquinolone_exp == TRUE,
+df_complete$weight <- with(df_complete, ifelse(fluoroquinolone_exp == TRUE,
                              p_treat / ps, #IPTW for treated individuals
                              (1 - p_treat) / (1 - ps))) #IPTW for untreated individuals
 
@@ -120,7 +230,7 @@ df$weight <- with(df, ifelse(fluoroquinolone_exp == TRUE,
 
 require(WeightIt)
 W.out <- weightit(ps.formula, 
-                    data = df, 
+                    data = df_complete, 
                     estimand = "ATE",
                     method = "ps")
 summary(W.out$weights)
@@ -131,7 +241,7 @@ require(cobalt)
 bal.tab(W.out, un = TRUE, 
         thresholds = c(m = .1))
 
-weightit(formula = ps.formula, data = df, method = "ps", 
+weightit(formula = ps.formula, data = df_complete, method = "ps", 
    estimand = "ATE")
 
 #Plot the balancing
@@ -149,7 +259,7 @@ dev.off()
 #Then once balanced run coxph
 
 iptw_cox_model <- coxph(Surv(time_tendinitis, event_tendinitis) ~ fluoroquinolone_exp,
-                   data = df,
+                   data = df_complete,
                    weights = weight,
                    robust = TRUE)
 
