@@ -7,6 +7,12 @@ actions:
       highly_sensitive:
         dataset: output/dataset.csv.gz
 
+  generate_ctc:
+    run: ehrql:v1 generate-dataset analysis/ctc_definition.py --output output/ctc_data.csv.gz
+    outputs:
+      highly_sensitive:
+        dataset: output/ctc_data.csv.gz
+
 #measures - look at abx prescribing over time
   generate_measure:
     run: ehrql:v1 generate-measures analysis/measure_definition.py --output output/measures.csv 
@@ -30,3 +36,4 @@ actions:
       outputs:
         highly_sensitive:
           chart: output/dataset_formatted_cohort.csv
+
