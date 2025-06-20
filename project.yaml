@@ -27,8 +27,8 @@ actions:
      needs: [generate_measure]
      outputs:
       moderately_sensitive:
-        chart1: output/abx_quarter_time_plot.png
-        chart2: output/outcome_quarter_time_plot.png
+        chart1: output/time_plot/abx_quarter_time_plot.png
+        chart2: output/time_plot/outcome_quarter_time_plot.png
 
   generate_cohort:
       run: r:v2 analysis/dataset_manipulate_cohort.R

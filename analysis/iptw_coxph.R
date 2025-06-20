@@ -93,12 +93,12 @@ AIC_table <- tibble(
 
 ggsave(plot = age_spline_check,
 filename = "age_spline_check.png",
-path = here::here("output")
+path = here::here("output/cohort")
 )
 
 AIC_table %>%
   knitr::kable(format = "markdown") %>%
-  writeLines("output/aictable_agespline.md")
+  writeLines("output/cohort/aictable_agespline.md")
 
 #imd_decile check
 
@@ -112,7 +112,7 @@ labs(title= "IMD Decile vs Probability of fq exp")
 
 ggsave(plot = imd_decile_roughcheck,
 filename = "imd_decile_rough_check.png",
-path = here::here("output")
+path = here::here("output/cohort")
 )
 
 #bmi check
@@ -154,13 +154,13 @@ path = here::here("output")
 #   theme_minimal()
 
 # ggsave(plot = bmi_cont_plot,
-# filename = "age_spline_check.png",
-# path = here::here("output")
+# filename = "bmi_cont_check.png",
+# path = here::here("output/cohort")
 # )
 
 # ggsave(plot = bmi_cat_plot,
-# filename = "age_spline_check.png",
-# path = here::here("output")
+# filename = "bmi_cat_check.png",
+# path = here::here("output/cohort")
 # )
 
 # Fit a basic logistic regression - for n hosp appt in 6m
@@ -181,7 +181,7 @@ n_hosp_logoddsplot<- ggplot(df, aes(x = n_hosp_appt_6m, y = log_odds)) +
 
 ggsave(plot = n_hosp_logoddsplot,
 filename = "n_hosp_logoddsplot.png",
-path = here::here("output")
+path = here::here("output/cohort")
 )
 
 ps.formula <- as.formula(paste("fluoroquinolone_exp ~",
@@ -206,7 +206,7 @@ df_complete$ps <- predict(ps_model, type = "response")
 summary(df_complete$ps)
 
 #Look at overlap
-png(filename = here::here("output", "ps_density_plot.png"), width = 800, height = 600)
+png(filename = here::here("output/cohort", "ps_density_plot.png"), width = 800, height = 600)
 
 plot(density(df_complete$ps[df_complete$fluoroquinolone_exp==TRUE]), 
      col = "red", main = "")
@@ -246,7 +246,7 @@ weightit(formula = ps.formula, data = df_complete, method = "ps",
 
 #Plot the balancing
 
-png(filename = here::here("output", "ps_love_plot.png"), width = 800, height = 600)
+png(filename = here::here("output/cohort", "ps_love_plot.png"), width = 800, height = 600)
 
 love.plot(W.out, binary = "std",
           thresholds = c(m = .1),

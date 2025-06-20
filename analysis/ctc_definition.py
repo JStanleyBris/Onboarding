@@ -106,10 +106,10 @@ dataset.incident_tendinitis = incident_tendinitis
         #abx code dictionary for use in functions below
 antibiotic_codelists_dmd = {
         "amoxicillin": amoxicillin_codes,
-        "amoxicillin_clavulanic_acid": amox_clavulanicacid_codes,
+        "amox_clavulanic_acid": amox_clavulanicacid_codes,
         "cefalexin":cefalexin_codes,
         "trimethoprim": trimethoprim_codes,
-        "trimethoprim_sulfamethoxazole":trim_sulfa_codes,
+        "trim_sulfamethoxazole":trim_sulfa_codes,
 
         "fluoroquinolones": fluoroquinolone_codes
     

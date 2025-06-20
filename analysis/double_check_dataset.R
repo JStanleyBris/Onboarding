@@ -122,4 +122,4 @@ filter(!(variable %in% c("unknown", "NA")))
 
 rbind(overall_summary, continuous_summary_wide, combined_summary_multilevelcat, summary_table) %>%
   knitr::kable(format = "markdown") %>%
-  writeLines("output/overall_table1.md")
+  writeLines("output/cohort/table_1/overall_table1.md")
