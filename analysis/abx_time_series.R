@@ -82,6 +82,8 @@ labs(x = "Quarter",
 y = "New diagnoses per 1000 prescriptions",
 title = "Quarterly Tendinitis and Neuropathy in the 30 days after Antibiotic Prescription")
 
+dir.create("output/time_plot", recursive = TRUE, showWarnings = FALSE)
+
 ggsave(
     plot = plot_abx_quarter,
 filename = "abx_quarter_time_plot.png",
