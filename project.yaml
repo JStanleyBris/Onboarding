@@ -19,14 +19,14 @@ actions:
       highly_sensitive:
         dataset: output/ctc_data_potential_controls.csv.gz
 
-  matching:
-    run: python:v1 python analysis/match.py
-    needs: [generate_ctc_cases, generate_ctc_potential_control]
-    outputs:
-      moderately_sensitive:
-        matching_report: output/matching_report.txt
-      highly_sensitive:
-        matched_matches: output/matched_matches.csv
+  # matching:
+  #   run: python:v1 python analysis/match.py
+  #   needs: [generate_ctc_cases, generate_ctc_potential_control]
+  #   outputs:
+  #     moderately_sensitive:
+  #       matching_report: output/matching_report.txt
+  #     highly_sensitive:
+  #       matched_matches: output/matched_matches.csv
 
 #measures - look at abx prescribing over time
   generate_measure:
