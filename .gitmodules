@@ -1,0 +1,3 @@
+[submodule "analysis/osmatching"]
+	path = analysis/osmatching
+	url = https://github.com/opensafely-core/matching

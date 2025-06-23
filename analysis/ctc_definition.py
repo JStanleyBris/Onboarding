@@ -101,6 +101,9 @@ incident_neuropathy = clinical_events.where(
 dataset.incident_neuropathy = incident_neuropathy
 dataset.incident_tendinitis = incident_tendinitis
 
+dataset.neuropathy_case = incident_neuropathy.is_not_null()
+dataset.tendinitis_case = incident_tendinitis.is_not_null()
+
 #Look for exposure in risk window
 
         #abx code dictionary for use in functions below
@@ -143,3 +146,6 @@ for antibiotic, codelist in antibiotic_codelists_dmd.items():
             )
             .exists_for_patient()
         )
+
+dataset.sex = patients.sex
+dataset.age = patients.age_on(potential_case_date) #TO COME BACK - need to separate out for each event type

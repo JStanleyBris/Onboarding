@@ -7,11 +7,26 @@ actions:
       highly_sensitive:
         dataset: output/dataset.csv.gz
 
-  generate_ctc:
-    run: ehrql:v1 generate-dataset analysis/ctc_definition.py --output output/ctc_data.csv.gz
+  generate_ctc_cases:
+    run: ehrql:v1 generate-dataset analysis/ctc_definition.py --output output/ctc_data_cases.csv.gz
     outputs:
       highly_sensitive:
-        dataset: output/ctc_data.csv.gz
+        dataset: output/ctc_data_cases.csv.gz
+
+  generate_ctc_potential_control:
+    run: ehrql:v1 generate-dataset analysis/ctc_potential_control_definition.py --output output/ctc_data_potential_controls.csv.gz
+    outputs:
+      highly_sensitive:
+        dataset: output/ctc_data_potential_controls.csv.gz
+
+  matching:
+    run: python:v1 python analysis/match.py
+    needs: [generate_ctc_cases, generate_ctc_potential_control]
+    outputs:
+      moderately_sensitive:
+        matching_report: output/matching_report.txt
+      highly_sensitive:
+        matched_matches: output/matched_matches.csv
 
 #measures - look at abx prescribing over time
   generate_measure:
