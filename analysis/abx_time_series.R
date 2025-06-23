@@ -85,17 +85,17 @@ title = "Quarterly Tendinitis and Neuropathy in the 30 days after Antibiotic Pre
 ggsave(
     plot = plot_abx_quarter,
 filename = "abx_quarter_time_plot.png",
-path = here::here("output/time_plot")
+path = ("output/time_plot")
 )
 
 ggsave(
     plot = plot_outcome_quarter,
 filename = "outcome_quarter_time_plot.png",
-path = here::here("output/time_plot")
+path = ("output/time_plot")
 )
 
 ggsave(
     plot = plot_outcome_postabx_quarter,
 filename = "outcome_postabx_quarter.png",
-path = here::here("output/time_plot")
+path = ("output/time_plot")
 )
