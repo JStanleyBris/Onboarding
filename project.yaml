@@ -19,39 +19,14 @@ actions:
       highly_sensitive:
         dataset: output/ctc_data_potential_controls.csv.gz
 
-  matching:
-    run: python:v2 python analysis/match.py
-    needs: [generate_ctc_cases, generate_ctc_potential_control]
-    outputs:
-      moderately_sensitive:
-        matching_report: output/matching_report.txt
-      highly_sensitive:
-        matched_matches: output/matched_matches.csv
-
-  check_osmatching:
-    run: python:v2 analysis/check_osmatching.py
-    outputs:
-      highly_sensitive:
-        textfile: output/osmatching_info.txt
-
-  find-load-dataframe:
-    run: python:v2 analysis/find_load_dataframe.py
-    outputs:
-      highly_sensitive:
-        textfile: output/load_dataframe_location.txt
-
-  list-osmatching-init:
-    run: python:v2 analysis/list_osmatching_init.py
-    outputs:
-      highly_sensitive:
-        textfile: output/osmatching_init_exports.txt
-    
-
-  list-osmatching-functions:
-    run: python:v2 analysis/list_osmatching_functions.py
-    outputs:
-      highly_sensitive:
-        textfile: output/osmatching_functions.txt
+  # matching:
+  #   run: python:v2 python analysis/match.py
+  #   needs: [generate_ctc_cases, generate_ctc_potential_control]
+  #   outputs:
+  #     moderately_sensitive:
+  #       matching_report: output/matching_report.txt
+  #     highly_sensitive:
+  #       matched_matches: output/matched_matches.csv
 
 
 #measures - look at abx prescribing over time

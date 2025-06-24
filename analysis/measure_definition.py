@@ -69,46 +69,93 @@ first_neuropathy = clinical_events.where(
     clinical_events.snomedct_code.is_in(neuropathy_codes)).where(
         clinical_events.date.is_during(INTERVAL)).sort_by(clinical_events.date).first_for_patient().date
 
-#Rx 30d before outcome
-
-tendinitis_window_start = first_tendinitis - days(30)
-tendinitis_window_end = first_tendinitis - days(1)
-
-neuropathy_window_start = first_neuropathy - days(30) 
-neuropathy_window_end = first_neuropathy - days(1)
-
-
-comparator_rx_pre_tendinitis = medications.where(medications.dmd_code.is_in(all_comparator_abx)).where(
-        medications.date.is_on_or_between(tendinitis_window_start, tendinitis_window_end)
-                                          )
-
-fluoroquinolone_rx_pre_tendinitis = medications.where(medications.dmd_code.is_in(fluoroquinolone_codes)).where(
-        medications.date.is_on_or_between(tendinitis_window_start, tendinitis_window_end)
-                                          )
-
-comparator_rx_pre_neuropathy = medications.where(medications.dmd_code.is_in(all_comparator_abx)).where(
-        medications.date.is_on_or_between(neuropathy_window_start, neuropathy_window_end)
-                                          )
-
-fluoroquinolone_rx_pre_neuropathy = medications.where(medications.dmd_code.is_in(fluoroquinolone_codes)).where(
-        medications.date.is_on_or_between(neuropathy_window_start, neuropathy_window_end)
-                                          )                                         
-
-    #Define denominators
 
 denominator_abxcount = (
     practice_registrations.spanning(INTERVAL.start_date, INTERVAL.end_date)
     )
 
-denominator_all_comparator = ( #For use with post abx outcomes - this is count of all prescriptions within the timeframe - look back 30 days
- medications.where(medications.dmd_code.is_in(all_comparator_abx))
- .where(medications.date.is_on_or_between(INTERVAL.start_date - days(30), INTERVAL.start_date - days(1)))
-)
+# #Rx 30d before outcome
+#Start to make more efficient
 
-denominator_fq_specific = ( #For use with post abx outcomes - this is count of all prescriptions within the timeframe - look back 30 days
- medications.where(medications.dmd_code.is_in(fluoroquinolone_codes))
- .where(medications.date.is_on_or_between(INTERVAL.start_date - days(30), INTERVAL.start_date - days(1)))
-)
+#Dictionary
+
+# Antibiotic codelists
+antibiotics = {
+    "amoxicillin": amoxicillin_codes,
+    "cefalexin": cefalexin_codes,
+    "co_amoxiclav": co_amox_codes,
+    "trimethoprim": trim_codes,
+    "co_trimoxazole": co_trim_codes,
+    "fluoroquinolone": fluoroquinolone_codes,
+}
+
+# Outcome codelists
+outcomes = {
+    "tendinitis": tendinitis_codes,
+    "neuropathy": neuropathy_codes,
+}
+
+#Extract first outcome dates - as outcomes are rare this is the best way to do it
+
+first_outcome_dates = {}
+
+for outcome_name, outcome_codes in outcomes.items():
+    first_outcome_dates[outcome_name] = clinical_events.where(
+        clinical_events.snomedct_code.is_in(outcome_codes)
+    ).where(
+        clinical_events.date.is_during(INTERVAL)
+    ).sort_by(
+        clinical_events.date
+    ).first_for_patient().date
+
+#Define window in which antibiotic can be prescribed 
+
+window_starts = {}
+window_ends = {}
+
+for outcome_name, first_date in first_outcome_dates.items():
+    window_starts[outcome_name] = first_date - days(30)
+    window_ends[outcome_name] = first_date - days(1)
+
+#Look for ab prescription
+
+rx_pre_outcome = {}
+
+for ab_name, ab_codes in antibiotics.items():
+    for outcome_name in outcomes:
+        var_name = f"{ab_name}_rx_pre_{outcome_name}"
+        rx_pre_outcome[var_name] = medications.where(
+            medications.dmd_code.is_in(ab_codes)
+        ).where(
+            medications.date.is_on_or_between(
+                window_starts[outcome_name], window_ends[outcome_name]
+            )
+        )
+
+# Loop through each antibiotic × outcome combination
+for ab_name in antibiotics:
+    for outcome_name in outcomes:
+
+        var_name = f"{ab_name}_rx_pre_{outcome_name}"  # this was already created earlier
+        measure_name = f"{outcome_name}_prev_{ab_name}_trends"
+
+        # Define denominator: all prescriptions for that antibiotic in the interval (30-day lookback from INTERVAL.start_date)
+        denominator = medications.where(
+            medications.dmd_code.is_in(antibiotics[ab_name])
+        ).where(
+            medications.date.is_on_or_between(
+                INTERVAL.start_date - days(30),
+                INTERVAL.start_date - days(1),
+            )
+        )
+
+        # Define measure
+        measures.define_measure(
+            name=measure_name,
+            numerator=rx_pre_outcome[var_name].exists_for_patient(),
+            denominator=denominator.exists_for_patient(),
+        )
+
 
 #Start with measures
 
@@ -160,32 +207,4 @@ measures.define_measure(
     name="neuropathy_trends",
     numerator= neuropathy_dx.exists_for_patient(), 
     denominator = denominator_abxcount.exists_for_patient(),
-)
-
-    #Outcome post abx
-
-#Tendinitis
-measures.define_measure(
-    name="tendinitis_prev_comparator_trends",
-    numerator= comparator_rx_pre_tendinitis.exists_for_patient(), #this runs and works - and only counts by patient within interval I think because of rx_in_interval
-    denominator= denominator_all_comparator.exists_for_patient(), 
-)
-
-measures.define_measure(
-    name="tendinitis_prev_fluoroquinolone_trends",
-    numerator= fluoroquinolone_rx_pre_tendinitis.exists_for_patient(), 
-    denominator= denominator_fq_specific.exists_for_patient(), 
-)
-
-#Neuropathy
-measures.define_measure(
-    name="neuropathy_prev_comparator_trends",
-    numerator= comparator_rx_pre_neuropathy.exists_for_patient(), 
-    denominator= denominator_all_comparator.exists_for_patient(), 
-)
-
-measures.define_measure(
-    name="neuropathy_prev_fluoroquinolone_trends",
-    numerator= fluoroquinolone_rx_pre_neuropathy.exists_for_patient(),
-    denominator= denominator_fq_specific.exists_for_patient(), 
 )

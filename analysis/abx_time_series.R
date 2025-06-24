@@ -3,8 +3,15 @@ library(lubridate)
 
 abx_list<-c( "Fluoroquinolones", "Amoxicillin","Amoxicillin + clavulanic acid",  "Cefalexin","Trimethoprim", "Trimethoprim + sulfamethoxazole")
 outcome_list <- c("Tendinitis", "Neuropathy")
-outcome_post_abx_list <- c("Tendinitis after Fluoroquinolone Prescription", "Tendinitis after Comparator Prescription", "Neuropathy after Fluoroquinolone Prescription", 
-"Neuropathy after Comparator Prescription")
+
+neuropathy_post_abx_list <- c("neuropathy_prev_fluoroquinolone_trends", "neuropathy_prev_amoxicillin_trends", "neuropathy_prev_cefalexin_trends", 
+"neuropathy_prev_co_amoxiclav_trends", "neuropathy_prev_trimethoprim_trends", "neuropathy_prev_co_trimoxazole_trends")
+
+tendinitis_post_abx_list <- c("tendinitis_prev_fluoroquinolone_trends", "tendinitis_prev_amoxicillin_trends", "tendinitis_prev_cefalexin_trends", 
+"tendinitis_prev_co_amoxiclav_trends", "tendinitis_prev_trimethoprim_trends", "tendinitis_prev_co_trimoxazole_trends")
+
+# outcome_post_abx_list <- c("Tendinitis after Fluoroquinolone Prescription", "Tendinitis after Comparator Prescription", "Neuropathy after Fluoroquinolone Prescription", 
+# "Neuropathy after Comparator Prescription")
 
 df_input <- read_csv(
     here::here("output", "measures.csv"),
@@ -35,11 +42,7 @@ mutate(measure = recode(measure,
 "trim_trends" = "Trimethoprim", 
 "co_trim_trends" = "Trimethoprim + sulfamethoxazole",
 "tendinitis_trends" = "Tendinitis", 
-"neuropathy_trends" = "Neuropathy",
-"tendinitis_prev_fluoroquinolone_trends" = "Tendinitis after Fluoroquinolone Prescription", 
-"tendinitis_prev_comparator_trends" = "Tendinitis after Comparator Prescription", 
-"neuropathy_prev_fluoroquinolone_trends" = "Neuropathy after Fluoroquinolone Prescription", 
-"neuropathy_prev_comparator_trends"  = "Neuropathy after Comparator Prescription"
+"neuropathy_trends" = "Neuropathy"
 )) %>%
 mutate(ratio_mean_1000 = ratio_mean*1000) #for use with prescribing/1000 patients
 
@@ -112,16 +115,79 @@ y = "New diagnoses per 1000 registered patients",
 title = "Quarterly Tendinitis and Neuropathy Trends Over Time")
 
 #Plot of outcomes post abx rx
+#First neuropathy
 
-plot_outcome_postabx_quarter <- ggplot(data = (df_quarter %>% 
-filter(measure %in% outcome_post_abx_list)  #restrict to outcomes post abx only
+plot_neuropathy_postabx_quarter <- ggplot(data = (df_quarter %>% 
+filter(measure %in% neuropathy_post_abx_list) %>%  #restrict to outcomes post abx only
+  mutate(
+    measure = measure %>%
+      str_remove("^neuropathy_prev_") %>%    # remove prefix
+      str_remove("_trends$") %>%              # remove suffix
+      str_replace_all("_", "-") %>% 
+      str_to_title()                          # capitalize first letter of each word
+  )
 ), aes(x = quarter_start, y = ratio_mean_1000)) +
 os_plots_date_pointmarkers + 
 facet_wrap(~ measure, scales = "free_y") + 
 theme_minimal() +
+theme(
+    axis.text.x = element_text(angle = 60, hjust = 1),
+    axis.text = element_text(size = 6, color = "black"),
+    strip.text = element_text(size = 10, face = "bold", color = "black"),
+    strip.background = element_rect(
+      fill = "white",
+      color = NA
+    ),
+    panel.background = element_rect(fill = "white", color = NA),  # plot area
+    plot.background = element_rect(fill = "white", color = NA),   # full canvas
+    panel.grid.major = element_line(color = "grey90"),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_x_date(
+    date_breaks = "6 months",         # Show a tick every 3 months
+    date_labels = "%b %Y"             # Format: "Mar 2020", "Jun 2020", etc.
+  ) +
 labs(x = "Quarter",
 y = "New diagnoses per 1000 prescriptions",
-title = "Quarterly Tendinitis and Neuropathy in the 30 days after Antibiotic Prescription")
+title = "Quarterly Neuropathy in the 30 days after Antibiotic Prescription")
+
+#Next tendinitis
+plot_tendinitis_postabx_quarter <- ggplot(data = (df_quarter %>% 
+filter(measure %in% tendinitis_post_abx_list) %>%  #restrict to outcomes post abx only
+  mutate(
+    measure = measure %>%
+      str_remove("^tendinitis_prev_") %>%    # remove prefix
+      str_remove("_trends$") %>%              # remove suffix
+      str_replace_all("_", "-") %>% 
+      str_to_title()                          # capitalize first letter of each word
+  )
+), aes(x = quarter_start, y = ratio_mean_1000)) +
+os_plots_date_pointmarkers + 
+facet_wrap(~ measure, scales = "free_y") + 
+theme_minimal() +
+theme(
+    axis.text.x = element_text(angle = 60, hjust = 1),
+    axis.text = element_text(size = 6, color = "black"),
+    strip.text = element_text(size = 10, face = "bold", color = "black"),
+    strip.background = element_rect(
+      fill = "white",
+      color = NA
+    ),
+    panel.background = element_rect(fill = "white", color = NA),  # plot area
+    plot.background = element_rect(fill = "white", color = NA),   # full canvas
+    panel.grid.major = element_line(color = "grey90"),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_x_date(
+    date_breaks = "6 months",         # Show a tick every 3 months
+    date_labels = "%b %Y"             # Format: "Mar 2020", "Jun 2020", etc.
+  ) +
+labs(x = "Quarter",
+y = "New diagnoses per 1000 prescriptions",
+title = "Quarterly Tendinitis in the 30 days after Antibiotic Prescription")
+
+
+tendinitis_post_abx_list 
 
 dir.create("output/time_plot", recursive = TRUE, showWarnings = FALSE)
 
@@ -138,7 +204,13 @@ path = ("output/time_plot")
 )
 
 ggsave(
-    plot = plot_outcome_postabx_quarter,
-filename = "outcome_postabx_quarter.png",
+    plot = plot_neuropathy_postabx_quarter,
+filename = "neuropathy_postabx_quarter.png",
+path = ("output/time_plot")
+)
+
+ggsave(
+    plot = plot_tendinitis_postabx_quarter ,
+filename = "tendinitis_postabx_quarter.png",
 path = ("output/time_plot")
 )
