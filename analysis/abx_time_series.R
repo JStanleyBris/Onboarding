@@ -43,15 +43,58 @@ mutate(measure = recode(measure,
 )) %>%
 mutate(ratio_mean_1000 = ratio_mean*1000) #for use with prescribing/1000 patients
 
+#Set vertical lines for plotting
+MHRA_1 <- as.Date("01/03/2019", format = "%d/%m/%Y")
+
+covid_start <- as.Date("01/03/2020", format = "%d/%m/%Y")
+covid_end   <- as.Date("01/04/2022", format = "%d/%m/%Y")
+
+MHRA_2 <- as.Date("01/01/2024", format = "%d/%m/%Y")
+
+#Make object for break marking
+
+ os_plots_date_pointmarkers <- list(geom_rect(
+    aes(xmin = covid_start, xmax = covid_end, ymin = -Inf, ymax = Inf),
+    fill = "#cce5ff",  # light blue
+    alpha = 0.4,
+    inherit.aes = FALSE
+  ),
+geom_point(),
+geom_line(), 
+geom_vline(xintercept = MHRA_1, linetype = "dashed", color = "red"),
+geom_vline(xintercept = MHRA_2, linetype = "dashed", color = "red")
+ )
+
 #Plot of abx over time - want this /1000 patients(?)
 
 plot_abx_quarter <- ggplot(data = (df_quarter %>% 
-filter(measure %in% abx_list) #restrict to abx only
+filter(measure %in% abx_list) %>% #restrict to abx only
+mutate(measure = case_when(
+    measure == "Amoxicillin + clavulanic acid" ~ "Amoxicillin\n+ clavulanic acid",
+    measure == "Trimethoprim + sulfamethoxazole" ~ "Trimethoprim\n+ sulfamethoxazole",
+    TRUE ~ measure
+  ))
 ), aes(x = quarter_start, y = ratio_mean_1000)) +
-geom_point() +
-geom_line() + 
+  os_plots_date_pointmarkers + 
 facet_wrap(~ measure, scales = "free_y") + 
 theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 60, hjust = 1),
+    axis.text = element_text(size = 6, color = "black"),
+    strip.text = element_text(size = 10, face = "bold", color = "black"),
+    strip.background = element_rect(
+      fill = "white",
+      color = NA
+    ),
+    panel.background = element_rect(fill = "white", color = NA),  # plot area
+    plot.background = element_rect(fill = "white", color = NA),   # full canvas
+    panel.grid.major = element_line(color = "grey90"),
+    panel.grid.minor = element_blank()
+  ) +
+  scale_x_date(
+    date_breaks = "6 months",         # Show a tick every 3 months
+    date_labels = "%b %Y"             # Format: "Mar 2020", "Jun 2020", etc.
+  ) +
 labs(x = "Quarter", 
 y = "Prescriptions per quarter per 1000 registered patients",
 title = "Quarterly Prescribing Trends Over Time")
@@ -61,8 +104,7 @@ title = "Quarterly Prescribing Trends Over Time")
 plot_outcome_quarter <- ggplot(data = (df_quarter %>% 
 filter(measure %in% outcome_list)  #restrict to outcomes only
 ), aes(x = quarter_start, y = ratio_mean_1000)) +
-geom_point() +
-geom_line() + 
+os_plots_date_pointmarkers + 
 facet_wrap(~ measure, scales = "free_y") + 
 theme_minimal() +
 labs(x = "Quarter",
@@ -74,8 +116,7 @@ title = "Quarterly Tendinitis and Neuropathy Trends Over Time")
 plot_outcome_postabx_quarter <- ggplot(data = (df_quarter %>% 
 filter(measure %in% outcome_post_abx_list)  #restrict to outcomes post abx only
 ), aes(x = quarter_start, y = ratio_mean_1000)) +
-geom_point() +
-geom_line() + 
+os_plots_date_pointmarkers + 
 facet_wrap(~ measure, scales = "free_y") + 
 theme_minimal() +
 labs(x = "Quarter",
