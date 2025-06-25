@@ -120,6 +120,12 @@ nitrofurantoin_codes = codelist_from_csv("codelists/user-jacklsbrist-nitrofurant
 
 drug_causes_of_neuropathy_codes = phenytoin_codes  + amiodarone_codes + metronidazole_codes + nitrofurantoin_codes
 
+#Allergy codes
+
+fluoroquinolone_allergy_codes = codelist_from_csv("codelists/user-jacklsbrist-allergy-to-fluoroquinolones.csv", column = "code")
+co_amox_allergy_codes = codelist_from_csv("codelists/user-jacklsbrist-allergy-to-co-amoxiclav.csv", column = "code")
+
+cohort_abx_allergy_codes = fluoroquinolone_allergy_codes + co_amox_allergy_codes
 
 #This is date of first prescription of study abx for cohort
 
@@ -145,35 +151,28 @@ prior_tendinitis_or_neuropathy = clinical_events.where(
         clinical_events.date.is_on_or_before(first_cohort_abx_rx)
 ).exists_for_patient()
 
+cohort_abx_allergy = clinical_events.where(
+    clinical_events.snomedct_code.is_in(cohort_abx_allergy_codes)
+).where(
+    clinical_events.date.is_on_or_before(first_cohort_abx_rx) #Exclude allergies coded prior to receipt of drug
+).exists_for_patient()
+
 #Cohort definition
 
 dataset.define_population(
      (patients.exists_for_patient()) &
      (has_registration_1y_before_cohort_abx) &
+    ~(cohort_abx_allergy) &
     ~(prior_tendinitis_or_neuropathy) 
     )
 
 
 dataset.configure_dummy_data(population_size=1000)
 
-        #Exposed or not - all 0s therefore should be coamox. But for sanity to check by coding coamox and comparing once generated
-
-dataset.fluoroquinolone_exp = (medications.where(
-    medications.dmd_code.is_in(fluoroquinolone_codes))
-    .where(medications.date.is_on_or_between(first_cohort_abx_rx, first_cohort_abx_rx))
-        .exists_for_patient()
-    )
-
-dataset.coamox_exp = (medications.where(
-    medications.dmd_code.is_in(amox_clavulanicacid_codes))
-    .where(medications.date.is_on_or_between(first_cohort_abx_rx, first_cohort_abx_rx))
-        .exists_for_patient()
-    )
-
         #Medication options
 
 #This extracts first date of FQ prescription
-dataset.first_fluoroquinolone_date = medications.where(
+first_fluoroquinolone_date = medications.where(
         medications.dmd_code.is_in(fluoroquinolone_codes)
 ).where(
         medications.date.is_on_or_after(first_cohort_abx_rx)
@@ -181,7 +180,7 @@ dataset.first_fluoroquinolone_date = medications.where(
         medications.date
 ).first_for_patient().date
 
-dataset.first_co_amox_date = medications.where(
+first_co_amox_date = medications.where(
         medications.dmd_code.is_in(amox_clavulanicacid_codes)
 ).where(
         medications.date.is_on_or_after(first_cohort_abx_rx)
@@ -189,6 +188,18 @@ dataset.first_co_amox_date = medications.where(
         medications.date
 ).first_for_patient().date
 
+dataset.first_fluoroquinolone_date = first_fluoroquinolone_date
+dataset.first_co_amox_date = first_co_amox_date
+
+        #Exposed or not - all 0s therefore should be coamox. But for sanity to check by coding coamox and comparing once generated
+
+dataset.fluoroquinolone_exp = (
+    first_fluoroquinolone_date.is_not_null()
+)
+
+dataset.coamox_exp = (
+    first_co_amox_date.is_not_null()
+)
 
 #Outcome options - ICD-10 or SNOMED - any benefit to either cf the other? - Leave coded as start_date for now to check for santiy. 
 # We should not be getting any coming up before the date of prescription of either

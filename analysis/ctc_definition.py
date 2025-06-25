@@ -98,8 +98,8 @@ incident_neuropathy = clinical_events.where(
         clinical_events.date
 ).first_for_patient().date
 
-dataset.incident_neuropathy = incident_neuropathy
-dataset.incident_tendinitis = incident_tendinitis
+dataset.incident_neuropathy_date = incident_neuropathy
+dataset.incident_tendinitis_date = incident_tendinitis
 
 dataset.neuropathy_case = incident_neuropathy.is_not_null()
 dataset.tendinitis_case = incident_tendinitis.is_not_null()

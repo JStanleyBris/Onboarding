@@ -4,6 +4,7 @@ library(tableone)    # for checking balance
 library(cobalt)      # for Love plots and diagnostics
 library(lubridate)
 library(splines)
+library(finalfit)
 
 #Positivity - need a non-zero probability of receiving each treatment - IPTW points here - https://bpb-us-w2.wpmucdn.com/u.osu.edu/dist/e/58955/files/2023/11/Best-practices-IPTW.pdf
 
@@ -264,3 +265,15 @@ iptw_cox_model <- coxph(Surv(time_tendinitis, event_tendinitis) ~ fluoroquinolon
                    robust = TRUE)
 
 summary(iptw_cox_model)
+summary_model <- summary(iptw_cox_model)
+
+#Plot - to come back to hr_plot to improve
+
+png(filename = here::here("output/cohort", "rough_hr_plot.png"), width = 800, height = 600)
+
+finalfit::hr_plot(coxfit=iptw_cox_model, 
+       main = "Hazard Ratios for Fluoroquinolone Exposure", 
+       xlim = c(0.5, 2), 
+       cex = 1.2)
+
+dev.off()

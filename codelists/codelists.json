@@ -239,6 +239,18 @@
       "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/nitrofurantoin-dmd/4a01c566/",
       "downloaded_at": "2025-06-11 06:48:26.292574Z",
       "sha": "054594114170e81b7c30d05d4ac107f0bd001e7c"
+    },
+    "user-jacklsbrist-allergy-to-fluoroquinolones.csv": {
+      "id": "user/jacklsbrist/allergy-to-fluoroquinolones/7d4604a8",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/allergy-to-fluoroquinolones/7d4604a8/",
+      "downloaded_at": "2025-06-25 08:52:36.511185Z",
+      "sha": "1da83a2fd78ef810d79633282b287034c6fdaca0"
+    },
+    "user-jacklsbrist-allergy-to-co-amoxiclav.csv": {
+      "id": "user/jacklsbrist/allergy-to-co-amoxiclav/165577de",
+      "url": "https://www.opencodelists.org/codelist/user/jacklsbrist/allergy-to-co-amoxiclav/165577de/",
+      "downloaded_at": "2025-06-25 08:52:37.323794Z",
+      "sha": "402fc74ee5569698394cd6ce7a2908703723e674"
     }
   }
 }

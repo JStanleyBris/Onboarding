@@ -52,3 +52,6 @@ user/jacklsbrist/phenytoin-dmd/565a2c5c
 ukhsa/metronidazole-tinidazole-and-ornidazole-antibacterials/193f96f4
 user/jacklsbrist/nitrofurantoin-dmd/4a01c566
 
+#Allergies
+user/jacklsbrist/allergy-to-fluoroquinolones/7d4604a8
+user/jacklsbrist/allergy-to-co-amoxiclav/165577de
