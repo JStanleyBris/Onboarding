@@ -4,7 +4,7 @@ library(tableone)    # for checking balance
 library(cobalt)      # for Love plots and diagnostics
 library(lubridate)
 library(splines)
-library(finalfit)
+library(survminer)
 
 #Positivity - need a non-zero probability of receiving each treatment - IPTW points here - https://bpb-us-w2.wpmucdn.com/u.osu.edu/dist/e/58955/files/2023/11/Best-practices-IPTW.pdf
 
@@ -16,10 +16,13 @@ df <- readr::read_csv("output/dataset_formatted_cohort.csv")
 #Start with iptw for sex and present of hypertension only then expand
 
 #Set variables
+
+#bmi, ethnicity, imd coming out as messing with completeness with dummy - "latest_ethnicity_group", "imd_decile", "last_bmi"
+
 baseline_vars <- c("sex", "has_diabetes", "harmful_alcohol", "has_had_cancer", "has_chronic_liver_disease", "has_chronic_resp_disease",
 "has_dementia", "has_hiv", "has_heart_failure", "has_hemiplegia", "has_multiple_sclerosis", "has_rheumatoid_arthritis", "has_solid_organ_transplant",              
 "has_stroke_tia", "has_aaa", "has_ckd", "has_coronary_hd", "has_hypertension", "has_peptic_ulcer", "has_pvd",  "corticosteroid_60d_before_abx",
-"drug_linked_to_neuropathy_60d_before_abx", "latest_ethnicity_group", "imd_decile")  
+"drug_linked_to_neuropathy_60d_before_abx")  
                                     
 # To think about - "age" - splines. Code below
 #"imd_decile" - consider to be a factor but look for evidence that it is linear. Might need to impute as some missing data
@@ -264,16 +267,57 @@ iptw_cox_model <- coxph(Surv(time_tendinitis, event_tendinitis) ~ fluoroquinolon
                    weights = weight,
                    robust = TRUE)
 
-summary(iptw_cox_model)
-summary_model <- summary(iptw_cox_model)
 
-#Plot - to come back to hr_plot to improve
+#Try simple coxph
 
-png(filename = here::here("output/cohort", "rough_hr_plot.png"), width = 800, height = 600)
+iptw_cox_model_2 <- coxph(Surv(time_tendinitis, event_tendinitis) ~ fluoroquinolone_exp,
+                   data = df_complete)
 
-finalfit::hr_plot(coxfit=iptw_cox_model, 
-       main = "Hazard Ratios for Fluoroquinolone Exposure", 
-       xlim = c(0.5, 2), 
-       cex = 1.2)
 
-dev.off()
+#Plot
+
+model_summary <- summary(iptw_cox_model_2)
+
+# Extract HR and CI
+hr <- model_summary$coefficients[, "exp(coef)"]
+conf_low <- model_summary$conf.int[, "lower .95"]
+conf_high <- model_summary$conf.int[, "upper .95"]
+term <- rownames(model_summary$coefficients)
+
+#Look at df_complete
+
+df_complete %>%
+group_by(fluoroquinolone_exp, event_tendinitis) %>%
+summarise(count = n()) %>%
+  knitr::kable(format = "markdown") %>%
+  writeLines("output/cohort/n_events_tendinitis.md")
+
+
+# Save as plain text
+capture.output(summary(iptw_cox_model_2),
+               file = here::here("output/cohort/iptw_cox_model_summary.txt"))
+
+
+# Make a tidy dataframe
+forest_df <- tibble(term, hr, conf_low, conf_high)
+
+forest_df %>%
+  knitr::kable(format = "markdown") %>%
+  writeLines("output/cohort/forest_df.md")
+
+# Plot
+iptw_forest <- ggplot(forest_df, aes(x = term, y = hr, ymin = conf_low, ymax = conf_high)) +
+  geom_pointrange(color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed") +
+  scale_y_log10() +
+  ylab("Hazard Ratio (log scale)") +
+  xlab("") +
+  theme_minimal() +
+  ggtitle("Hazard Ratio from IPTW Cox Model")
+
+
+ggsave(plot = iptw_forest,
+filename = "iptw_forest.png",
+path = here::here("output/cohort")
+)
+

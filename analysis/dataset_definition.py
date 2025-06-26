@@ -129,12 +129,17 @@ cohort_abx_allergy_codes = fluoroquinolone_allergy_codes + co_amox_allergy_codes
 
 #This is date of first prescription of study abx for cohort
 
-first_cohort_abx_rx = medications.where(
-    medications.dmd_code.is_in(cohort_abx_codes)).where( #Set this to be the first date of receipt of any study antibiotic
-        medications.date.is_on_or_between(start_date, end_date)
+first_cohort_rx = medications.where(
+    medications.dmd_code.is_in(cohort_abx_codes)
+).where(
+    medications.date.is_on_or_between(start_date, end_date)
 ).sort_by(
-        medications.date
-).first_for_patient().date
+    medications.date
+).first_for_patient() #set for use in rest of dataset definition
+
+first_cohort_abx_rx = first_cohort_rx.date
+
+dataset.fluoroquinolone_exp = first_cohort_rx.dmd_code.is_in(fluoroquinolone_codes)
 
 
 has_registration_1y_before_cohort_abx =  (
@@ -142,6 +147,15 @@ has_registration_1y_before_cohort_abx =  (
     .except_where(practice_registrations.end_date < end_date)
     .exists_for_patient()
 )
+
+# dataset.fluoroquinolone_exp = medications.where(
+#     medications.dmd_code.is_in(cohort_abx_codes)).where(
+#          medications.date.is_on_or_between(start_date, end_date) - to check if still needed
+#          ).sort_by(
+#         medications.date
+# ).first_for_patient().where(medications.dmd_code.is_in(fluoroquinolone_codes)).exists_for_patient()
+
+
 
 #Exclusion criteria
 
@@ -166,40 +180,39 @@ dataset.define_population(
     ~(prior_tendinitis_or_neuropathy) 
     )
 
+dataset.configure_dummy_data(population_size=100000)
 
-dataset.configure_dummy_data(population_size=1000)
+        #Medication options - no longer needed - just use cohort first abx rx
 
-        #Medication options
+# #This extracts first date of FQ prescription
+# first_fluoroquinolone_date = medications.where(
+#         medications.dmd_code.is_in(fluoroquinolone_codes)
+# ).where(
+#         medications.date.is_on_or_after(first_cohort_abx_rx)
+# ).sort_by(
+#         medications.date
+# ).first_for_patient().date
 
-#This extracts first date of FQ prescription
-first_fluoroquinolone_date = medications.where(
-        medications.dmd_code.is_in(fluoroquinolone_codes)
-).where(
-        medications.date.is_on_or_after(first_cohort_abx_rx)
-).sort_by(
-        medications.date
-).first_for_patient().date
+# first_co_amox_date = medications.where(
+#         medications.dmd_code.is_in(amox_clavulanicacid_codes)
+# ).where(
+#         medications.date.is_on_or_after(first_cohort_abx_rx)
+# ).sort_by(
+#         medications.date
+# ).first_for_patient().date
 
-first_co_amox_date = medications.where(
-        medications.dmd_code.is_in(amox_clavulanicacid_codes)
-).where(
-        medications.date.is_on_or_after(first_cohort_abx_rx)
-).sort_by(
-        medications.date
-).first_for_patient().date
-
-dataset.first_fluoroquinolone_date = first_fluoroquinolone_date
-dataset.first_co_amox_date = first_co_amox_date
+# dataset.first_fluoroquinolone_date = first_fluoroquinolone_date
+# dataset.first_co_amox_date = first_co_amox_date
 
         #Exposed or not - all 0s therefore should be coamox. But for sanity to check by coding coamox and comparing once generated
 
-dataset.fluoroquinolone_exp = (
-    first_fluoroquinolone_date.is_not_null()
-)
+# dataset.fluoroquinolone_exp = (
+#     first_fluoroquinolone_date.is_not_null()
+# )
 
-dataset.coamox_exp = (
-    first_co_amox_date.is_not_null()
-)
+# dataset.coamox_exp = (
+#     first_co_amox_date.is_not_null()
+# )
 
 #Outcome options - ICD-10 or SNOMED - any benefit to either cf the other? - Leave coded as start_date for now to check for santiy. 
 # We should not be getting any coming up before the date of prescription of either
@@ -219,6 +232,8 @@ dataset.first_neuropathy_diagnosis_date = clinical_events.where(
 ).sort_by(
         clinical_events.date
 ).first_for_patient().date
+
+
 
 
         #Demographics
