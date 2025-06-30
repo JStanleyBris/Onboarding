@@ -43,7 +43,7 @@ combo_outcome_codes = tendinitis_codes + neuropathy_newdx_codes
 
         #Include just cases after the start date
 
-potential_case_date = clinical_events.where(clinical_events.snomedct_code.is_in(combo_outcome_codes )
+tendinitis_case_date = clinical_events.where(clinical_events.snomedct_code.is_in(tendinitis_codes )
 ).where(
     clinical_events.date.is_after(start_date)
 ).sort_by(
@@ -52,16 +52,18 @@ potential_case_date = clinical_events.where(clinical_events.snomedct_code.is_in(
 
     #Registration 1y before case status
 
-has_registration_1y_before_start_date =  (
-    practice_registrations.where(practice_registrations.start_date <= (start_date + years(1)))
+has_registration_1y_before_tendinitis =  (
+    practice_registrations.where(practice_registrations.start_date <= (tendinitis_case_date + years(1)))
     .except_where(practice_registrations.end_date < end_date)
     .exists_for_patient()
 )
 
+dataset.configure_dummy_data(population_size=10000)
+
 #Exclusion criteria - those with prior tendinitis/neuropathy
 
-prior_tendinitis_or_neuropathy = clinical_events.where(
-        clinical_events.snomedct_code.is_in(combo_outcome_codes) #Exclude those with pre-existing diagnoses
+prior_tendinitis = clinical_events.where(
+        clinical_events.snomedct_code.is_in(tendinitis_codes) #Exclude those with pre-existing diagnoses
 ).where(
         clinical_events.date.is_on_or_before(start_date)
 ).exists_for_patient()
@@ -72,7 +74,65 @@ prior_tendinitis_or_neuropathy = clinical_events.where(
 
 dataset.define_population(
      (patients.exists_for_patient()) &
-     potential_case_date.is_null() & #Exclude those with incidence of either outcome of interest
-     has_registration_1y_before_start_date &
-    ~(prior_tendinitis_or_neuropathy) 
+     tendinitis_case_date.is_not_null() &
+     has_registration_1y_before_tendinitis &
+    ~(prior_tendinitis) 
     )
+
+
+dataset.configure_dummy_data(population_size=1000)
+
+#Case status
+
+incident_tendinitis = clinical_events.where(
+     clinical_events.snomedct_code.is_in(tendinitis_codes)
+).where(
+    clinical_events.date.is_after(start_date)
+).sort_by(
+        clinical_events.date
+).first_for_patient().date
+
+dataset.incident_tendinitis_date = incident_tendinitis
+
+dataset.tendinitis_case = incident_tendinitis.is_not_null()
+
+#Look for exposure in risk window
+
+        #abx code dictionary for use in functions below
+antibiotic_codelists_dmd = {
+        "amoxicillin": amoxicillin_codes,
+        "amox_clavulanic_acid": amox_clavulanicacid_codes,
+        "cefalexin":cefalexin_codes,
+        "trimethoprim": trimethoprim_codes,
+        "trim_sulfamethoxazole":trim_sulfa_codes,
+
+        "fluoroquinolones": fluoroquinolone_codes
+    
+}
+
+# Define time windows for each period label
+tendinitis_periods = {
+    "risk": (days(30), days(1)),
+    "reference": (days(180), days(151))
+}
+
+
+# Loop over antibiotics and periods
+for antibiotic, codelist in antibiotic_codelists_dmd.items():
+    for period_label, (start_offset, end_offset) in tendinitis_periods.items():
+                setattr(
+                        dataset,
+                        f"{antibiotic}_{period_label}_tendinitis",
+                         medications.where(medications.dmd_code.is_in(codelist))
+                         .where(
+                          medications.date.is_on_or_between(
+                                        incident_tendinitis - start_offset,
+                                        incident_tendinitis - end_offset
+                )
+            )
+            .exists_for_patient()
+        )
+
+dataset.sex = patients.sex
+dataset.age = patients.age_on(tendinitis_case_date) 
+dataset.tendinitis_case_date = tendinitis_case_date
