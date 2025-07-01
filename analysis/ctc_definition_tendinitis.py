@@ -84,17 +84,12 @@ dataset.configure_dummy_data(population_size=1000)
 
 #Case status
 
-incident_tendinitis = clinical_events.where(
-     clinical_events.snomedct_code.is_in(tendinitis_codes)
-).where(
-    clinical_events.date.is_after(start_date)
-).sort_by(
-        clinical_events.date
-).first_for_patient().date
 
-dataset.incident_tendinitis_date = incident_tendinitis
+dataset.tendinitis_case = tendinitis_case_date.is_not_null()
 
-dataset.tendinitis_case = incident_tendinitis.is_not_null()
+dataset.sex = patients.sex
+dataset.age = patients.age_on(tendinitis_case_date) 
+dataset.tendinitis_case_date = tendinitis_case_date
 
 #Look for exposure in risk window
 
@@ -126,13 +121,10 @@ for antibiotic, codelist in antibiotic_codelists_dmd.items():
                          medications.where(medications.dmd_code.is_in(codelist))
                          .where(
                           medications.date.is_on_or_between(
-                                        incident_tendinitis - start_offset,
-                                        incident_tendinitis - end_offset
+                                        tendinitis_case_date - start_offset,
+                                        tendinitis_case_date - end_offset
                 )
             )
             .exists_for_patient()
         )
 
-dataset.sex = patients.sex
-dataset.age = patients.age_on(tendinitis_case_date) 
-dataset.tendinitis_case_date = tendinitis_case_date

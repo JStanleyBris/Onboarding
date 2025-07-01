@@ -27,17 +27,18 @@ actions:
       --config '{
       "matches_per_case": 3,
       "match_variables": {
-        "sex": "category"
+      "sex": "category",
+      "age": 5
       },
       "index_date_variable": "tendinitis_case_date",
       "generate_match_index_date": "no_offset"
       }'
-    needs: [ generate_ctc_cases_tendinitis, generate_ctc_potential_control_tendinitis]
+    needs: [generate_ctc_cases_tendinitis, generate_ctc_potential_control_tendinitis]
     outputs:
       highly_sensitive:
-        matched_cases: output/matched_cases.csv
-        matched_controls: output/matched_matches.csv
-        matched_combined: output/matched_combined.csv
+        matched_cases: output/matched_cases.arrow
+        matched_controls: output/matched_matches.arrow
+        matched_combined: output/matched_combined.arrow
       moderately_sensitive:
         report: output/matching_report.txt
 

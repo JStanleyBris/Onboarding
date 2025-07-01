@@ -11,9 +11,12 @@
 
 ######################################
 
-from ehrql import create_dataset, codelist_from_csv, years, months, weeks, days, show
+from ehrql import create_dataset, codelist_from_csv, years, months, weeks, days, show, case
 from ehrql.tables.tpp import patients, medications, practice_registrations, addresses, clinical_events, apcs, ons_deaths
 from codelists import *
+from datetime import date, timedelta, datetime
+
+
 
 #show(dataset) - how do I get show to work?
 
@@ -79,3 +82,67 @@ dataset.define_population(
 
 dataset.sex = patients.sex
 dataset.configure_dummy_data(population_size=100000)
+
+
+# Locally convert strings to date objects for arithmetic
+start_date_obj = datetime.strptime(start_date, "%Y-%m-%d").date()
+end_date_obj = datetime.strptime(end_date, "%Y-%m-%d").date()
+
+# Now compute number of days
+N_days = (end_date_obj - start_date_obj).days
+
+# Create a stable patient sequence number
+# We'll combine year, month, and day to get some variation
+patient_sequence = (
+    patients.date_of_birth.year * 10000 +
+    patients.date_of_birth.month * 100 +
+    patients.date_of_birth.day
+)
+
+# Compute offset: mod N_days ensures cycling
+quotient = patient_sequence // N_days
+offset_days = patient_sequence - (quotient * N_days)
+
+# Add offset to start date
+# This is allowed in ehrql using `start_date + offset_days`
+random_date = start_date + days(offset_days)
+
+dataset.tendinitis_case_date = random_date
+dataset.age = patients.age_on(random_date)
+
+#Look for exposure in risk window
+
+        #abx code dictionary for use in functions below
+antibiotic_codelists_dmd = {
+        "amoxicillin": amoxicillin_codes,
+        "amox_clavulanic_acid": amox_clavulanicacid_codes,
+        "cefalexin":cefalexin_codes,
+        "trimethoprim": trimethoprim_codes,
+        "trim_sulfamethoxazole":trim_sulfa_codes,
+
+        "fluoroquinolones": fluoroquinolone_codes
+    
+}
+
+# Define time windows for each period label
+tendinitis_periods = {
+    "risk": (days(30), days(1)),
+    "reference": (days(180), days(151))
+}
+
+
+# Loop over antibiotics and periods
+for antibiotic, codelist in antibiotic_codelists_dmd.items():
+    for period_label, (start_offset, end_offset) in tendinitis_periods.items():
+                setattr(
+                        dataset,
+                        f"{antibiotic}_{period_label}_tendinitis",
+                         medications.where(medications.dmd_code.is_in(codelist))
+                         .where(
+                          medications.date.is_on_or_between(
+                                        tendinitis_case_date - start_offset,
+                                        tendinitis_case_date - end_offset
+                )
+            )
+            .exists_for_patient()
+        )

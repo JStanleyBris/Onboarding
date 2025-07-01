@@ -7,6 +7,9 @@
 
 #opensafely exec ehrql:v1 generate-dataset analysis/dataset_definition.py
 
+#Make dummy data using opensafely exec ehrql:v1 create-dummy-tables dataset_definition.py dummy_tables
+#Run dataset definition on dummy data already generated - opensafely exec ehrql:v1 generate-dataset dataset_definition.py --dummy-tables dummy_tables
+
 ######################################
 
 #COuld this be one dataset and then another one for CTC?
@@ -15,7 +18,9 @@ from ehrql import create_dataset, codelist_from_csv, years, months, weeks, days,
 from ehrql.tables.tpp import patients, medications, practice_registrations, addresses, clinical_events, apcs, ons_deaths
 from codelists import *
 
-#show(dataset) - how do I get show to work?
+# show(dataset)
+
+#how do I get show to work?
 
 dataset = create_dataset()
 
@@ -140,6 +145,8 @@ first_cohort_rx = medications.where(
 first_cohort_abx_rx = first_cohort_rx.date
 
 dataset.fluoroquinolone_exp = first_cohort_rx.dmd_code.is_in(fluoroquinolone_codes)
+
+show(dataset.fluoroquinolone_exp)
 
 
 has_registration_1y_before_cohort_abx =  (
@@ -268,6 +275,9 @@ dataset.latest_ethnicity_group = dataset.latest_ethnicity_code.to_category(
 #Smoking - ctv3 or snomedct? Do I need to use both? Or just one?
 #This works but could be improved with a boolean string for never smokers. Q for Will/Rose. Is it possible here to dynamically assign smoking status to N/E/S based on boolean logic and dates?
 # Or do I need to set three columns for never, ex, smoker all T/f
+
+#https://github.com/opensafely/disparities-comparison/blob/284fcdfc587eafc858d246b4b4e096b05e4a7b59/analysis/additional_comorbidities.py#L159 - check here - Rose 1/7
+
 dataset.latest_smoking_code =(
     clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
     .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
@@ -322,7 +332,7 @@ dataset.n_hosp_appt_6m = apcs.where(apcs.admission_date.is_on_or_between(
     (first_cohort_abx_rx - months(6)), (first_cohort_abx_rx - days(1)) 
 )).count_for_patient()
 #n GP appt last 6 months 
-        #Nb to d/w Will/Rose as per here - https://docs.opensafely.org/ehrql/reference/schemas/tpp/#appointments
+        #Nb to d/w Will/Rose as per here - https://docs.opensafely.org/ehrql/reference/schemas/tpp/#appointments - leave with Rose 1/7
 
         #Comorbidities
 #?need codelists - ctv3. Or snomed. Or both?
