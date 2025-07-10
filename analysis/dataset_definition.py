@@ -55,6 +55,9 @@ smoking_clear_codelist = codelist_from_csv("codelists/opensafely-smoking-clear.c
 bmi_codelist = codelist_from_csv("codelists/primis-covid19-vacc-uptake-bmi.csv", column = "code")
 harmful_alcohol_codelist = codelist_from_csv("codelists/opensafely-hazardous-alcohol-drinking.csv", column = "code")
 
+filtered_ever_smoking_codes = case(when)
+
+
 #Comorbidity codes
 
         #ctv3
@@ -278,43 +281,67 @@ dataset.latest_ethnicity_group = dataset.latest_ethnicity_code.to_category(
 
 #https://github.com/opensafely/disparities-comparison/blob/284fcdfc587eafc858d246b4b4e096b05e4a7b59/analysis/additional_comorbidities.py#L159 - check here - Rose 1/7
 
-dataset.latest_smoking_code =(
-    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
-    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
-    .sort_by(clinical_events.date)
-    .last_for_patient()
-    .ctv3_code
-)
-dataset.latest_smoking_group = dataset.latest_smoking_code.to_category(
-    smoking_clear_codelist #Here i would like to say - if this code = N then look at all patient events in smoking clear and check if there is an E or S
+# dataset.latest_smoking_code =(
+#     clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+#     .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+#     .sort_by(clinical_events.date)
+#     .last_for_patient()
+#     .ctv3_code
+# )
+# dataset.latest_smoking_group = dataset.latest_smoking_code.to_category(
+#     smoking_clear_codelist #Here i would like to say - if this code = N then look at all patient events in smoking clear and check if there is an E or S
+# )
+
+# dataset.never_smoker = ( 
+#     clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+#     .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+#     .where(
+#         (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "N") & 
+#         (~clinical_events.ctv3_code.to_category(smoking_clear_codelist).is_in(["E","S"]))
+# )
+# .exists_for_patient() #So here we want 'N' only if they have never had a smoking status entered in error
+# )
+
+# last_ex_smoke_date =(
+#     clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+#     .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+#     .where(
+#         (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "E")
+#     )
+#     .date
+# )
+
+# last_smoke_date =(
+#     clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
+#     .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
+#     .where(
+#         (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "S")
+#     )
+#     .date
+# )
+
+most_recent_smoking_code = (
+  (clinical_events.where(clinical_events.ctv3_code
+  .is_in(smoking_clear_codelist))
+  .sort_by(clinical_events.date).last_for_patient()
+  .ctv3_code.to_category(smoking_clear_codelist))
 )
 
-dataset.never_smoker = ( 
-    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
-    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
-    .where(
-        (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "N") & 
-        (~clinical_events.ctv3_code.to_category(smoking_clear_codelist).is_in(["E","S"]))
-)
-.exists_for_patient() #So here we want 'N' only if they have never had a smoking status entered in error
+ever_smoked = (
+  clinical_events.where(clinical_events.ctv3_code
+  .is_in(filter_codes_by_category(codelists
+  .smoking_clear_codelist, include = ["S", "E"])))
+  .exists_for_patient()
 )
 
-last_ex_smoke_date =(
-    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
-    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
-    .where(
-        (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "E")
-    )
-    .date
-)
-
-last_smoke_date =(
-    clinical_events.where(clinical_events.ctv3_code.is_in(smoking_clear_codelist))
-    .where(clinical_events.date.is_on_or_before(first_cohort_abx_rx))
-    .where(
-        (clinical_events.ctv3_code.to_category(smoking_clear_codelist) == "S")
-    )
-    .date
+smoking_status = (case(
+  when(most_recent_smoking_code == "S").then("Current"),
+  when((most_recent_smoking_code == "E") 
+  | ((most_recent_smoking_code == "N") 
+  & (ever_smoked == True))).then("Former"),
+  when((most_recent_smoking_code == "N") 
+  & (ever_smoked == False)).then("Never"),
+  otherwise = None)
 )
 
 dataset.harmful_alcohol =(
