@@ -55,7 +55,11 @@ smoking_clear_codelist = codelist_from_csv("codelists/opensafely-smoking-clear.c
 bmi_codelist = codelist_from_csv("codelists/primis-covid19-vacc-uptake-bmi.csv", column = "code")
 harmful_alcohol_codelist = codelist_from_csv("codelists/opensafely-hazardous-alcohol-drinking.csv", column = "code")
 
-filtered_ever_smoking_codes = case(when)
+smoking_cat = smoking_clear_codelist.to_category()
+
+filtered_ever_smoking_codes = case(
+    when(smoking_cat
+    )
 
 
 #Comorbidity codes
