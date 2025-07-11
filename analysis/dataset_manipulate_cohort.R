@@ -89,6 +89,10 @@ readr::write_csv(df, here::here("output", "dataset_formatted_cohort.csv"))
 
 #Double check number of event
 
+if (!dir.exists("output/cohort")) {
+  dir.create("output/cohort", recursive = TRUE)
+}
+
 df %>%
 group_by(fluoroquinolone_exp) %>%
   summarise(count_event = sum(event_tendinitis == 1, na.rm = TRUE)) %>% 

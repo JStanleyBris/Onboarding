@@ -64,5 +64,7 @@ actions:
       needs: [generate_dataset]
       outputs:
         highly_sensitive:
-          chart: output/dataset_formatted_cohort.csv
+          chart1: output/dataset_formatted_cohort.csv
+          chart2: output/cohort/n_events.md
+          chart3: output/cohort/missingdata_count_df.md
 
