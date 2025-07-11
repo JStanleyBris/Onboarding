@@ -55,11 +55,7 @@ smoking_clear_codelist = codelist_from_csv("codelists/opensafely-smoking-clear.c
 bmi_codelist = codelist_from_csv("codelists/primis-covid19-vacc-uptake-bmi.csv", column = "code")
 harmful_alcohol_codelist = codelist_from_csv("codelists/opensafely-hazardous-alcohol-drinking.csv", column = "code")
 
-smoking_cat = smoking_clear_codelist.to_category()
 
-filtered_ever_smoking_codes = case(
-    when(smoking_cat
-    )
 
 
 #Comorbidity codes
@@ -324,29 +320,7 @@ dataset.latest_ethnicity_group = dataset.latest_ethnicity_code.to_category(
 #     .date
 # )
 
-most_recent_smoking_code = (
-  (clinical_events.where(clinical_events.ctv3_code
-  .is_in(smoking_clear_codelist))
-  .sort_by(clinical_events.date).last_for_patient()
-  .ctv3_code.to_category(smoking_clear_codelist))
-)
 
-ever_smoked = (
-  clinical_events.where(clinical_events.ctv3_code
-  .is_in(filter_codes_by_category(codelists
-  .smoking_clear_codelist, include = ["S", "E"])))
-  .exists_for_patient()
-)
-
-smoking_status = (case(
-  when(most_recent_smoking_code == "S").then("Current"),
-  when((most_recent_smoking_code == "E") 
-  | ((most_recent_smoking_code == "N") 
-  & (ever_smoked == True))).then("Former"),
-  when((most_recent_smoking_code == "N") 
-  & (ever_smoked == False)).then("Never"),
-  otherwise = None)
-)
 
 dataset.harmful_alcohol =(
     clinical_events.where(clinical_events.ctv3_code.is_in(harmful_alcohol_codelist))
