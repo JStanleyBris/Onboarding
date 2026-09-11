@@ -46,6 +46,7 @@ actions:
       match_variables:
         sex: category
         index_date: month_only
+        age: 5
       index_date_variable: index_date
       generate_match_index_date: no_offset
       output_suffix: _tendinitis

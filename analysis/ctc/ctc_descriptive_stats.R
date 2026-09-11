@@ -7,7 +7,7 @@ library(tidyr)
 
 ctc_cases_data <- readr::read_csv("output/ctc_data_cases_tendinitis.csv.gz")
 ctc_potential_controls <- readr::read_csv("output/ctc_data_potential_controls_tendinitis.csv.gz")
-ctc_potential_controls_withindex <- readr::read_csv("output/ctc_data_ptnl_controls_indexappended.csv.gz")
+ctc_potential_controls_withindex <- readr::read_csv("output/ctc_data_potential_controls_indexappended.csv.gz")
 ctc_potential_controls_withindex_and_age <- readr::read_csv("output/ctc_data_potentialcontrols_withindexdates_andages_tendinitis.csv.gz")
 
 ## Make a recreatable list of abx risk/ref
@@ -171,3 +171,23 @@ ctc_potential_controls %>%
     absent = sum(!(patient_id %in% ctc_potential_controls$patient_id)),
     percent_present = mean(patient_id %in% ctc_potential_controls$patient_id) * 100
   )
+
+colnames(ctc_potential_controls_withindex_and_age)
+
+ctc_potential_controls_withindex_and_age %>%
+group_by(age) %>%
+summarise(count = n())
+
+
+ctc_potential_controls_withindex_and_age %>%
+filter(!is.na(age)) %>%
+summarise(count = n())
+
+
+head(ctc_potential_controls_withindex_and_age, 20)
+
+ctc_potential_controls_withindex_and_age %>%
+filter(!is.na(date_of_birth))
+
+ctc_potential_controls_withindex_and_age %>%
+filter(!is.na(age))

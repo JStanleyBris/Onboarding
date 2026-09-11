@@ -37,10 +37,17 @@ indexed_controls = table_from_file(
 dataset = create_dataset()
 dataset.define_population(indexed_controls.exists_for_patient())
 
+dataset.configure_dummy_data(population_size=100000)
+
 dataset.index_date = indexed_controls.index_date
 
 dataset.age = patients.age_on(indexed_controls.index_date)
 dataset.sex = indexed_controls.sex
+
+dataset.has_patient_record = patients.exists_for_patient()
+dataset.date_of_birth = patients.date_of_birth
+dataset.index_date_is_missing = indexed_controls.index_date.is_null()
+dataset.patient_table_sex = patients.sex
 
 #Look for exposure in risk window
 

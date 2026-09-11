@@ -2,8 +2,7 @@ library(data.table)
 library(readr)
 library(tidyverse)
 
-
-controls <- readr::read_csv("/workspaces/fluoroquinolones_covid19_opensafely/output/ctc_data_ptnl_controls_indexappended.csv.gz")
+controls <- readr::read_csv("/workspaces/fluoroquinolones_covid19_opensafely/output/ctc_data_potential_controls_indexappended.csv.gz")
 
 #Check names right
 colnames(controls)
